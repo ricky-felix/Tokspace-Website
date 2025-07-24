@@ -41,7 +41,9 @@ export function ContactUs() {
 							/>
 						</div>
 						<div>
-							<Button title="Submit">Submit</Button>
+							<Button title="Submit" className="bubble-button primary">
+								Submit
+							</Button>
 						</div>
 					</form>
 					<div className="mb-auto grid gap-x-4 gap-y-10 py-2 sm:grid-cols-2">
