@@ -13,6 +13,49 @@ export function Header() {
 		}
 	};
 
+	// Add this to your <head> or before the iframe
+	(function () {
+		// Override fetch to block Vimeo analytics
+		const originalFetch = window.fetch;
+		window.fetch = function (url, options) {
+			if (typeof url === "string") {
+				// Block all Vimeo analytics endpoints
+				if (
+					url.includes("arclight.vimeo.com") ||
+					url.includes("lensflare.vimeo.com") ||
+					url.includes("player-stats") ||
+					url.includes("play_video") ||
+					url.includes("finish_video") ||
+					url.includes("watch_video_heartbeat")
+				) {
+					// Return a fake successful response immediately
+					return Promise.resolve(
+						new Response('{"success":true}', {
+							status: 200,
+							statusText: "OK",
+							headers: { "Content-Type": "application/json" },
+						})
+					);
+				}
+			}
+			return originalFetch.apply(this, arguments);
+		};
+
+		// Also override XMLHttpRequest for older requests
+		const originalOpen = XMLHttpRequest.prototype.open;
+		XMLHttpRequest.prototype.open = function (method, url, ...args) {
+			if (
+				typeof url === "string" &&
+				(url.includes("arclight.vimeo.com") ||
+					url.includes("lensflare.vimeo.com"))
+			) {
+				// Block the request by redirecting to a dummy endpoint
+				url = 'data:application/json,{"blocked":true}';
+			}
+			return originalOpen.call(this, method, url, ...args);
+		};
+	})();
+
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
@@ -42,7 +85,7 @@ export function Header() {
 				</div>
 				<div>
 					<iframe
-						src="https://player.vimeo.com/video/1103973310?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0"
+						src="https://player.vimeo.com/video/1103973310?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&dnt=1&muted=1&dnt=1"
 						className="w-full aspect-video"
 						width="800"
 						height="720"
