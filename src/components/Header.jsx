@@ -42,16 +42,17 @@ export function Header() {
 				</div>
 				<div>
 					<iframe
-						src="https://player.vimeo.com/video/1103973310?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+						src="https://player.vimeo.com/video/1103973310?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0"
 						className="w-full aspect-video"
 						width="800"
 						height="720"
 						loading="lazy"
 						frameBorder="0"
-						allow="autoplay; clipboard-write; encrypted-media; web-share"
+						allow="autoplay; fullscreen; picture-in-picture"
+						allowFullScreen
 						referrerPolicy="strict-origin-when-cross-origin"
 						title="Tokspace - Website - Clip 1"
-					></iframe>
+					/>
 				</div>
 			</div>
 		</section>

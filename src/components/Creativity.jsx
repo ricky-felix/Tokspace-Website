@@ -35,7 +35,7 @@ export function Creativity() {
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
 								<iframe
-									src="https://player.vimeo.com/video/1103995631?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+									src="https://player.vimeo.com/video/1103995631?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 									className="w-full aspect-video"
 									width="300"
 									loading="lazy"
@@ -78,7 +78,7 @@ export function Creativity() {
 						<div className="flex flex-col sm:col-span-2 sm:grid sm:auto-cols-fr sm:grid-cols-2 bg-[#f2f2f2] rounded-xl">
 							<div className="flex size-full flex-col items-center justify-center self-start">
 								<iframe
-									src="https://player.vimeo.com/video/1103996020?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+									src="https://player.vimeo.com/video/1103996020?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 									className="w-full aspect-video"
 									width="300"
 									loading="lazy"
@@ -112,7 +112,7 @@ export function Creativity() {
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
 								<iframe
-									src="https://player.vimeo.com/video/1103997132?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+									src="https://player.vimeo.com/video/1103997132?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 									className="w-full aspect-video"
 									width="300"
 									loading="lazy"

@@ -133,7 +133,7 @@ export function OurMission() {
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<div>
 										<iframe
-											src="https://player.vimeo.com/video/1103988039?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+											src="https://player.vimeo.com/video/1103988039?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 											className="w-full aspect-video"
 											width="300"
 											height="300"
@@ -180,7 +180,7 @@ export function OurMission() {
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe
-										src="https://player.vimeo.com/video/1103988016?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+										src="https://player.vimeo.com/video/1103988016?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 										className="w-full aspect-video"
 										width="300"
 										height="300"

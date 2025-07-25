@@ -61,7 +61,7 @@ export function Steppers() {
 					>
 						<div>
 							<iframe
-								src="https://player.vimeo.com/video/1103999740?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+								src="https://player.vimeo.com/video/1103999740?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 								className="w-full aspect-video"
 								width="800"
 								height="720"
@@ -79,7 +79,7 @@ export function Steppers() {
 					>
 						<div>
 							<iframe
-								src="https://player.vimeo.com/video/1104325374?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+								src="https://player.vimeo.com/video/1104325374?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 								className="w-full aspect-video"
 								width="800"
 								height="720"
@@ -97,7 +97,7 @@ export function Steppers() {
 					>
 						<div>
 							<iframe
-								src="https://player.vimeo.com/video/1104004919?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&app_id=58479"
+								src="https://player.vimeo.com/video/1104004919?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
 								className="w-full aspect-video"
 								width="800"
 								height="720"
