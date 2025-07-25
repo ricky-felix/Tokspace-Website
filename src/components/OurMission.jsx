@@ -91,7 +91,7 @@ export function OurMission() {
 	return (
 		<section id="relume" className="py-16 md:py-24 lg:py-28 w-full">
 			<div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="rb-12 mb-12 w-full max-w-lg md:mb-18 lg:mb-20 text-center">
+				<div className="rb-12 mb-12 w-full max-w-lg md:mb-18 lg:mb-20 mx-auto text-center">
 					<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
 						Our Mission: Creativity Meets Technology in Indonesia
 					</h1>
