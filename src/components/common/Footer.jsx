@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "../../css/Button.module.css";
+
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
 import {
@@ -41,13 +43,16 @@ export function Footer() {
 								technology.
 							</p>
 							<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-								<Button title="Discover" className="bubble-button primary">
+								<Button
+									title="Discover"
+									className={`${styles.bubbleButton} ${styles.primary}`}
+								>
 									Check out Roadmap! (COMING SOON)
 								</Button>
 								<Button
 									title="Connect"
 									variant="secondary"
-									className="bubble-button secondary"
+									className={`${styles.bubbleButton} ${styles.secondary}`}
 								>
 									Join Our Community! (COMING SOON)
 								</Button>

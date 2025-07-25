@@ -3,6 +3,8 @@
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
 
+import styles from "../css/Button.module.css";
+
 export function Header() {
 	const scrollToOurMission = () => {
 		const element = document.getElementById("ourmission");
@@ -30,7 +32,7 @@ export function Header() {
 							<Button
 								title="Learn More"
 								variant="primary"
-								className="bubble-button primary"
+								className={`${styles.bubbleButton} ${styles.primary}`}
 								onClick={scrollToOurMission}
 							>
 								Learn More

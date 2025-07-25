@@ -37,7 +37,10 @@ export function NotFound404() {
 					</p>
 					<div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
 						<Link to="/">
-							<Button title="Home" className="bubble-button primary">
+							<Button
+								title="Home"
+								className="${styles.bubbleButton} ${styles.primary}"
+							>
 								Home
 							</Button>
 						</Link>
@@ -45,7 +48,7 @@ export function NotFound404() {
 							<Button
 								title="Shop"
 								variant="secondary"
-								className="bubble-button secondary"
+								className="${styles.bubbleButton} ${styles.secondary}"
 							>
 								Contact Us
 							</Button>

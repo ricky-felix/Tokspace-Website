@@ -4,6 +4,8 @@ import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
 import emailjs from "@emailjs/browser";
 
+import styles from "../css/Button.module.css";
+
 export function ContactUs() {
 	const [formData, setFormData] = useState({
 		name: "",
@@ -55,8 +57,7 @@ export function ContactUs() {
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
 				<div className="rb-12 mb-8 max-w-lg md:mb-12">
-					<p className="mb-3 font-semibold md:mb-4">Connect</p>
-					<h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+					<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 						Get in Touch
 					</h2>
 					<p className="md:text-md">We'd love to hear from you!</p>
@@ -116,7 +117,7 @@ export function ContactUs() {
 							<Button
 								type="submit"
 								title="Submit"
-								className="bubble-button primary"
+								className={`${styles.bubbleButton} ${styles.primary}`}
 								disabled={isSubmitting}
 							>
 								{isSubmitting ? "Sending..." : "Submit"}
@@ -140,11 +141,11 @@ export function ContactUs() {
 								<BiPhone className="size-8" />
 							</div>
 							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-								Phone
+								WhatsApp
 							</h3>
-							<a className="underline" href="#">
-								Coming Soon
-							</a>
+							{/* <a className="underline" href=""> */}
+							Coming Soon
+							{/* </a> */}
 						</div>
 						<div>
 							<div className="mb-3 md:mb-4">

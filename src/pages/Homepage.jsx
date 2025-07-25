@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import "../index.css";
+
+import "../css/index.css";
+
 import { useLocation } from "react-router";
 import { motion } from "framer-motion";
 
