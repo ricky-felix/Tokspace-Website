@@ -77,6 +77,9 @@ export default defineConfig({
 					process.env.NODE_ENV === "production"
 						? "assets/[hash].[ext]"
 						: "assets/[name]-[hash].[ext]",
+				manualChunks: {
+					vendor: ["react", "react-dom"],
+				},
 			},
 		},
 	},
