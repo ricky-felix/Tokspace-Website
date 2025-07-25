@@ -44,6 +44,7 @@ export default defineConfig({
 		},
 	},
 	build: {
+		cssCodeSplit: false,
 		minify: "terser",
 		terserOptions: {
 			compress: {
@@ -59,6 +60,9 @@ export default defineConfig({
 			mangle: {
 				// Mangle all variable names for better obfuscation
 				toplevel: true,
+				properties: {
+					regex: /^_/,
+				},
 			},
 		},
 		// Additional build optimizations
