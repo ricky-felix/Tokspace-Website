@@ -88,49 +88,6 @@ export function OurMission() {
 
 	const useSctoll = useRelume(features); // Pass features to the hook
 
-	// Add this to your <head> or before the iframe
-	(function () {
-		// Override fetch to block Vimeo analytics
-		const originalFetch = window.fetch;
-		window.fetch = function (url, options) {
-			if (typeof url === "string") {
-				// Block all Vimeo analytics endpoints
-				if (
-					url.includes("arclight.vimeo.com") ||
-					url.includes("lensflare.vimeo.com") ||
-					url.includes("player-stats") ||
-					url.includes("play_video") ||
-					url.includes("finish_video") ||
-					url.includes("watch_video_heartbeat")
-				) {
-					// Return a fake successful response immediately
-					return Promise.resolve(
-						new Response('{"success":true}', {
-							status: 200,
-							statusText: "OK",
-							headers: { "Content-Type": "application/json" },
-						})
-					);
-				}
-			}
-			return originalFetch.apply(this, arguments);
-		};
-
-		// Also override XMLHttpRequest for older requests
-		const originalOpen = XMLHttpRequest.prototype.open;
-		XMLHttpRequest.prototype.open = function (method, url, ...args) {
-			if (
-				typeof url === "string" &&
-				(url.includes("arclight.vimeo.com") ||
-					url.includes("lensflare.vimeo.com"))
-			) {
-				// Block the request by redirecting to a dummy endpoint
-				url = 'data:application/json,{"blocked":true}';
-			}
-			return originalOpen.call(this, method, url, ...args);
-		};
-	})();
-
 	return (
 		<section id="relume" className="py-16 md:py-24 lg:py-28 w-full">
 			<div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,7 +133,7 @@ export function OurMission() {
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<div>
 										<iframe
-											src="https://player.vimeo.com/video/1103988039?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
+											src="https://player.vimeo.com/video/1103988039?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
 											className="w-full aspect-video"
 											width="300"
 											height="300"
