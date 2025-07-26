@@ -35,58 +35,60 @@ const useRelume = (features = []) => {
 };
 
 export function OurMission() {
-	const features = [
-		{
-			columnText: "01",
-			verticalText: "Feature one",
-			horizontalText: "Feature one",
-			heading: "Short heading goes here",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-			image: {
-				src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-				alt: "Relume placeholder image 1",
-			},
-		},
-		{
-			columnText: "02",
-			verticalText: "Feature two",
-			horizontalText: "Feature two",
-			heading: "Short heading goes here",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-			image: {
-				src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-				alt: "Relume placeholder image 2",
-			},
-		},
-		{
-			columnText: "03",
-			verticalText: "Feature three",
-			horizontalText: "Feature three",
-			heading: "Short heading goes here",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-			image: {
-				src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-				alt: "Relume placeholder image 3",
-			},
-		},
-		{
-			columnText: "04",
-			verticalText: "Feature four",
-			horizontalText: "Feature four",
-			heading: "Short heading goes here",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-			image: {
-				src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-				alt: "Relume placeholder image 4",
-			},
-		},
-	];
+	// const features = [
+	// 	{
+	// 		columnText: "01",
+	// 		verticalText: "Feature one",
+	// 		horizontalText: "Feature one",
+	// 		heading: "Short heading goes here",
+	// 		description:
+	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+	// 		image: {
+	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
+	// 			alt: "Relume placeholder image 1",
+	// 		},
+	// 	},
+	// 	{
+	// 		columnText: "02",
+	// 		verticalText: "Feature two",
+	// 		horizontalText: "Feature two",
+	// 		heading: "Short heading goes here",
+	// 		description:
+	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+	// 		image: {
+	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
+	// 			alt: "Relume placeholder image 2",
+	// 		},
+	// 	},
+	// 	{
+	// 		columnText: "03",
+	// 		verticalText: "Feature three",
+	// 		horizontalText: "Feature three",
+	// 		heading: "Short heading goes here",
+	// 		description:
+	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+	// 		image: {
+	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
+	// 			alt: "Relume placeholder image 3",
+	// 		},
+	// 	},
+	// 	{
+	// 		columnText: "04",
+	// 		verticalText: "Feature four",
+	// 		horizontalText: "Feature four",
+	// 		heading: "Short heading goes here",
+	// 		description:
+	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+	// 		image: {
+	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
+	// 			alt: "Relume placeholder image 4",
+	// 		},
+	// 	},
+	// ];
 
-	const useSctoll = useRelume(features); // Pass features to the hook
+	// const useSctoll = useRelume(features); // Pass features to the hook
+
+	const useSctoll = useRelume([{}, {}, {}, {}]); // Just pass 4 empty objects for length
 
 	return (
 		<section id="relume" className="py-16 md:py-24 lg:py-28 w-full">
@@ -99,7 +101,7 @@ export function OurMission() {
 						Empowering local creators through technology and community.
 					</p>
 				</div>
-				<div className="flex w-full flex-col overflow-hidden border-r border-b border-l border-border-primary lg:h-[90vh] lg:flex-row lg:border-t lg:border-r-0 bg-[#E9EDF1]">
+				<div className="flex w-full flex-col overflow-hidden border border-border-primary lg:h-[90vh] lg:flex-row bg-[#E9EDF1]">
 					<motion.div
 						className="flex flex-col justify-start overflow-hidden lg:h-[90vh] lg:min-w-20 lg:flex-row lg:border-r lg:border-border-primary"
 						onClick={useSctoll.handleSetIsActive(0)}
