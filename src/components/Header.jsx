@@ -3,7 +3,7 @@
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
 
-import styles from "../css/Button.module.css";
+import buttonStyles from "../css/Button.module.css";
 
 export function Header() {
 	const scrollToOurMission = () => {
@@ -32,7 +32,7 @@ export function Header() {
 							<Button
 								title="Learn More"
 								variant="primary"
-								className={`${styles.bubbleButton} ${styles.primary}`}
+								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 								onClick={scrollToOurMission}
 							>
 								Learn More
@@ -42,7 +42,7 @@ export function Header() {
 				</div>
 				<div>
 					<iframe
-						src="https://player.vimeo.com/video/1103973310?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&dnt=1"
+						src="https://player.vimeo.com/video/1103973310?background=1&amp;autoplay=1&amp;loop=1&amp;byline=0&amp;title=0&amp;portrait=0&amp;muted=1&amp;dnt=1"
 						className="w-full aspect-video"
 						width="800"
 						height="720"

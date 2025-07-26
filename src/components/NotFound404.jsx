@@ -6,6 +6,8 @@ import React from "react";
 
 import { Link } from "react-router";
 
+import buttonStyles from "../css/Button.module.css";
+
 export function NotFound404() {
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
@@ -39,7 +41,7 @@ export function NotFound404() {
 						<Link to="/">
 							<Button
 								title="Home"
-								className="${styles.bubbleButton} ${styles.primary}"
+								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 							>
 								Home
 							</Button>
@@ -48,7 +50,7 @@ export function NotFound404() {
 							<Button
 								title="Shop"
 								variant="secondary"
-								className="${styles.bubbleButton} ${styles.secondary}"
+								className={`${buttonStyles.bubbleButton} ${buttonStyles.secondary}`}
 							>
 								Contact Us
 							</Button>

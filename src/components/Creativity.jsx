@@ -20,7 +20,7 @@ export function Creativity() {
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2">
 					<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 ">
-						<div className="flex flex-col sm:col-span-2 bg-[#f2f2f2] rounded-xl">
+						<div className="flex flex-col sm:col-span-2 bg-[#DEE3E9] rounded-xl">
 							<div className="block flex-1 p-6 sm:flex sm:flex-col sm:justify-center md:p-8 lg:p-12">
 								<div>
 									<p className="mb-2 font-semibold">Create</p>
@@ -47,7 +47,7 @@ export function Creativity() {
 								></iframe>
 							</div>
 						</div>
-						<div className="flex flex-col bg-[#f2f2f2] rounded-xl">
+						<div className="flex flex-col bg-[#DEE3E9] rounded-xl">
 							<div className="flex h-full flex-col justify-between p-6 md:p-8 lg:p-6">
 								<div>
 									<div className="mb-3 md:mb-4">
@@ -60,7 +60,7 @@ export function Creativity() {
 								</div>
 							</div>
 						</div>
-						<div className="flex flex-col bg-[#f2f2f2] rounded-xl">
+						<div className="flex flex-col bg-[#DEE3E9] rounded-xl">
 							<div className="flex h-full flex-col justify-between p-6 md:p-8 lg:p-6">
 								<div>
 									<div className="mb-3 md:mb-4">
@@ -75,7 +75,7 @@ export function Creativity() {
 						</div>
 					</div>
 					<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8">
-						<div className="flex flex-col sm:col-span-2 sm:grid sm:auto-cols-fr sm:grid-cols-2 bg-[#f2f2f2] rounded-xl">
+						<div className="flex flex-col sm:col-span-2 sm:grid sm:auto-cols-fr sm:grid-cols-2 bg-[#DEE3E9] rounded-xl">
 							<div className="flex size-full flex-col items-center justify-center self-start">
 								<iframe
 									src="https://player.vimeo.com/video/1103996020?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
@@ -97,7 +97,7 @@ export function Creativity() {
 								<p>Collaborate and innovate with our vibrant community.</p>
 							</div>
 						</div>
-						<div className="flex flex-col sm:col-span-2 bg-[#f2f2f2] rounded-xl">
+						<div className="flex flex-col sm:col-span-2 bg-[#DEE3E9] rounded-xl">
 							<div className="block flex-1 p-6 sm:flex sm:flex-col sm:justify-center md:p-8 lg:p-12 ">
 								<div>
 									<p className="mb-2 font-semibold">Imagine</p>

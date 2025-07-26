@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 import { Link, useLocation } from "react-router";
 
-import styles from "../../css/Button.module.css";
+import buttonStyles from "../../css/Button.module.css";
 
 const useRelume = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -158,7 +158,7 @@ export function Navbar() {
 							<Button
 								title="Reach Out"
 								size="sm"
-								className={`w-full ${styles.bubbleButton} ${styles.primary}`}
+								className={`w-full ${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 							>
 								Contact Us
 							</Button>

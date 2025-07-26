@@ -99,7 +99,7 @@ export function OurMission() {
 						Empowering local creators through technology and community.
 					</p>
 				</div>
-				<div className="flex w-full flex-col overflow-hidden border-r border-b border-l border-border-primary lg:h-[90vh] lg:flex-row lg:border-t lg:border-r-0 bg-[#f2f2f2]">
+				<div className="flex w-full flex-col overflow-hidden border-r border-b border-l border-border-primary lg:h-[90vh] lg:flex-row lg:border-t lg:border-r-0 bg-[#E9EDF1]">
 					<motion.div
 						className="flex flex-col justify-start overflow-hidden lg:h-[90vh] lg:min-w-20 lg:flex-row lg:border-r lg:border-border-primary"
 						onClick={useSctoll.handleSetIsActive(0)}

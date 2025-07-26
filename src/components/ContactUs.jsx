@@ -1,10 +1,9 @@
-import { Button, Checkbox, Input, Label, Textarea } from "@relume_io/relume-ui";
 import React, { useState } from "react";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
-import { RxChevronRight } from "react-icons/rx";
 import emailjs from "@emailjs/browser";
 
-import styles from "../css/Button.module.css";
+import buttonStyles from "../css/Button.module.css";
+import formStyles from "../css/Form.module.css";
 
 export function ContactUs() {
 	const [formData, setFormData] = useState({
@@ -63,66 +62,60 @@ export function ContactUs() {
 					<p className="md:text-md">We'd love to hear from you!</p>
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-[1fr_1fr] md:gap-x-20 md:gap-y-16">
-					<form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
-						{submitStatus === "success" && (
-							<div className="p-4 bg-green-100 text-green-700 rounded-md">
-								Thank you! Your message has been sent successfully.
-							</div>
-						)}
-						{submitStatus === "error" && (
-							<div className="p-4 bg-red-100 text-red-700 rounded-md">
-								Sorry, there was an error sending your message. Please try
-								again.
-							</div>
-						)}
-
-						<div className="grid w-full items-center">
-							<Label htmlFor="name" className="mb-2">
-								Name
-							</Label>
-							<Input
+					<form onSubmit={handleSubmit} className={formStyles.formContainer}>
+						<div>
+							<label htmlFor="name" className={formStyles.label}>
+								Nama
+							</label>
+							<input
 								type="text"
 								id="name"
+								name="name"
+								placeholder="Enter your full name here"
+								className={`${formStyles.input}`}
 								value={formData.name}
 								onChange={handleInputChange}
 								required
 							/>
 						</div>
-						<div className="grid w-full items-center">
-							<Label htmlFor="email" className="mb-2">
+
+						<div>
+							<label htmlFor="email" className={formStyles.label}>
 								Email
-							</Label>
-							<Input
+							</label>
+							<input
 								type="email"
 								id="email"
+								name="email"
+								placeholder="Write your active email here"
+								className={`${formStyles.input}`}
 								value={formData.email}
 								onChange={handleInputChange}
 								required
 							/>
 						</div>
-						<div className="grid w-full items-center">
-							<Label htmlFor="message" className="mb-2">
-								Message
-							</Label>
-							<Textarea
+
+						<div>
+							<label htmlFor="message" className={formStyles.label}>
+								Pesan
+							</label>
+							<textarea
 								id="message"
-								placeholder="Type your message..."
-								className="min-h-[11.25rem] overflow-auto"
+								name="message"
+								placeholder="Do you have any inquiry?"
+								className={`${formStyles.textarea}`}
 								value={formData.message}
 								onChange={handleInputChange}
 								required
 							/>
 						</div>
-						<div>
-							<Button
-								type="submit"
-								title="Submit"
-								className={`${styles.bubbleButton} ${styles.primary}`}
-								disabled={isSubmitting}
-							>
-								{isSubmitting ? "Sending..." : "Submit"}
-							</Button>
-						</div>
+
+						<button
+							type="submit"
+							className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+						>
+							Send Email
+						</button>
 					</form>
 					<div className="mb-auto grid gap-x-4 gap-y-10 py-2 sm:grid-cols-2">
 						<div>
