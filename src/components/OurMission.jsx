@@ -3,6 +3,7 @@
 import { useMediaQuery } from "@relume_io/relume-ui";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const useRelume = (features = []) => {
 	// Accept features as parameter
@@ -35,6 +36,7 @@ const useRelume = (features = []) => {
 };
 
 export function OurMission() {
+	const { t } = useTranslation();
 	// const features = [
 	// 	{
 	// 		columnText: "01",
@@ -95,11 +97,9 @@ export function OurMission() {
 			<div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="rb-12 mb-12 w-full max-w-lg md:mb-18 lg:mb-20 mx-auto text-center">
 					<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
-						Our Mission: Creativity Meets Technology in Indonesia
+						{t("ourMission.title")}
 					</h1>
-					<p className="md:text-md">
-						Empowering local creators through technology and community.
-					</p>
+					<p className="md:text-md">{t("ourMission.subtitle")}</p>
 				</div>
 				<div className="flex w-full flex-col overflow-hidden border border-border-primary lg:h-[90vh] lg:flex-row bg-[#E9EDF1]">
 					<motion.div
@@ -114,10 +114,10 @@ export function OurMission() {
 								01
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
-								Exploration
+								{t("ourMission.exploration")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								Exploration
+								{t("ourMission.exploration")}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -127,10 +127,10 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									Iteration over Perfection
+									{t("ourMission.explorationTitle")}
 								</h3>
 								<p className="md:text-md">
-									Try new ideas, themes, and tech. Never static.
+									{t("ourMission.explorationDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<div>
@@ -161,10 +161,10 @@ export function OurMission() {
 								02
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
-								Connection & Community
+								{t("ourMission.community")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								Connection & Community
+								{t("ourMission.community")}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -174,10 +174,10 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									Welcome to the Tokspace community.
+									{t("ourMission.communityTitle")}
 								</h3>
 								<p className="md:text-md">
-									Make people feel part of a bigger story.
+									{t("ourMission.communityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe
@@ -206,10 +206,10 @@ export function OurMission() {
 								03
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
-								Curiosity
+								{t("ourMission.curiosity")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								Curiosity
+								{t("ourMission.curiosity")}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -219,10 +219,10 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									Have something in mind? Share it!
+									{t("ourMission.curiosityTitle")}
 								</h3>
 								<p className="md:text-md">
-									Teach, show, and share — not just sell.
+									{t("ourMission.curiosityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe
@@ -251,10 +251,10 @@ export function OurMission() {
 								04
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
-								Sustainability
+								{t("ourMission.sustainability")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								Sustainability
+								{t("ourMission.sustainability")}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -264,10 +264,10 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									Commitment to a Reducing Waste
+									{t("ourMission.sustainabilityTitle")}
 								</h3>
 								<p className="md:text-md">
-									Small-batch, thoughtful, minimal waste.
+									{t("ourMission.sustainabilityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe

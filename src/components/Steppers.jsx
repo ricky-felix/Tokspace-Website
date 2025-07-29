@@ -2,19 +2,18 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@relume_io/relume-ui";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export function Steppers() {
+	const { t } = useTranslation();
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
 				<div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
 					<h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
-						Discover How Local Creators Innovate with Us
+						{t("steppers.title")}
 					</h2>
-					<p className="md:text-md">
-						Join us on a journey through the creative process. Watch how local
-						creators harness our technology to bring their visions to life.
-					</p>
+					<p className="md:text-md">{t("steppers.subtitle")}</p>
 				</div>
 				<Tabs defaultValue="tab-one">
 					<TabsList className="mb-12 flex-col md:mb-16 md:flex-row">
@@ -23,36 +22,27 @@ export function Steppers() {
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
 							<h3 className="text-md leading-[1.4] font-bold md:text-xl">
-								Step 1: Ideation
+								{t("steppers.step1Title")}
 							</h3>
-							<p>
-								Creators brainstorm ideas and sketch their concepts, laying the
-								groundwork for innovation.
-							</p>
+							<p>{t("steppers.step1Description")}</p>
 						</TabsTrigger>
 						<TabsTrigger
 							value="tab-two"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
 							<h3 className="text-md leading-[1.4] font-bold md:text-xl">
-								Step 2: Design
+								{t("steppers.step2Title")}
 							</h3>
-							<p>
-								Using our tools, creators transform sketches into digital
-								designs ready for 3D printing.
-							</p>
+							<p>{t("steppers.step2Description")}</p>
 						</TabsTrigger>
 						<TabsTrigger
 							value="tab-three"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
 							<h3 className="text-md leading-[1.4] font-bold md:text-xl">
-								Step 3: Prototype
+								{t("steppers.step3Title")}
 							</h3>
-							<p>
-								Creators print prototypes, testing functionality and aesthetics
-								to refine their products before launch.
-							</p>
+							<p>{t("steppers.step3Description")}</p>
 						</TabsTrigger>
 					</TabsList>
 					<TabsContent

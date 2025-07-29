@@ -4,7 +4,7 @@ import buttonStyles from "../../css/Button.module.css";
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import {
 	BiLogoFacebookCircle,
 	BiLogoInstagram,
@@ -38,31 +38,29 @@ export function Footer() {
 					<div className="mb-12 grid grid-cols-1 gap-x-[8vw] gap-y-12 md:mb-18 md:gap-y-16 lg:mb-20 lg:grid-cols-[1fr_0.5fr] lg:gap-y-20">
 						<div className="rb-6 max-w-md">
 							<h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-6xl">
-								{t('footer.exploreTitle')}
+								{t("footer.exploreTitle")}
 							</h1>
-							<p>
-								{t('footer.joinUs')}
-							</p>
+							<p>{t("footer.joinUs")}</p>
 							<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 								<Button
 									title="Discover"
 									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 								>
-									{t('footer.checkRoadmap')}
+									{t("footer.checkRoadmap")}
 								</Button>
 								<Button
 									title="Connect"
 									variant="secondary"
 									className={`${buttonStyles.bubbleButton} ${buttonStyles.secondary}`}
 								>
-									{t('footer.joinCommunity')}
+									{t("footer.joinCommunity")}
 								</Button>
 							</div>
 						</div>
 						<div className="grid grid-cols-1 items-start gap-x-6 gap-y-5 sm:grid-cols-2 sm:gap-x-6 md:gap-x-8 md:gap-y-4">
 							<ul>
 								<li className="py-2 text-sm font-bold text-[#1c1f2a]">
-									{t('footer.homepage')}
+									{t("footer.homepage")}
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
@@ -70,7 +68,7 @@ export function Footer() {
 										onClick={(e) => handleScrollToSection(e, "header")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t('footer.meetTokspace')}
+										{t("footer.meetTokspace")}
 									</Link>
 								</li>
 								<li className="py-2 text-sm font-semibold">
@@ -79,7 +77,7 @@ export function Footer() {
 										onClick={(e) => handleScrollToSection(e, "creativity")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t('navbar.creativity')}
+										{t("navbar.creativity")}
 									</Link>
 								</li>
 								<li className="py-2 text-sm font-semibold">
@@ -88,7 +86,7 @@ export function Footer() {
 										onClick={(e) => handleScrollToSection(e, "ourmission")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t('navbar.ourMission')}
+										{t("navbar.ourMission")}
 									</Link>
 								</li>
 								<li className="py-2 text-sm font-semibold">
@@ -97,20 +95,20 @@ export function Footer() {
 										onClick={(e) => handleScrollToSection(e, "steppers")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t('navbar.innovation')}
+										{t("navbar.innovation")}
 									</Link>
 								</li>
 							</ul>
 							<ul>
 								<li className="py-2 text-sm font-bold text-[#1c1f2a]">
-									{t('footer.others')}
+									{t("footer.others")}
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/contact-us"
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t('navbar.contactUs')}
+										{t("navbar.contactUs")}
 									</Link>
 								</li>
 
@@ -149,7 +147,7 @@ export function Footer() {
 					</div>
 				</div>
 				<div className="flex flex-col-reverse items-start justify-between pt-6 pb-4 text-sm md:flex-row md:items-center md:pt-8 md:pb-0">
-					<p className="text-black">{t('footer.copyright')}</p>
+					<p className="text-black">{t("footer.copyright")}</p>
 					<div className="grid grid-flow-col grid-cols-[max-content] items-start justify-start gap-x-3">
 						{/* <a href="#" target="_blank">
 							<BiLogoFacebookCircle className="size-6" />

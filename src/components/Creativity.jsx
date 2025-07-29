@@ -2,20 +2,22 @@
 
 // import { Card } from "@relume_io/relume-ui";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { MdOutlineJoinFull } from "react-icons/md";
 import { MdDesignServices } from "react-icons/md";
 
 export function Creativity() {
+	const { t } = useTranslation();
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
 				<div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
 					<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
-						Unleash Your Creativity
+						{t('creativity.title')}
 					</h1>
 					<p className="md:text-md">
-						Explore our innovative modular kits and storytelling tools.
+						{t('creativity.subtitle')}
 					</p>
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2">
@@ -23,13 +25,12 @@ export function Creativity() {
 						<div className="flex flex-col sm:col-span-2 bg-[#DEE3E9] rounded-xl">
 							<div className="block flex-1 p-6 sm:flex sm:flex-col sm:justify-center md:p-8 lg:p-12">
 								<div>
-									<p className="mb-2 font-semibold">Create</p>
+									<p className="mb-2 font-semibold">{t('creativity.createLabel')}</p>
 									<h2 className="rb-5 mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-4xl">
-										Transform Ideas into Reality
+										{t('creativity.createTitle')}
 									</h2>
 									<p>
-										Discover how our tools empower your creative journey and
-										inspire innovation.
+										{t('creativity.createDescription')}
 									</p>
 								</div>
 							</div>
@@ -53,9 +54,9 @@ export function Creativity() {
 										<MdOutlineJoinFull className="size-12" />
 									</div>
 									<h3 className="mb-2 text-xl font-bold md:text-2xl">
-										Craft Your Unique Story
+										{t('creativity.craftTitle')}
 									</h3>
-									<p>Join us in shaping the future of storytelling.</p>
+									<p>{t('creativity.craftDescription')}</p>
 								</div>
 							</div>
 						</div>
@@ -66,9 +67,9 @@ export function Creativity() {
 										<MdDesignServices className="size-12" />
 									</div>
 									<h3 className="mb-2 text-xl font-bold md:text-2xl">
-										Experience the Future of Design
+										{t('creativity.experienceTitle')}
 									</h3>
-									<p>Embrace technology to elevate your creative projects.</p>
+									<p>{t('creativity.experienceDescription')}</p>
 								</div>
 							</div>
 						</div>
@@ -88,23 +89,22 @@ export function Creativity() {
 								></iframe>
 							</div>
 							<div className="block flex-col justify-center p-6 sm:flex">
-								<p className="mb-2 font-semibold">Inspire</p>
+								<p className="mb-2 font-semibold">{t('creativity.inspireLabel')}</p>
 								<h2 className="mb-2 text-xl font-bold md:text-2xl">
-									Connect with Local Creators
+									{t('creativity.inspireTitle')}
 								</h2>
-								<p>Collaborate and innovate with our vibrant community.</p>
+								<p>{t('creativity.inspireDescription')}</p>
 							</div>
 						</div>
 						<div className="flex flex-col sm:col-span-2 bg-[#DEE3E9] rounded-xl">
 							<div className="block flex-1 p-6 sm:flex sm:flex-col sm:justify-center md:p-8 lg:p-12 ">
 								<div>
-									<p className="mb-2 font-semibold">Imagine</p>
+									<p className="mb-2 font-semibold">{t('creativity.imagineLabel')}</p>
 									<h2 className="rb-5 mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-5xl">
-										Launch Your Ideas into Space
+										{t('creativity.imagineTitle')}
 									</h2>
 									<p>
-										Let your imagination soar with our cutting-edge tools and
-										resources.
+										{t('creativity.imagineDescription')}
 									</p>
 								</div>
 							</div>

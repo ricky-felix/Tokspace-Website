@@ -8,11 +8,13 @@ import {
 } from "react-icons/bi";
 import { AiOutlineLoading } from "react-icons/ai";
 import emailjs from "@emailjs/browser";
+import { useTranslation } from "react-i18next";
 
 import buttonStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 
 export function ContactUs() {
+	const { t } = useTranslation();
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -64,21 +66,21 @@ export function ContactUs() {
 			<div className="container">
 				<div className="rb-12 mb-8 max-w-lg md:mb-12">
 					<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-						Get in Touch
+						{t('contactUs.title')}
 					</h2>
-					<p className="md:text-md">We'd love to hear from you!</p>
+					<p className="md:text-md">{t('contactUs.subtitle')}</p>
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-[1fr_1fr] md:gap-x-20 md:gap-y-16">
 					<form onSubmit={handleSubmit} className={formStyles.formContainer}>
 						<div>
 							<label htmlFor="name" className={formStyles.label}>
-								Nama
+								{t('contactUs.nameLabel')}
 							</label>
 							<input
 								type="text"
 								id="name"
 								name="name"
-								placeholder="Enter your full name here"
+								placeholder={t('contactUs.namePlaceholder')}
 								className={`${formStyles.input}`}
 								value={formData.name}
 								onChange={handleInputChange}
@@ -88,13 +90,13 @@ export function ContactUs() {
 
 						<div>
 							<label htmlFor="email" className={formStyles.label}>
-								Email
+								{t('contactUs.emailLabel')}
 							</label>
 							<input
 								type="email"
 								id="email"
 								name="email"
-								placeholder="Write your active email here"
+								placeholder={t('contactUs.emailPlaceholder')}
 								className={`${formStyles.input}`}
 								value={formData.email}
 								onChange={handleInputChange}
@@ -104,12 +106,12 @@ export function ContactUs() {
 
 						<div>
 							<label htmlFor="message" className={formStyles.label}>
-								Pesan
+								{t('contactUs.messageLabel')}
 							</label>
 							<textarea
 								id="message"
 								name="message"
-								placeholder="Do you have any inquiry?"
+								placeholder={t('contactUs.messagePlaceholder')}
 								className={`${formStyles.textarea}`}
 								value={formData.message}
 								onChange={handleInputChange}
@@ -121,7 +123,7 @@ export function ContactUs() {
 							<div className="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50">
 								<BiCheckCircle className="size-5 mr-2" />
 								<span>
-									Message sent successfully! We'll get back to you soon.
+									{t('contactUs.successMessage')}
 								</span>
 							</div>
 						)}
@@ -129,7 +131,7 @@ export function ContactUs() {
 						{submitStatus === "error" && (
 							<div className="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50">
 								<BiErrorCircle className="size-5 mr-2" />
-								<span>Failed to send message. Please try again later.</span>
+								<span>{t('contactUs.errorMessage')}</span>
 							</div>
 						)}
 
@@ -139,13 +141,13 @@ export function ContactUs() {
 							disabled={isSubmitting}
 						>
 							{isSubmitting ? (
-								<>
-									<AiOutlineLoading className="animate-spin mr-2 size-5" />
-									Sending...
-								</>
-							) : (
-								"Send Email"
-							)}
+						<>
+							<AiOutlineLoading className="animate-spin mr-2 size-5" />
+							{t('contactUs.sending')}
+						</>
+					) : (
+						t('contactUs.sendButton')
+					)}
 						</button>
 					</form>
 					<div className="mb-auto grid gap-x-4 gap-y-10 py-2 sm:grid-cols-2">
@@ -154,7 +156,7 @@ export function ContactUs() {
 								<BiEnvelope className="size-8" />
 							</div>
 							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-								Email
+								{t('contactUs.emailTitle')}
 							</h3>
 							<a className="underline" href="mailto:tokspace@outlook.co.id">
 								tokspace@outlook.co.id
@@ -165,10 +167,10 @@ export function ContactUs() {
 								<BiPhone className="size-8" />
 							</div>
 							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-								WhatsApp
+								{t('contactUs.whatsappTitle')}
 							</h3>
 							{/* <a className="underline" href=""> */}
-							Coming Soon
+							{t('contactUs.comingSoon')}
 							{/* </a> */}
 						</div>
 						<div>
@@ -176,9 +178,9 @@ export function ContactUs() {
 								<BiMap className="size-8" />
 							</div>
 							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-								Location
+								{t('contactUs.locationTitle')}
 							</h3>
-							<p className="mb-2">Medan, Indonesia</p>
+							<p className="mb-2">{t('contactUs.location')}</p>
 						</div>
 					</div>
 				</div>

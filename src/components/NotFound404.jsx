@@ -3,12 +3,14 @@
 import { Button } from "@relume_io/relume-ui";
 import { motion } from "framer-motion";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Link } from "react-router";
 
 import buttonStyles from "../css/Button.module.css";
 
 export function NotFound404() {
+	const { t } = useTranslation();
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
@@ -20,7 +22,7 @@ export function NotFound404() {
 							transition={{ type: "spring", bounce: 0 }}
 							className="block text-3xl font-bold md:text-5xl lg:text-7xl"
 						>
-							Lost in Space
+							{t('notFound.title')}
 						</motion.span>
 					</h1>
 					<h1>
@@ -30,12 +32,11 @@ export function NotFound404() {
 							transition={{ type: "spring", bounce: 0 }}
 							className="mb-5 block text-3xl font-bold md:mb-6 md:text-5xl lg:text-7xl"
 						>
-							Oops! Page Missing
+							{t('notFound.subtitle')}
 						</motion.span>
 					</h1>
 					<p className="md:text-md">
-						It seems the page you`re looking for has launched into the cosmos.
-						Let`s get you home.
+						{t('notFound.description')}
 					</p>
 					<div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
 						<Link to="/">
@@ -43,7 +44,7 @@ export function NotFound404() {
 								title="Home"
 								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 							>
-								Home
+								{t('notFound.homeButton')}
 							</Button>
 						</Link>
 						<Link to="/contact-us">
@@ -52,7 +53,7 @@ export function NotFound404() {
 								variant="secondary"
 								className={`${buttonStyles.bubbleButton} ${buttonStyles.secondary}`}
 							>
-								Contact Us
+								{t('notFound.contactButton')}
 							</Button>
 						</Link>
 					</div>
