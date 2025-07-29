@@ -46,10 +46,8 @@ export function Header() {
 						className="w-full aspect-video"
 						width="800"
 						height="720"
-						loading="lazy"
 						frameBorder="0"
-						allow="autoplay; fullscreen; picture-in-picture"
-						allowFullScreen
+						allow="autoplay; fullscreen"
 						referrerPolicy="strict-origin-when-cross-origin"
 						title="Tokspace - Website - Clip 1"
 					/>

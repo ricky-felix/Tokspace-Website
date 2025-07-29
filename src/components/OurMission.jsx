@@ -135,13 +135,12 @@ export function OurMission() {
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<div>
 										<iframe
-											src="https://player.vimeo.com/video/1103988039?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+											src="https://player.vimeo.com/video/1103988039?controls=0&autoplay=1&loop=1&title=0&byline=0&portrait=0&badge=0&autopause=0&muted=1&dnt=1"
 											className="w-full aspect-video"
 											width="300"
 											height="300"
-											loading="lazy"
 											frameBorder="0"
-											allow="autoplay; clipboard-write; encrypted-media; web-share"
+											allow="autoplay; fullscreen"
 											referrerPolicy="strict-origin-when-cross-origin"
 											title="Tokspace - Website - Clip 1"
 										></iframe>
@@ -186,9 +185,8 @@ export function OurMission() {
 										className="w-full aspect-video"
 										width="300"
 										height="300"
-										loading="lazy"
 										frameBorder="0"
-										allow="autoplay; clipboard-write; encrypted-media; web-share"
+										allow="autoplay; fullscreen"
 										referrerPolicy="strict-origin-when-cross-origin"
 										title="Tokspace - Website - Clip 1"
 									></iframe>
@@ -232,9 +230,8 @@ export function OurMission() {
 										className="w-full aspect-video"
 										width="300"
 										height="300"
-										loading="lazy"
 										frameBorder="0"
-										allow="autoplay; clipboard-write; encrypted-media; web-share"
+										allow="autoplay; fullscreen"
 										referrerPolicy="strict-origin-when-cross-origin"
 										title="Tokspace - Website - Clip 1"
 									></iframe>
@@ -278,9 +275,8 @@ export function OurMission() {
 										className="w-full aspect-video"
 										width="300"
 										height="300"
-										loading="lazy"
 										frameBorder="0"
-										allow="autoplay; clipboard-write; encrypted-media; web-share"
+										allow="autoplay; fullscreen"
 										referrerPolicy="strict-origin-when-cross-origin"
 										title="Tokspace - Website - Clip 1"
 									></iframe>

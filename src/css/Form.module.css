@@ -63,3 +63,10 @@
 	background: linear-gradient(135deg, #ff944d, #ffd699);
 	transform: translateY(-2px);
 }
+
+.input:disabled,
+.textarea:disabled,
+button:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}

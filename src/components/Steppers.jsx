@@ -65,9 +65,8 @@ export function Steppers() {
 								className="w-full aspect-video"
 								width="800"
 								height="720"
-								loading="lazy"
 								frameBorder="0"
-								allow="autoplay; clipboard-write; encrypted-media; web-share"
+								allow="autoplay; fullscreen"
 								referrerPolicy="strict-origin-when-cross-origin"
 								title="Tokspace - Website - Clip 1"
 							></iframe>
@@ -83,9 +82,8 @@ export function Steppers() {
 								className="w-full aspect-video"
 								width="800"
 								height="720"
-								loading="lazy"
 								frameBorder="0"
-								allow="autoplay; clipboard-write; encrypted-media; web-share"
+								allow="autoplay; fullscreen"
 								referrerPolicy="strict-origin-when-cross-origin"
 								title="Tokspace - Website - Clip 1"
 							></iframe>
@@ -101,9 +99,8 @@ export function Steppers() {
 								className="w-full aspect-video"
 								width="800"
 								height="720"
-								loading="lazy"
 								frameBorder="0"
-								allow="autoplay; clipboard-write; encrypted-media; web-share"
+								allow="autoplay; fullscreen"
 								referrerPolicy="strict-origin-when-cross-origin"
 								title="Tokspace - Website - Clip 1"
 							></iframe>

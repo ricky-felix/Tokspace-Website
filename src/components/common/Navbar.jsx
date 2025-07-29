@@ -4,7 +4,7 @@ import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 
 import buttonStyles from "../../css/Button.module.css";
 

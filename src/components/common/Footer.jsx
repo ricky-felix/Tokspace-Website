@@ -12,7 +12,7 @@ import {
 } from "react-icons/bi";
 import { FaXTwitter } from "react-icons/fa6";
 
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 
 export function Footer() {
 	const location = useLocation();

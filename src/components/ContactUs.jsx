@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
+import React, { useState, useEffect } from "react";
+import {
+	BiEnvelope,
+	BiMap,
+	BiPhone,
+	BiCheckCircle,
+	BiErrorCircle,
+} from "react-icons/bi";
+import { AiOutlineLoading } from "react-icons/ai";
 import emailjs from "@emailjs/browser";
 
 import buttonStyles from "../css/Button.module.css";
@@ -110,11 +117,35 @@ export function ContactUs() {
 							/>
 						</div>
 
+						{submitStatus === "success" && (
+							<div className="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50">
+								<BiCheckCircle className="size-5 mr-2" />
+								<span>
+									Message sent successfully! We'll get back to you soon.
+								</span>
+							</div>
+						)}
+
+						{submitStatus === "error" && (
+							<div className="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50">
+								<BiErrorCircle className="size-5 mr-2" />
+								<span>Failed to send message. Please try again later.</span>
+							</div>
+						)}
+
 						<button
 							type="submit"
-							className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+							className={`${buttonStyles.bubbleButton} ${buttonStyles.primary} flex items-center justify-center`}
+							disabled={isSubmitting}
 						>
-							Send Email
+							{isSubmitting ? (
+								<>
+									<AiOutlineLoading className="animate-spin mr-2 size-5" />
+									Sending...
+								</>
+							) : (
+								"Send Email"
+							)}
 						</button>
 					</form>
 					<div className="mb-auto grid gap-x-4 gap-y-10 py-2 sm:grid-cols-2">

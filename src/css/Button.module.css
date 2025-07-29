@@ -37,6 +37,16 @@
 		0 4px 10px rgba(255, 101, 35, 0.5);
 }
 
+.bubbleButton.primary:disabled {
+	background: #ff8b5a;
+	transform: translateY(2px);
+	box-shadow:
+		0 4px 0 #d64a15,
+		0 6px 15px rgba(255, 101, 35, 0.3);
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
 /* Secondary bubble button */
 .bubbleButton.secondary {
 	background: white;
