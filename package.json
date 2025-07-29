@@ -8,7 +8,6 @@
 		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"prepare": "tw-patch",
 		"build-webpack": "webpack --config prod.config.js"
 	},
 	"dependencies": {
