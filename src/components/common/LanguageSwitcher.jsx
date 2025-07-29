@@ -1,29 +1,54 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
-  
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
+	const { i18n } = useTranslation();
 
-  return (
-    <div className="flex items-center space-x-2">
-      <button 
-        onClick={() => changeLanguage('en')} 
-        className={`px-2 py-1 text-sm rounded ${i18n.language === 'en' ? 'bg-[#ff6523] text-white' : 'bg-gray-200 text-black hover:bg-gray-300'}`}
-      >
-        EN
-      </button>
-      <button 
-        onClick={() => changeLanguage('id')} 
-        className={`px-2 py-1 text-sm rounded ${i18n.language === 'id' ? 'bg-[#ff6523] text-white' : 'bg-gray-200 text-black hover:bg-gray-300'}`}
-      >
-        ID
-      </button>
-    </div>
-  );
+	return (
+		<div className="inline-flex items-center gap-2">
+			<button
+				onClick={() => i18n.changeLanguage("en")}
+				className={`
+          relative overflow-hidden border-none rounded-xl px-6 py-3 text-base font-semibold cursor-pointer
+          transition-all duration-300 ease-out transform
+          ${
+						i18n.language === "en"
+							? "bg-[#011ad6] text-white translate-y-0 shadow-[0_6px_0_#0013a8,0_8px_20px_rgba(1,26,214,0.4)] hover:translate-y-0.5 hover:shadow-[0_4px_0_#0013a8,0_6px_15px_rgba(1,26,214,0.6)] hover:bg-[#1129e0] active:translate-y-1 active:shadow-[0_2px_0_#0013a8,0_4px_10px_rgba(1,26,214,0.5)]"
+							: "bg-white text-[#666] border-2 border-[#e0e0e0] translate-y-0 shadow-[0_6px_0_#d0d0d0,0_8px_20px_rgba(0,0,0,0.1)] hover:translate-y-0.5 hover:shadow-[0_4px_0_#d0d0d0,0_6px_15px_rgba(0,0,0,0.15)] hover:bg-[#f8f9fa] hover:border-[#d0d0d0] active:translate-y-1 active:shadow-[0_2px_0_#d0d0d0,0_4px_10px_rgba(0,0,0,0.12)]"
+					}
+          before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-0 before:h-0 before:rounded-full before:transform before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-600
+          ${
+						i18n.language === "en"
+							? "before:bg-white/30 active:before:w-[300px] active:before:h-[300px]"
+							: "before:bg-black/10 active:before:w-[300px] active:before:h-[300px]"
+					}
+        `}
+			>
+				EN
+			</button>
+
+			<button
+				onClick={() => i18n.changeLanguage("id")}
+				className={`
+          relative overflow-hidden border-none rounded-xl px-6 py-3 text-base font-semibold cursor-pointer
+          transition-all duration-300 ease-out transform
+          ${
+						i18n.language === "id"
+							? "bg-[#011ad6] text-white translate-y-0 shadow-[0_6px_0_#0013a8,0_8px_20px_rgba(1,26,214,0.4)] hover:translate-y-0.5 hover:shadow-[0_4px_0_#0013a8,0_6px_15px_rgba(1,26,214,0.6)] hover:bg-[#1129e0] active:translate-y-1 active:shadow-[0_2px_0_#0013a8,0_4px_10px_rgba(1,26,214,0.5)]"
+							: "bg-white text-[#666] border-2 border-[#e0e0e0] translate-y-0 shadow-[0_6px_0_#d0d0d0,0_8px_20px_rgba(0,0,0,0.1)] hover:translate-y-0.5 hover:shadow-[0_4px_0_#d0d0d0,0_6px_15px_rgba(0,0,0,0.15)] hover:bg-[#f8f9fa] hover:border-[#d0d0d0] active:translate-y-1 active:shadow-[0_2px_0_#d0d0d0,0_4px_10px_rgba(0,0,0,0.12)]"
+					}
+          before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-0 before:h-0 before:rounded-full before:transform before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-600
+          ${
+						i18n.language === "id"
+							? "before:bg-white/30 active:before:w-[300px] active:before:h-[300px]"
+							: "before:bg-black/10 active:before:w-[300px] active:before:h-[300px]"
+					}
+        `}
+			>
+				ID
+			</button>
+		</div>
+	);
 };
 
 export default LanguageSwitcher;

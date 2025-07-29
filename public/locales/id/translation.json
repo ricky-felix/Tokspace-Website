@@ -8,7 +8,7 @@
 	},
 	"footer": {
 		"exploreTitle": "Jelajahi Masa Depan Kreativitas",
-		"joinUs": "Bergabunglah dengan kami dalam membentuk masa depan dengan desain dan teknologi inovatif.",
+		"joinUs": "Bergabunglah dengan kami, membentuk masa depan dengan desain dan teknologi inovatif.",
 		"checkRoadmap": "Lihat Roadmap! (SEGERA HADIR)",
 		"joinCommunity": "Bergabung dengan Komunitas Kami! (SEGERA HADIR)",
 		"homepage": "BERANDA",
@@ -33,7 +33,7 @@
 		"sendButton": "Kirim Email",
 		"sending": "Mengirim...",
 		"successMessage": "Pesan berhasil dikirim! Kami akan segera menghubungi Anda.",
-		"errorMessage": "Gagal mengirim pesan. Silakan coba lagi nanti.",
+		"errorMessage": "Gagal mengirim pesan. Silakan coba lagi dalam beberapa menit.",
 		"emailTitle": "Email",
 		"whatsappTitle": "WhatsApp",
 		"locationTitle": "Lokasi",
@@ -81,12 +81,12 @@
 		"step2Title": "Langkah 2: Desain",
 		"step2Description": "Menggunakan alat kami, kreator mengubah sketsa menjadi desain digital yang siap untuk pencetakan 3D.",
 		"step3Title": "Langkah 3: Prototipe",
-		"step3Description": "Kreator mencetak prototipe, menguji fungsionalitas dan estetika untuk menyempurnakan produk mereka sebelum diluncurkan."
+		"step3Description": "Kreator mencetak prototipe, menguji fungsionalitas, dan estetika untuk menyempurnakan produk mereka sebelum diluncurkan."
 	},
 	"notFound": {
 		"title1": "Tersesat di Angkasa",
 		"title2": "Ups! Halaman Hilang",
-		"description": "Sepertinya halaman yang Anda cari telah meluncur ke kosmos. Mari kita bawa Anda pulang.",
+		"description": "Sepertinya halaman yang Anda cari telah meluncur ke kosmos. Mari kita bawa Anda pulang ke rumah.",
 		"homeButton": "Beranda",
 		"contactButton": "Hubungi Kami"
 	}
