@@ -2,10 +2,12 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 import buttonStyles from "../css/Button.module.css";
 
 export function Header() {
+	const { t } = useTranslation();
 	const scrollToOurMission = () => {
 		const element = document.getElementById("ourmission");
 		if (element) {
@@ -19,23 +21,21 @@ export function Header() {
 				<div className="rb-12 mb-12 grid grid-cols-1 items-start gap-x-12 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-y-8 lg:mb-20 lg:gap-x-20 lg:gap-y-16">
 					<div>
 						<h1 className="text-2xl font-bold md:text-4xl lg:text-6xl">
-							Unleash Your Creativity with 3D Innovation
+							{t('header.title')}
 						</h1>
 					</div>
 					<div>
 						<p className="md:text-md">
-							At Tokspace, we empower local creators to transform their ideas
-							into reality using cutting-edge technology. Join us in a journey
-							of exploration and innovation, where your dreams take flight.
+							{t('header.description')}
 						</p>
 						<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 							<Button
-								title="Learn More"
+								title={t('header.learnMore')}
 								variant="primary"
 								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 								onClick={scrollToOurMission}
 							>
-								Learn More
+								{t('header.learnMore')}
 							</Button>
 						</div>
 					</div>

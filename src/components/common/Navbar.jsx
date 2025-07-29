@@ -3,8 +3,10 @@
 import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 import { Link, useLocation } from "react-router-dom";
+import LanguageSwitcher from './LanguageSwitcher';
 
 import buttonStyles from "../../css/Button.module.css";
 
@@ -43,6 +45,7 @@ const useRelume = () => {
 export function Navbar() {
 	const useActive = useRelume();
 	const location = useLocation();
+	const { t } = useTranslation();
 
 	const handleScrollToSection = (e, sectionId) => {
 		if (location.pathname === "/") {
@@ -127,40 +130,41 @@ export function Navbar() {
 							onClick={(e) => handleScrollToSection(e, "home")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
-							Home
+							{t('navbar.home')}
 						</Link>
 						<Link
 							to="/#creativity"
 							onClick={(e) => handleScrollToSection(e, "creativity")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
-							Creativity
+							{t('navbar.creativity')}
 						</Link>
 						<Link
 							to="/#ourmission"
 							onClick={(e) => handleScrollToSection(e, "ourmission")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
-							Our Mission
+							{t('navbar.ourMission')}
 						</Link>
 						<Link
 							to="/#innovation"
 							onClick={(e) => handleScrollToSection(e, "innovation")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
-							Innovation
+							{t('navbar.innovation')}
 						</Link>
 					</nav>
 
 					{/* Contact Button */}
 					<div className="mt-4 flex flex-col items-center gap-4 lg:mt-0 lg:ml-4 lg:flex-row">
+					<LanguageSwitcher />
 						<Link to="/contact-us">
 							<Button
 								title="Reach Out"
 								size="sm"
 								className={`w-full ${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 							>
-								Contact Us
+								{t('navbar.contactUs')}
 							</Button>
 						</Link>
 					</div>

@@ -1,0 +1,24 @@
+{
+  "navbar": {
+    "home": "Home",
+    "creativity": "Creativity",
+    "ourMission": "Our Mission",
+    "innovation": "Innovation",
+    "contactUs": "Contact Us"
+  },
+  "footer": {
+    "exploreTitle": "Explore the Future of Creativity",
+    "joinUs": "Join us in shaping tomorrow with innovative design and technology.",
+    "checkRoadmap": "Check out Roadmap! (COMING SOON)",
+    "joinCommunity": "Join Our Community! (COMING SOON)",
+    "homepage": "HOMEPAGE",
+    "meetTokspace": "Meet Tokspace",
+    "others": "OTHERS",
+    "copyright": "Tokspace. 2025."
+  },
+  "header": {
+    "title": "Unleash Your Creativity with 3D Innovation",
+    "description": "At Tokspace, we empower local creators to transform their ideas into reality using cutting-edge technology. Join us in a journey of exploration and innovation, where your dreams take flight.",
+    "learnMore": "Learn More"
+  }
+}

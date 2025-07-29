@@ -1,0 +1,24 @@
+{
+  "navbar": {
+    "home": "Beranda",
+    "creativity": "Kreativitas",
+    "ourMission": "Misi Kami",
+    "innovation": "Inovasi",
+    "contactUs": "Hubungi Kami"
+  },
+  "footer": {
+    "exploreTitle": "Jelajahi Masa Depan Kreativitas",
+    "joinUs": "Bergabunglah dengan kami dalam membentuk masa depan dengan desain dan teknologi inovatif.",
+    "checkRoadmap": "Lihat Roadmap! (SEGERA HADIR)",
+    "joinCommunity": "Bergabung dengan Komunitas Kami! (SEGERA HADIR)",
+    "homepage": "BERANDA",
+    "meetTokspace": "Kenali Tokspace",
+    "others": "LAINNYA",
+    "copyright": "Tokspace. 2025."
+  },
+  "header": {
+    "title": "Lepaskan Kreativitas Anda dengan Inovasi 3D",
+    "description": "Di Tokspace, kami memberdayakan kreator lokal untuk mengubah ide mereka menjadi kenyataan menggunakan teknologi mutakhir. Bergabunglah dengan kami dalam perjalanan eksplorasi dan inovasi, di mana impian Anda menjadi kenyataan.",
+    "learnMore": "Pelajari Lebih Lanjut"
+  }
+}
