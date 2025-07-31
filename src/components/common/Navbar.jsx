@@ -4,10 +4,8 @@ import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { Link, useLocation } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
-
 import buttonStyles from "../../css/Button.module.css";
 
 const useRelume = () => {
@@ -39,7 +37,19 @@ const useRelume = () => {
 		animateMobileMenuButtonSpan,
 		animateDropdownMenu,
 		animateDropdownMenuIcon,
+		isMobile,
 	};
+};
+
+// Mobile Language Switcher Component for Navbar
+const MobileLanguageSwitcher = ({ isMobile }) => {
+	if (!isMobile) return null;
+
+	return (
+		<div className="flex items-center">
+			<LanguageSwitcher />
+		</div>
+	);
 };
 
 export function Navbar() {
@@ -59,58 +69,70 @@ export function Navbar() {
 		// If not on homepage, let the Link handle navigation normally
 	};
 
+	const handleNavLinkClick = (e, sectionId) => {
+		handleScrollToSection(e, sectionId);
+		// Close mobile menu after clicking a nav link
+		if (useActive.animateMobileMenu === "open") {
+			useActive.toggleMobileMenu();
+		}
+	};
+
 	return (
 		<section
 			id="relume"
-			className="z-[999] flex w-full items-center border-b border-border-primary bg-background-primary lg:min-h-18 lg:px-[5%]"
+			className="sticky top-0 z-[999] flex w-full items-center border-b border-border-primary bg-white lg:min-h-18 lg:px-[5%]"
 		>
 			<div className="size-full lg:flex lg:items-center lg:justify-between">
 				<div className="flex min-h-16 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
 					<Link to="/">
 						<img src="./Tokspace-Logo.png" alt="Logo image" width="100px" />
 					</Link>
-					<button
-						className="-mr-2 flex size-12 flex-col items-center justify-center lg:hidden"
-						onClick={useActive.toggleMobileMenu}
-					>
-						<motion.span
-							className="my-[3px] h-0.5 w-6 bg-black"
-							animate={useActive.animateMobileMenuButtonSpan}
-							variants={{
-								open: { translateY: 8, transition: { delay: 0.1 } },
-								rotatePhase: { rotate: -45, transition: { delay: 0.2 } },
-								closed: {
-									translateY: 0,
-									rotate: 0,
-									transition: { duration: 0.2 },
-								},
-							}}
-						/>
-						<motion.span
-							className="my-[3px] h-0.5 w-6 bg-black"
-							animate={useActive.animateMobileMenu}
-							variants={{
-								open: { width: 0, transition: { duration: 0.1 } },
-								closed: {
-									width: "1.5rem",
-									transition: { delay: 0.3, duration: 0.2 },
-								},
-							}}
-						/>
-						<motion.span
-							className="my-[3px] h-0.5 w-6 bg-black"
-							animate={useActive.animateMobileMenuButtonSpan}
-							variants={{
-								open: { translateY: -8, transition: { delay: 0.1 } },
-								rotatePhase: { rotate: 45, transition: { delay: 0.2 } },
-								closed: {
-									translateY: 0,
-									rotate: 0,
-									transition: { duration: 0.2 },
-								},
-							}}
-						/>
-					</button>
+					<div className="flex items-center gap-3 lg:hidden">
+						{/* Mobile Language Switcher */}
+						<MobileLanguageSwitcher isMobile={useActive.isMobile} />
+						<button
+							className="-mr-2 flex size-12 flex-col items-center justify-center"
+							onClick={useActive.toggleMobileMenu}
+						>
+							<motion.span
+								className="my-[3px] h-0.5 w-6 bg-black"
+								animate={useActive.animateMobileMenuButtonSpan}
+								variants={{
+									open: { translateY: 8, transition: { delay: 0.1 } },
+									rotatePhase: { rotate: -45, transition: { delay: 0.2 } },
+									closed: {
+										translateY: 0,
+										rotate: 0,
+										transition: { duration: 0.2 },
+									},
+								}}
+							/>
+							<motion.span
+								className="my-[3px] h-0.5 w-6 bg-black"
+								animate={useActive.animateMobileMenu}
+								variants={{
+									open: { width: 0, transition: { duration: 0.1 } },
+									closed: {
+										width: "1.5rem",
+										transition: { delay: 0.3, duration: 0.2 },
+									},
+								}}
+							/>
+							<motion.span
+								className="my-[3px] h-0.5 w-6 bg-black"
+								animate={useActive.animateMobileMenuButtonSpan}
+								variants={{
+									open: { translateY: -8, transition: { delay: 0.1 } },
+									rotatePhase: { rotate: 45, transition: { delay: 0.2 } },
+									closed: {
+										translateY: 0,
+										rotate: 0,
+										transition: { duration: 0.2 },
+									},
+								}}
+							/>
+						</button>
+					</div>
 				</div>
 				<motion.div
 					variants={{
@@ -127,37 +149,41 @@ export function Navbar() {
 					<nav className="flex flex-col gap-6 py-6 lg:flex-row lg:gap-8 lg:py-0">
 						<Link
 							to="/#home"
-							onClick={(e) => handleScrollToSection(e, "home")}
+							onClick={(e) => handleNavLinkClick(e, "home")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.home")}
 						</Link>
 						<Link
 							to="/#creativity"
-							onClick={(e) => handleScrollToSection(e, "creativity")}
+							onClick={(e) => handleNavLinkClick(e, "creativity")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.creativity")}
 						</Link>
 						<Link
 							to="/#ourmission"
-							onClick={(e) => handleScrollToSection(e, "ourmission")}
+							onClick={(e) => handleNavLinkClick(e, "ourmission")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.ourMission")}
 						</Link>
 						<Link
 							to="/#innovation"
-							onClick={(e) => handleScrollToSection(e, "innovation")}
+							onClick={(e) => handleNavLinkClick(e, "innovation")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.innovation")}
 						</Link>
 					</nav>
-					<LanguageSwitcher />
+
+					{/* Desktop Language Switcher - Hidden on mobile */}
+					<div className="hidden lg:block">
+						<LanguageSwitcher />
+					</div>
+
 					{/* Contact Button */}
 					<div className="mt-4 flex flex-col items-center gap-4 lg:mt-0 lg:ml-4 lg:flex-row">
-						{/* <LanguageSwitcher /> */}
 						<Link to="/contact-us">
 							<Button
 								title="Reach Out"
