@@ -22,7 +22,7 @@ export function NotFound404() {
 							transition={{ type: "spring", bounce: 0 }}
 							className="block text-3xl font-bold md:text-5xl lg:text-7xl"
 						>
-							{t('notFound.title')}
+							{t("notFound.title1")}
 						</motion.span>
 					</h1>
 					<h1>
@@ -32,19 +32,17 @@ export function NotFound404() {
 							transition={{ type: "spring", bounce: 0 }}
 							className="mb-5 block text-3xl font-bold md:mb-6 md:text-5xl lg:text-7xl"
 						>
-							{t('notFound.subtitle')}
+							{t("notFound.title2")}
 						</motion.span>
 					</h1>
-					<p className="md:text-md">
-						{t('notFound.description')}
-					</p>
+					<p className="md:text-md">{t("notFound.description")}</p>
 					<div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
 						<Link to="/">
 							<Button
 								title="Home"
 								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 							>
-								{t('notFound.homeButton')}
+								{t("notFound.homeButton")}
 							</Button>
 						</Link>
 						<Link to="/contact-us">
@@ -53,7 +51,7 @@ export function NotFound404() {
 								variant="secondary"
 								className={`${buttonStyles.bubbleButton} ${buttonStyles.secondary}`}
 							>
-								{t('notFound.contactButton')}
+								{t("notFound.contactButton")}
 							</Button>
 						</Link>
 					</div>
