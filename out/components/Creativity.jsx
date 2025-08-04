@@ -39,6 +39,7 @@ export function Creativity() {
 									className="w-full aspect-video"
 									width="300"
 									height="300"
+									loading="eager"
 									frameBorder="0"
 									allow="autoplay; fullscreen"
 									referrerPolicy="strict-origin-when-cross-origin"

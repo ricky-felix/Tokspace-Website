@@ -47,6 +47,7 @@ export function Header() {
 						width="800"
 						height="720"
 						frameBorder="0"
+						loading="eager"
 						allow="autoplay; fullscreen"
 						referrerPolicy="strict-origin-when-cross-origin"
 						title="Tokspace - Website - Clip 1"
