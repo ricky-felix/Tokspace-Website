@@ -1,11 +1,61 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@relume_io/relume-ui";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export function Steppers() {
 	const { t } = useTranslation();
+	const [windowWidth, setWindowWidth] = useState(
+		typeof window !== "undefined" ? window.innerWidth : 0
+	);
+
+	// Effect to handle window resize
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowWidth(window.innerWidth);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	// Get responsive aspect ratio for videos
+	const getVideoAspectRatio = () => {
+		if (windowWidth < 640) {
+			// Mobile - slightly taller aspect ratio for better mobile viewing
+			return "aspect-[16/10]";
+		} else if (windowWidth < 1024) {
+			// Tablet - standard video aspect ratio
+			return "aspect-video";
+		} else {
+			// Desktop - cinematic widescreen aspect ratio
+			return "aspect-[21/9]";
+		}
+	};
+
+	// Get responsive container classes
+	const getVideoContainerClasses = () => {
+		const baseClasses = "relative w-full overflow-hidden rounded-lg";
+		return `${baseClasses} ${getVideoAspectRatio()}`;
+	};
+
+	// Video iframe component for reusability
+	const VideoIframe = ({ src, title }) => (
+		<div className={getVideoContainerClasses()}>
+			<iframe
+				src={src}
+				className="absolute inset-0 w-full h-full"
+				width="800"
+				height="720"
+				frameBorder="0"
+				allow="autoplay; fullscreen"
+				referrerPolicy="strict-origin-when-cross-origin"
+				title={title}
+			/>
+		</div>
+	);
+
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
@@ -49,52 +99,28 @@ export function Steppers() {
 						value="tab-one"
 						className="data-[state=active]:animate-tabs"
 					>
-						<div>
-							<iframe
-								src="https://player.vimeo.com/video/1103999740?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
-								className="w-full aspect-video"
-								width="800"
-								height="720"
-								frameBorder="0"
-								allow="autoplay; fullscreen"
-								referrerPolicy="strict-origin-when-cross-origin"
-								title="Tokspace - Website - Clip 1"
-							></iframe>
-						</div>
+						<VideoIframe
+							src="https://player.vimeo.com/video/1103999740?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+							title="Tokspace - Website - Clip 1"
+						/>
 					</TabsContent>
 					<TabsContent
 						value="tab-two"
 						className="data-[state=active]:animate-tabs"
 					>
-						<div>
-							<iframe
-								src="https://player.vimeo.com/video/1104325374?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
-								className="w-full aspect-video"
-								width="800"
-								height="720"
-								frameBorder="0"
-								allow="autoplay; fullscreen"
-								referrerPolicy="strict-origin-when-cross-origin"
-								title="Tokspace - Website - Clip 1"
-							></iframe>
-						</div>
+						<VideoIframe
+							src="https://player.vimeo.com/video/1104325374?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+							title="Tokspace - Website - Clip 2"
+						/>
 					</TabsContent>
 					<TabsContent
 						value="tab-three"
 						className="data-[state=active]:animate-tabs"
 					>
-						<div>
-							<iframe
-								src="https://player.vimeo.com/video/1104004919?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
-								className="w-full aspect-video"
-								width="800"
-								height="720"
-								frameBorder="0"
-								allow="autoplay; fullscreen"
-								referrerPolicy="strict-origin-when-cross-origin"
-								title="Tokspace - Website - Clip 1"
-							></iframe>
-						</div>
+						<VideoIframe
+							src="https://player.vimeo.com/video/1104004919?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+							title="Tokspace - Website - Clip 3"
+						/>
 					</TabsContent>
 				</Tabs>
 			</div>
