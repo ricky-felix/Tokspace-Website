@@ -1,93 +1,92 @@
 {
-  "navbar": {
-    "home": "Home",
-    "creativity": "Creativity",
-    "ourMission": "Our Mission",
-    "innovation": "Innovation",
-    "contactUs": "Contact Us"
-  },
-  "footer": {
-    "exploreTitle": "Explore the Future of Creativity",
-    "joinUs": "Join us in shaping tomorrow with innovative design and technology.",
-    "checkRoadmap": "Check out Roadmap! (COMING SOON)",
-    "joinCommunity": "Join Our Community! (COMING SOON)",
-    "homepage": "HOMEPAGE",
-    "meetTokspace": "Meet Tokspace",
-    "others": "OTHERS",
-    "copyright": "Tokspace. 2025."
-  },
-  "header": {
-    "title": "Unleash Your Creativity with 3D Innovation",
-    "description": "Tokspace empowers creators in Indonesia with cutting-edge 3D printing technology and modular design kits. Join our community of innovators and bring your ideas to life.",
-    "learnMore": "Learn More"
-  },
-  "contactUs": {
-    "title": "Get in Touch",
-    "subtitle": "We'd love to hear from you!",
-    "nameLabel": "Nama",
-    "namePlaceholder": "Enter your full name here",
-    "emailLabel": "Email",
-    "emailPlaceholder": "Write your active email here",
-    "messageLabel": "Pesan",
-    "messagePlaceholder": "Do you have any inquiry?",
-    "sendButton": "Send Email",
-    "sending": "Sending...",
-    "successMessage": "Message sent successfully! We'll get back to you soon.",
-    "errorMessage": "Failed to send message. Please try again later.",
-    "emailTitle": "Email",
-    "whatsappTitle": "WhatsApp",
-    "locationTitle": "Location",
-    "comingSoon": "Coming Soon",
-    "location": "Medan, Indonesia"
-  },
-  "creativity": {
-    "title": "Unleash Your Creativity",
-    "subtitle": "Explore our innovative modular kits and storytelling tools.",
-    "createLabel": "Create",
-    "createTitle": "Transform Ideas into Reality",
-    "createDescription": "Discover how our tools empower your creative journey and inspire innovation.",
-    "craftTitle": "Craft Your Unique Story",
-    "craftDescription": "Join us in shaping the future of storytelling.",
-    "experienceTitle": "Experience the Future of Design",
-    "experienceDescription": "Embrace technology to elevate your creative projects.",
-    "inspireLabel": "Inspire",
-    "inspireTitle": "Connect with Local Creators",
-    "inspireDescription": "Collaborate and innovate with our vibrant community.",
-    "imagineLabel": "Imagine",
-    "imagineTitle": "Launch Your Ideas into Space",
-    "imagineDescription": "Let your imagination soar with our cutting-edge tools and resources."
-  },
-  "ourMission": {
-    "title": "Our Mission: Creativity Meets Technology in Indonesia",
-    "subtitle": "Empowering local creators through technology and community.",
-    "exploration": "Exploration",
-    "explorationTitle": "Iteration over Perfection",
-    "explorationDescription": "Try new ideas, themes, and tech. Never static.",
-    "community": "Connection & Community",
-    "communityTitle": "Welcome to the Tokspace community.",
-    "communityDescription": "Make people feel part of a bigger story.",
-    "curiosity": "Curiosity",
-    "curiosityTitle": "Have something in mind? Share it!",
-    "curiosityDescription": "Teach, show, and share — not just sell.",
-    "sustainability": "Sustainability",
-    "sustainabilityTitle": "Commitment to a Reducing Waste",
-    "sustainabilityDescription": "Small-batch, thoughtful, minimal waste."
-  },
-  "steppers": {
-    "title": "Discover How Local Creators Innovate with Us",
-    "subtitle": "Join us on a journey through the creative process. Watch how local creators harness our technology to bring their visions to life.",
-    "step1Title": "Step 1: Ideation",
-    "step1Description": "Creators brainstorm ideas and sketch their concepts, laying the groundwork for innovation.",
-    "step2Title": "Step 2: Design",
-    "step2Description": "Using our tools, creators transform sketches into digital designs ready for 3D printing.",
-    "step3Title": "Step 3: Prototype",
-    "step3Description": "Creators print prototypes, testing functionality and aesthetics to refine their products before launch."
-  },
-  "notFound": {
-    "title1": "Lost in Space",
-    "title2": "Oops! Page Missing",
-    "description": "It seems the page you're looking for has launched into the cosmos. Let's get you home.",
-    "homeButton": "Home",
-    "contactButton": "Contact Us"
-  }
+	"navbar": {
+		"home": "Home",
+		"creativity": "Creativity",
+		"ourMission": "Our Mission",
+		"innovation": "Innovation",
+		"contactUs": "Contact Us"
+	},
+	"footer": {
+		"exploreTitle": "Explore the Future of Creativity",
+		"joinUs": "Join us in shaping tomorrow with innovative design and technology.",
+		"checkRoadmap": "Check out Roadmap! (COMING SOON)",
+		"joinCommunity": "Join Our Community! (COMING SOON)",
+		"homepage": "HOMEPAGE",
+		"meetTokspace": "Meet Tokspace",
+		"others": "OTHERS",
+		"copyright": "Tokspace. 2025."
+	},
+	"header": {
+		"title": "Unleash Your Creativity with 3D Innovation",
+		"description": "Tokspace empowers creators in Indonesia with cutting-edge 3D printing technology and modular design kits. Join our community of innovators and bring your ideas to life.",
+		"learnMore": "Learn More"
+	},
+	"contactUs": {
+		"title": "Get in Touch",
+		"subtitle": "We'd love to hear from you!",
+		"nameLabel": "Nama",
+		"namePlaceholder": "Enter your full name here",
+		"emailLabel": "Email",
+		"emailPlaceholder": "Write your active email here",
+		"messageLabel": "Pesan",
+		"messagePlaceholder": "Do you have any inquiry?",
+		"sendButton": "Send Email",
+		"sending": "Sending...",
+		"successMessage": "Message sent successfully! We'll get back to you soon.",
+		"errorMessage": "Failed to send message. Please try again later.",
+		"emailTitle": "Email",
+		"whatsappTitle": "WhatsApp",
+		"locationTitle": "Location",
+		"location": "Medan, Indonesia"
+	},
+	"creativity": {
+		"title": "Unleash Your Creativity",
+		"subtitle": "Explore our innovative modular kits and storytelling tools.",
+		"createLabel": "Create",
+		"createTitle": "Transform Ideas into Reality",
+		"createDescription": "Discover how our tools empower your creative journey and inspire innovation.",
+		"craftTitle": "Craft Your Unique Story",
+		"craftDescription": "Join us in shaping the future of storytelling.",
+		"experienceTitle": "Experience the Future of Design",
+		"experienceDescription": "Embrace technology to elevate your creative projects.",
+		"inspireLabel": "Inspire",
+		"inspireTitle": "Connect with Local Creators",
+		"inspireDescription": "Collaborate and innovate with our vibrant community.",
+		"imagineLabel": "Imagine",
+		"imagineTitle": "Launch Your Ideas into Space",
+		"imagineDescription": "Let your imagination soar with our cutting-edge tools and resources."
+	},
+	"ourMission": {
+		"title": "Our Mission: Creativity Meets Technology in Indonesia",
+		"subtitle": "Empowering local creators through technology and community.",
+		"exploration": "Exploration",
+		"explorationTitle": "Iteration over Perfection",
+		"explorationDescription": "Try new ideas, themes, and tech. Never static.",
+		"community": "Connection & Community",
+		"communityTitle": "Welcome to the Tokspace community.",
+		"communityDescription": "Make people feel part of a bigger story.",
+		"curiosity": "Curiosity",
+		"curiosityTitle": "Have something in mind? Share it!",
+		"curiosityDescription": "Teach, show, and share — not just sell.",
+		"sustainability": "Sustainability",
+		"sustainabilityTitle": "Commitment to a Reducing Waste",
+		"sustainabilityDescription": "Small-batch, thoughtful, minimal waste."
+	},
+	"steppers": {
+		"title": "Discover How Local Creators Innovate with Us",
+		"subtitle": "Join us on a journey through the creative process. Watch how local creators harness our technology to bring their visions to life.",
+		"step1Title": "Step 1: Ideation",
+		"step1Description": "Creators brainstorm ideas and sketch their concepts, laying the groundwork for innovation.",
+		"step2Title": "Step 2: Design",
+		"step2Description": "Using our tools, creators transform sketches into digital designs ready for 3D printing.",
+		"step3Title": "Step 3: Prototype",
+		"step3Description": "Creators print prototypes, testing functionality and aesthetics to refine their products before launch."
+	},
+	"notFound": {
+		"title1": "Lost in Space",
+		"title2": "Oops! Page Missing",
+		"description": "It seems the page you're looking for has launched into the cosmos. Let's get you home.",
+		"homeButton": "Home",
+		"contactButton": "Contact Us"
+	}
 }
