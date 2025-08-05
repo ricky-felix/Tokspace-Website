@@ -21,6 +21,7 @@ h6 {
 p,
 li,
 ul,
-ol {
+ol,
+a {
 	color: #6b7280;
 }
