@@ -14,7 +14,7 @@
 
 		<meta
 			http-equiv="Content-Security-Policy"
-			content="default-src 'self'; connect-src 'self' https://api.emailjs.com; script-src 'self' *.vimeo.com *.vimeocdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-src 'self' *.vimeo.com;"
+			content="default-src 'self'; connect-src 'self' https://api.emailjs.com https://*.vimeo.com https://*.vimeocdn.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vimeo.com https://*.vimeocdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://*.vimeo.com https://*.vimeocdn.com; frame-src 'self' https://*.vimeo.com https://player.vimeo.com; media-src 'self' https://*.vimeo.com https://*.vimeocdn.com;"
 		/>
 		<meta http-equiv="X-Content-Type-Options" content="nosniff" />
 		<meta http-equiv="X-Frame-Options" content="DENY" />
