@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@relume_io/relume-ui";
 import React from "react";
 
 import { useTranslation } from "react-i18next";

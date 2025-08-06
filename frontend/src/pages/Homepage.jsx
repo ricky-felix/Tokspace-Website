@@ -11,9 +11,9 @@ import { Footer } from "../components/common/Footer";
 
 import { Header } from "../components/Header";
 import { Creativity } from "../components/Creativity";
+import { ShopProduct } from "../components/ShopProduct";
 import { OurMission } from "../components/OurMission";
 import { Steppers } from "../components/Steppers";
-import { BuyProduct } from "../components/BuyProduct";
 
 export default function Home() {
 	const location = useLocation();
@@ -88,7 +88,7 @@ export default function Home() {
 							<OurMission />
 						</motion.div>
 
-						<motion.div
+						{/* <motion.div
 							className="w-full"
 							id="ourmission"
 							initial={{ opacity: 0, y: 20 }}
@@ -96,8 +96,8 @@ export default function Home() {
 							transition={{ duration: 0.6, delay: 0.1 }}
 							viewport={{ once: true }}
 						>
-							<BuyProduct />
-						</motion.div>
+							<ShopProduct />
+						</motion.div> */}
 
 						<motion.div
 							className="w-full"
