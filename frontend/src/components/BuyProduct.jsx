@@ -1,80 +1,169 @@
-"use client";
-
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@relume_io/relume-ui";
+import React, { useEffect, useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
 	BreadcrumbLink,
 	BreadcrumbList,
 	BreadcrumbSeparator,
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+	Dialog,
+	DialogContent,
+	DialogTrigger,
+	Input,
+	Label,
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetTrigger,
+	Tabs,
+	TabsContent,
+	TabsList,
+	TabsTrigger,
 } from "@relume_io/relume-ui";
-import { Button } from "@relume_io/relume-ui";
-import { Carousel, CarouselContent, CarouselItem } from "@relume_io/relume-ui";
-import { Input } from "@relume_io/relume-ui";
-import { Label } from "@relume_io/relume-ui";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@relume_io/relume-ui";
-import React, { Fragment, useEffect, useState } from "react";
-import clsx from "clsx"; // Add this import
+import { BiSolidStar, BiSolidStarHalf, BiStar } from "react-icons/bi";
+import clsx from "clsx";
 
-// Star icon components - you may need to adjust these based on your icon library
-const StarFull = ({ className }) => (
-	<svg
-		className={className}
-		width="16"
-		height="16"
-		viewBox="0 0 16 16"
-		fill="currentColor"
-	>
-		<path d="M8 12.5l-4.5 2.5 1-5L0 6l5-0.5L8 1l3 4.5 5 0.5-4.5 4 1 5z" />
-	</svg>
-);
+import buttonStyles from "../css/Button.module.css";
 
-const StarHalf = ({ className }) => (
-	<svg
-		className={className}
-		width="16"
-		height="16"
-		viewBox="0 0 16 16"
-		fill="currentColor"
-	>
-		<defs>
-			<linearGradient id="half">
-				<stop offset="50%" stopColor="currentColor" />
-				<stop offset="50%" stopColor="transparent" />
-			</linearGradient>
-		</defs>
-		<path
-			fill="url(#half)"
-			d="M8 12.5l-4.5 2.5 1-5L0 6l5-0.5L8 1l3 4.5 5 0.5-4.5 4 1 5z"
-		/>
-	</svg>
-);
+export const BuyProduct = (props) => {
+	const {
+		breadcrumbs,
+		heading,
+		galleryImages,
+		price,
+		description,
+		rating,
+		showAllButton,
+		buttons,
+		options,
+		quantityInputPlaceholder,
+		freeShipping,
+		list,
+		tabs,
+	} = {
+		...ProductHeader2Defaults,
+		...props,
+	};
+	const [optionInput, setOptionInput] = useState("Option one");
+	const [quantityInput, setQuantityInput] = useState("");
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log({
+			optionInput,
+			quantityInput,
+		});
+	};
+	return (
+		<header id="relume" className="px-[5%] py-12 md:py-16 lg:py-20">
+			<div className="container">
+				<div className="mb-8 flex flex-col gap-6 md:mb-12">
+					{/* <Breadcrumb className="order-last flex flex-wrap items-center text-sm md:order-none">
+						<BreadcrumbList>
+							{breadcrumbs.map((item, index) => (
+								<React.Fragment key={index}>
+									<BreadcrumbItem>
+										<BreadcrumbLink href={item.url}>
+											{item.title}
+										</BreadcrumbLink>
+									</BreadcrumbItem>
+									{index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
+								</React.Fragment>
+							))}
+						</BreadcrumbList>
+					</Breadcrumb> */}
+					<GalleryDialog images={galleryImages} showAllButton={showAllButton} />
+				</div>
 
-const StarEmpty = ({ className }) => (
-	<svg
-		className={className}
-		width="16"
-		height="16"
-		viewBox="0 0 16 16"
-		fill="none"
-		stroke="currentColor"
-	>
-		<path d="M8 12.5l-4.5 2.5 1-5L0 6l5-0.5L8 1l3 4.5 5 0.5-4.5 4 1 5z" />
-	</svg>
-);
+				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
+					<div>
+						<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
+							{heading}
+						</h1>
+						<p>{description}</p>
+						<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
+							{list.map((item, index) => (
+								<li key={index} className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
+									{item.title}
+								</li>
+							))}
+						</ul>
+						<InformationTabs tabs={tabs} />
+					</div>
+					<div className="order-first md:order-none">
+						<h1 className="mb-4 text-4xl font-bold leading-[1.2] md:hidden">
+							{heading}
+						</h1>
+						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
+							{price}
+						</p>
+						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
+							<Star rating={rating.starsNumber} />
+							<p className="text-sm">{`(${rating.starsNumber} stars) • ${rating.review} reviews`}</p>
+						</div>
+						<form onSubmit={handleSubmit}>
+							<div className="grid grid-cols-1 gap-6">
+								<div className="flex flex-col">
+									<Label className="mb-2">Variant</Label>
+									<div className="flex flex-wrap gap-4">
+										{options.map((option, index) => (
+											<button
+												key={index}
+												type="button"
+												className={`${buttonStyles.bubbleButton} ${
+													optionInput === option.title
+														? buttonStyles.primary
+														: buttonStyles[option.variant || "secondary"]
+												} ${
+													option.disabled
+														? "opacity-25 pointer-events-none"
+														: ""
+												}`}
+												onClick={() => setOptionInput(option.title || "")}
+												disabled={option.disabled}
+											>
+												{option.title}
+											</button>
+										))}
+									</div>
+								</div>
+								<div className="flex flex-col">
+									<Label htmlFor="quantity" className="mb-2">
+										Quantity
+									</Label>
+									<Input
+										type="number"
+										id="quantity"
+										placeholder={quantityInputPlaceholder}
+										className="w-full"
+										value={quantityInput}
+										onChange={(e) => setQuantityInput(e.target.value)}
+									/>
+								</div>
+							</div>
+							<div className="mb-4 mt-8 flex flex-col gap-y-4">
+								{buttons.map((button, index) => (
+									<button
+										key={index}
+										type="submit"
+										className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
+									>
+										{button.title}
+									</button>
+								))}
+							</div>
+							<p className="text-center text-xs">{freeShipping}</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</header>
+	);
+};
 
-// Fix the Star component to accept rating as a prop
 const Star = ({ rating }) => {
 	const fullStars = Math.floor(rating);
 	const hasHalfStar = rating % 1 !== 0;
@@ -87,11 +176,11 @@ const Star = ({ rating }) => {
 				return (
 					<div key={i}>
 						{isFullStar ? (
-							<StarFull className="text-scheme-text" />
+							<BiSolidStar />
 						) : isHalfStar ? (
-							<StarHalf className="text-scheme-text" />
+							<BiSolidStarHalf />
 						) : (
-							<StarEmpty className="text-scheme-text" />
+							<BiStar />
 						)}
 					</div>
 				);
@@ -100,10 +189,128 @@ const Star = ({ rating }) => {
 	);
 };
 
-const useCarousel = () => {
+const GalleryDialog = ({ images, showAllButton }) => {
+	const [selectedSlide, setSelectedSlide] = useState(0);
+	return (
+		<>
+			<div className="relative">
+				<Dialog>
+					<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
+						<div>
+							<DialogTrigger asChild>
+								<button
+									className="block size-full"
+									onClick={() => setSelectedSlide(0)}
+								>
+									<img
+										src={images[0].src}
+										alt={images[0].alt}
+										className="aspect-[5/4] size-full object-cover"
+									/>
+								</button>
+							</DialogTrigger>
+						</div>
+						<div className="hidden md:grid md:grid-cols-2 md:gap-4 relative">
+							{images.slice(1, 5).map((image, index) => (
+								<DialogTrigger key={index} asChild>
+									<button
+										className="block w-full"
+										onClick={() => setSelectedSlide(index + 1)}
+									>
+										<img
+											src={image.src}
+											alt={image.alt}
+											className="aspect-[5/4] size-full object-cover"
+										/>
+									</button>
+								</DialogTrigger>
+							))}
+
+							{/* Show all photos button positioned in bottom-right */}
+							<div className="absolute bottom-2 right-2 z-10 pointer-events-auto">
+								<GallerySheet
+									images={images}
+									showAllButton={showAllButton}
+									setSelectedSlide={setSelectedSlide}
+									selectedSlide={selectedSlide}
+								/>
+							</div>
+						</div>
+					</div>
+					<DialogContent
+						onCloseAutoFocus={(e) => e.preventDefault()}
+						closeIconPosition="inside"
+						closeIconClassName="text-text-alternative z-[1001]"
+						className="z-[1001]"
+					>
+						<Lightbox images={images} selectedSlide={selectedSlide} />
+					</DialogContent>
+				</Dialog>
+			</div>
+		</>
+	);
+};
+
+const GallerySheet = ({
+	images,
+	showAllButton,
+	selectedSlide,
+	setSelectedSlide,
+}) => {
+	return (
+		<Sheet>
+			<SheetTrigger asChild>
+				<button
+					className={`${buttonStyles.bubbleButton} ${buttonStyles[showAllButton.variant || "secondary"]} !mb-0 bg-black/70 text-white hover:bg-black/80 transition-all duration-200 text-sm px-3 py-2 rounded-md shadow-md`}
+				>
+					{showAllButton.title}
+				</button>
+			</SheetTrigger>
+			<SheetContent side="bottom" className="size-full px-4 z-[1001]">
+				<SheetClose className="z-[1002]" />
+				<div className="container">
+					<div className="mx-auto max-w-lg">
+						<Dialog>
+							<div className="grid grid-cols-2 gap-4">
+								{images.map((image, index) => (
+									<DialogTrigger key={index} asChild>
+										<button
+											onClick={() => setSelectedSlide(index)}
+											className="first:col-span-2"
+										>
+											<img
+												src={image.src}
+												alt={image.alt}
+												className="aspect-[5/4] size-full object-cover"
+												onClick={() => setSelectedSlide(index)}
+											/>
+										</button>
+									</DialogTrigger>
+								))}
+							</div>
+							<DialogContent
+								onCloseAutoFocus={(e) => e.preventDefault()}
+								closeIconPosition="inside"
+								closeIconClassName="text-text-alternative z-[1003]"
+								className="z-[1002]"
+							>
+								<Lightbox images={images} selectedSlide={selectedSlide} />
+							</DialogContent>
+						</Dialog>
+					</div>
+				</div>
+			</SheetContent>
+		</Sheet>
+	);
+};
+
+const Lightbox = ({ images, selectedSlide }) => {
 	const [mainApi, setMainApi] = useState();
 	const [thumbApi, setThumbApi] = useState();
-	const [current, setCurrent] = useState(0);
+	const [current, setCurrent] = useState(selectedSlide);
+	useEffect(() => {
+		setCurrent(selectedSlide);
+	}, [selectedSlide]);
 	useEffect(() => {
 		if (!mainApi || !thumbApi) {
 			return;
@@ -114,285 +321,282 @@ const useCarousel = () => {
 			thumbApi.scrollTo(index);
 		});
 	}, [mainApi, thumbApi]);
-	const handleClick = (index) => () => {
-		return mainApi?.scrollTo(index);
-	};
-	const getThumbStyles = (index) => {
-		return clsx("block", current === index && "opacity-60");
-	};
-	return {
-		setMainApi,
-		setThumbApi,
-		handleClick,
-		getThumbStyles,
-	};
-};
-
-export function BuyProduct() {
-	const useActive = useCarousel();
 	return (
-		<header className="px-[5%] py-12 md:py-16 lg:py-20">
-			<div className="container">
-				<Breadcrumb className="text-small mb-6 flex flex-wrap items-center">
-					<BreadcrumbList>
-						<Fragment>
-							<BreadcrumbItem>
-								<BreadcrumbLink href="#">Shop all</BreadcrumbLink>
-							</BreadcrumbItem>
-							<BreadcrumbSeparator />
-						</Fragment>
-						<Fragment>
-							<BreadcrumbItem>
-								<BreadcrumbLink href="#">Category</BreadcrumbLink>
-							</BreadcrumbItem>
-							<BreadcrumbSeparator />
-						</Fragment>
-						<Fragment>
-							<BreadcrumbItem>
-								<BreadcrumbLink href="#">Galactic Kit</BreadcrumbLink>
-							</BreadcrumbItem>
-						</Fragment>
-					</BreadcrumbList>
-				</Breadcrumb>
-				<div className="grid grid-cols-1 gap-y-8 md:gap-y-10 lg:grid-cols-[1.25fr_1fr] lg:gap-x-20">
-					<div className="grid grid-cols-1 md:grid-cols-[5rem_1fr] md:gap-x-4">
-						<div className="relative hidden h-full md:block">
-							<div className="absolute top-0 bottom-0 max-h-full overflow-y-auto">
-								<Carousel
-									setApi={useActive.setThumbApi}
-									orientation="vertical"
-									opts={{
-										align: "start",
-										containScroll: "keepSnaps",
-										dragFree: true,
-									}}
-									className="m-0"
-								>
-									<CarouselContent className="m-0 gap-y-4">
-										<CarouselItem className="p-0">
-											<button
-												onClick={useActive.handleClick(0)}
-												className={useActive.getThumbStyles(0)}
-											>
-												<img
-													src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-													alt="Relume placeholder image 1"
-													className="aspect-[5/6] size-full object-cover"
-												/>
-											</button>
-										</CarouselItem>
-										<CarouselItem className="p-0">
-											<button
-												onClick={useActive.handleClick(1)}
-												className={useActive.getThumbStyles(1)}
-											>
-												<img
-													src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-													alt="Relume placeholder image 2"
-													className="aspect-[5/6] size-full object-cover"
-												/>
-											</button>
-										</CarouselItem>
-										<CarouselItem className="p-0">
-											<button
-												onClick={useActive.handleClick(2)}
-												className={useActive.getThumbStyles(2)}
-											>
-												<img
-													src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-													alt="Relume placeholder image 3"
-													className="aspect-[5/6] size-full object-cover"
-												/>
-											</button>
-										</CarouselItem>
-										<CarouselItem className="p-0">
-											<button
-												onClick={useActive.handleClick(3)}
-												className={useActive.getThumbStyles(3)}
-											>
-												<img
-													src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-													alt="Relume placeholder image 4"
-													className="aspect-[5/6] size-full object-cover"
-												/>
-											</button>
-										</CarouselItem>
-									</CarouselContent>
-								</Carousel>
-							</div>
-						</div>
-						<div className="overflow-hidden">
-							<Carousel
-								setApi={useActive.setMainApi}
-								opts={{ loop: true, align: "start" }}
-								className="m-0"
-							>
-								<CarouselContent className="m-0">
-									<CarouselItem className="basis-full pl-0">
-										<button>
-											<img
-												src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-												alt="Relume placeholder image 1"
-												className="aspect-[5/6] size-full object-cover"
-											/>
-										</button>
-									</CarouselItem>
-									<CarouselItem className="basis-full pl-0">
-										<button>
-											<img
-												src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-												alt="Relume placeholder image 2"
-												className="aspect-[5/6] size-full object-cover"
-											/>
-										</button>
-									</CarouselItem>
-									<CarouselItem className="basis-full pl-0">
-										<button>
-											<img
-												src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-												alt="Relume placeholder image 3"
-												className="aspect-[5/6] size-full object-cover"
-											/>
-										</button>
-									</CarouselItem>
-									<CarouselItem className="basis-full pl-0">
-										<button>
-											<img
-												src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-												alt="Relume placeholder image 4"
-												className="aspect-[5/6] size-full object-cover"
-											/>
-										</button>
-									</CarouselItem>
-								</CarouselContent>
-							</Carousel>
-						</div>
-					</div>
-					<div>
-						<h1 className="heading-h3 mb-2 font-bold">Galactic Kit</h1>
-						<p className="heading-h5 mb-5 font-bold md:mb-6">$55</p>
-						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
-							<Star rating={3.5} />
-							<p className="text-small">(3.5 stars) • 10 reviews</p>
-						</div>
-						<p className="mb-5 md:mb-6">
-							Unleash your creativity with our Galactic Kit, designed for
-							endless exploration. Perfect for makers and dreamers alike, it
-							brings your ideas to life.
-						</p>
-						<form className="mb-8">
-							<div className="grid grid-cols-1 gap-6">
-								<div className="flex flex-col">
-									<Label className="mb-2">Variant</Label>
-									<Select>
-										<SelectTrigger>
-											<SelectValue placeholder="Select" />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="first-choice">Option One</SelectItem>
-											<SelectItem value="second-choice">Option Two</SelectItem>
-											<SelectItem value="third-choice">Option Three</SelectItem>
-										</SelectContent>
-									</Select>
-								</div>
-								<div className="flex flex-col">
-									<Label className="mb-2">Variant</Label>
-									<div className="flex flex-wrap gap-4">
-										<Button
-											className="px-4 py-2"
-											asChild={true}
-											title="Option one"
-											url="#"
+		<div className="relative flex h-screen flex-col">
+			<div className="flex grow items-center justify-center pb-[12vh]">
+				<div className="mx-auto max-w-[1000px]">
+					<div className="overflow-hidden">
+						<Carousel
+							setApi={setMainApi}
+							opts={{
+								loop: true,
+								align: "start",
+							}}
+							className="static m-0"
+						>
+							<CarouselContent className="m-0">
+								{images.map((slide, index) => (
+									<CarouselItem key={index} className="pl-0">
+										<button
+											onClick={() => mainApi?.scrollTo(index + 1)}
+											className="block w-full"
 										>
-											<a href="#" className="">
-												Option one
-											</a>
-										</Button>
-										<Button
-											className="px-4 py-2"
-											asChild={true}
-											title="Option two"
-											url="#"
-											variant="secondary"
-										>
-											<a href="#" className="">
-												Option two
-											</a>
-										</Button>
-										<Button
-											className="px-4 py-2"
-											asChild={true}
-											title="Option three"
-											url="#"
-											variant="secondary"
-											disabled={true}
-										>
-											<a href="#" className="pointer-events-none opacity-25">
-												Option three
-											</a>
-										</Button>
-									</div>
-								</div>
-								<div className="flex flex-col">
-									<Label htmlFor="quantity" className="mb-2">
-										Quantity
-									</Label>
-									<Input
-										type="number"
-										id="quantity"
-										placeholder="1"
-										className="w-16"
-									/>
-								</div>
-							</div>
-							<div className="mt-8 mb-4 flex flex-col gap-y-4">
-								<Button title="Add to cart">Add to cart</Button>
-								<Button title="Buy now" variant="secondary">
-									Buy now
-								</Button>
-							</div>
-							<p className="text-tiny text-center">Free shipping over $50</p>
-						</form>
-						<Accordion type="multiple">
-							<AccordionItem value="item-0">
-								<AccordionTrigger className="text-medium py-4 font-semibold [&_svg]:size-6">
-									Details
-								</AccordionTrigger>
-								<AccordionContent className="md:pb-6">
-									If you're not completely satisfied with your purchase, we
-									accept returns within 30 days. Please ensure the product is in
-									its original condition. Contact our support team for
-									assistance with your return.
-								</AccordionContent>
-							</AccordionItem>
-							<AccordionItem value="item-1">
-								<AccordionTrigger className="text-medium py-4 font-semibold [&_svg]:size-6">
-									Shipping
-								</AccordionTrigger>
-								<AccordionContent className="md:pb-6">
-									If you're not completely satisfied with your purchase, we
-									accept returns within 30 days. Please ensure the product is in
-									its original condition. Contact our support team for
-									assistance with your return.
-								</AccordionContent>
-							</AccordionItem>
-							<AccordionItem value="item-2">
-								<AccordionTrigger className="text-medium py-4 font-semibold [&_svg]:size-6">
-									Returns
-								</AccordionTrigger>
-								<AccordionContent className="md:pb-6">
-									If you're not completely satisfied with your purchase, we
-									accept returns within 30 days. Please ensure the product is in
-									its original condition. Contact our support team for
-									assistance with your return.
-								</AccordionContent>
-							</AccordionItem>
-						</Accordion>
+											<img
+												src={slide.src}
+												alt={slide.alt}
+												className="max-w-screen mx-auto max-h-[86vh] w-full md:max-h-[84vh] md:max-w-[82.3vw]"
+											/>
+										</button>
+									</CarouselItem>
+								))}
+							</CarouselContent>
+							<CarouselPrevious className="left-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
+							<CarouselNext className="right-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
+						</Carousel>
 					</div>
 				</div>
 			</div>
-		</header>
+			<div className="absolute bottom-0 left-0 w-full overflow-hidden p-[1vh]">
+				<Carousel
+					setApi={setThumbApi}
+					opts={{
+						align: "start",
+						dragFree: true,
+						loop: true,
+					}}
+					className="m-0"
+				>
+					<CarouselContent className="m-0 block whitespace-nowrap text-center">
+						{images.map((slide, index) => (
+							<CarouselItem
+								key={index}
+								className="inline-block max-w-[12vh] pl-[2vh]"
+							>
+								<button
+									onClick={() => mainApi?.scrollTo(index)}
+									className={clsx("block", current === index && "opacity-30")}
+								>
+									<img src={slide.src} alt={slide.alt} className="w-full" />
+								</button>
+							</CarouselItem>
+						))}
+					</CarouselContent>
+				</Carousel>
+			</div>
+		</div>
 	);
-}
+};
+
+const InformationTabs = ({ tabs }) => {
+	const [activeTab, setActiveTab] = useState(tabs[0]?.value);
+
+	return (
+		<div className="w-full">
+			<div className="mb-6 flex flex-wrap gap-2">
+				{tabs.map((tab, index) => (
+					<button
+						key={index}
+						onClick={() => setActiveTab(tab.value)}
+						className={clsx(
+							"px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-in-out",
+							"border-2 relative overflow-hidden",
+							activeTab === tab.value
+								? [
+										"bg-gradient-to-r from-orange-500 to-red-500",
+										"text-white border-orange-500",
+										"shadow-lg shadow-orange-500/30",
+										"transform translate-y-0",
+									]
+								: [
+										"bg-white text-gray-600",
+										"border-gray-200 hover:border-gray-300",
+										"hover:bg-gray-50 hover:text-gray-800",
+										"hover:shadow-md hover:transform hover:-translate-y-0.5",
+									]
+						)}
+					>
+						<span className="relative z-10">{tab.trigger}</span>
+						{activeTab === tab.value && (
+							<div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-20"></div>
+						)}
+					</button>
+				))}
+			</div>
+
+			<div className="mt-4">
+				{tabs.map((tab, index) => (
+					<div
+						key={index}
+						className={clsx(
+							"transition-all duration-300 ease-in-out",
+							activeTab === tab.value
+								? "opacity-100 max-h-none"
+								: "opacity-0 max-h-0 overflow-hidden"
+						)}
+					>
+						{activeTab === tab.value && (
+							<div className="animate-fade-in">
+								<p className="text-gray-700 leading-relaxed">
+									{tab.description}
+								</p>
+							</div>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+	);
+};
+
+export const ProductHeader2Defaults = {
+	breadcrumbs: [
+		// { url: "#", title: "Shop all" },
+		// { url: "#", title: "Category" },
+		// { url: "#", title: "Product name" },
+	],
+	heading: "Fidgeting Toy",
+	price: "Rp 100.000",
+	rating: {
+		review: 10,
+		starsNumber: 4.0,
+	},
+	description:
+		"This small keychain is more than just an accessory—it's a piece of your narrative. Carry it everywhere to express yourself or simply keep it as a cherished companion.",
+	galleryImages: [
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 1",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 2",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 3",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 4",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 5",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 6",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 7",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 8",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 9",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 10",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 11",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 12",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 13",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 14",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 15",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 16",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 17",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 18",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 19",
+		},
+		{
+			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+			alt: "Relume placeholder image 20",
+		},
+	],
+	showAllButton: {
+		title: "Show all photos",
+		variant: "secondary",
+		size: "sm",
+	},
+	buttons: [
+		// { title: "Add to cart" },
+		{ title: "Buy now", variant: "primary" },
+	],
+	options: [
+		{
+			title: "Option one",
+			url: "#",
+		},
+		{ title: "Option two", url: "#", variant: "secondary" },
+		{ title: "Option three", url: "#", variant: "secondary" },
+		{ title: "Option four", url: "#", variant: "secondary" },
+		{ title: "Option five", url: "#", variant: "secondary" },
+	],
+	quantityInputPlaceholder: "1",
+	freeShipping: "Free shipping over $50",
+	list: [
+		{
+			title: "Perfect for focus and self-expression on the go.",
+		},
+		{
+			title: "A pocket-sized friend for your daily adventures.",
+		},
+		{
+			title: "Designed for creativity and personal connection.",
+		},
+	],
+	defaultTabValue: "tab-details",
+	tabs: [
+		{
+			value: "tab-details",
+			trigger: "Details",
+			description:
+				"Our keychains are crafted with care, ensuring durability and style. Each piece is a unique expression of your personality. Enjoy a seamless shopping experience with our easy returns policy.",
+		},
+		{
+			value: "tab-shipping",
+			trigger: "Shipping",
+			description:
+				"Depending on where you are located, shipping might take 1-2 weeks",
+		},
+		{
+			value: "tab-returns",
+			trigger: "Returns",
+			description:
+				"Currently, we don't process any returns. If, however, your product run into any issue please do contact us.",
+		},
+	],
+};
 
 export default BuyProduct;

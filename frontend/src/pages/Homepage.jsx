@@ -13,7 +13,7 @@ import { Header } from "../components/Header";
 import { Creativity } from "../components/Creativity";
 import { OurMission } from "../components/OurMission";
 import { Steppers } from "../components/Steppers";
-import { BuyProduct } from "../components/BuyProduct";
+import { ShopProduct } from "../components/ShopProduct";
 
 export default function Home() {
 	const location = useLocation();
@@ -96,7 +96,7 @@ export default function Home() {
 							transition={{ duration: 0.6, delay: 0.1 }}
 							viewport={{ once: true }}
 						>
-							<BuyProduct />
+							<ShopProduct />
 						</motion.div>
 
 						<motion.div
