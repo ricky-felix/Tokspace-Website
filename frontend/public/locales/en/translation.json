@@ -89,5 +89,43 @@
 		"description": "It seems the page you're looking for has launched into the cosmos. Let's get you home.",
 		"homeButton": "Home",
 		"contactButton": "Contact Us"
+	},
+	"shopProduct": {
+		"title": "Discover Our Innovative 3D-Printed Products",
+		"description": "Explore a world where creativity meets technology. Our unique offerings empower local entrepreneurs to bring their visions to life.",
+		"shopButton": "Shop"
+	},
+	"productCTA": {
+		"heading": "Ready to Bring Your Vision Into Reality?",
+		"description": "Contact us today for custom projects tailored to your unique needs and aspirations.",
+		"contactButton": "Contact",
+		"inquiryButton": "Inquiry Now"
+	},
+	"buyProduct": {
+		"heading": "Fidgeting Toy",
+		"price": "Rp 100.000",
+		"description": "This small keychain is more than just an accessory—it's a piece of your narrative. Carry it everywhere to express yourself or simply keep it as a cherished companion.",
+		"starsReviews": "stars) • {{count}} reviews",
+		"variantLabel": "Variant",
+		"quantityLabel": "Quantity",
+		"quantityPlaceholder": "1",
+		"buyNowButton": "Buy now",
+		"addToCartButton": "Add to cart",
+		"freeShipping": "Free shipping over $50",
+		"showAllPhotos": "Show all photos",
+		"optionOne": "Option one",
+		"optionTwo": "Option two",
+		"optionThree": "Option three",
+		"optionFour": "Option four",
+		"optionFive": "Option five",
+		"listItem1": "Perfect for focus and self-expression on the go.",
+		"listItem2": "A pocket-sized friend for your daily adventures.",
+		"listItem3": "Designed for creativity and personal connection.",
+		"tabDetails": "Details",
+		"tabShipping": "Shipping",
+		"tabReturns": "Returns",
+		"tabDetailsDescription": "Our keychains are crafted with care, ensuring durability and style. Each piece is a unique expression of your personality. Enjoy a seamless shopping experience with our easy returns policy.",
+		"tabShippingDescription": "Depending on where you are located, shipping might take 1-2 weeks",
+		"tabReturnsDescription": "Currently, we don't process any returns. If, however, your product run into any issue please do contact us."
 	}
 }

@@ -1,7 +1,9 @@
 import { Button } from "@relume_io/relume-ui";
+import { useTranslation } from "react-i18next";
 import buttonStyles from "../css/Button.module.css";
 
 export const ProductCTA = (props) => {
+	const { t } = useTranslation();
 	const { heading, description, buttons, image } = {
 		...ProductCTADefaults,
 		...props,
@@ -13,16 +15,17 @@ export const ProductCTA = (props) => {
 					<div className="grid auto-cols-fr grid-cols-1 border border-border-primary lg:grid-cols-2">
 						<div className="flex flex-col justify-center p-8 md:p-12">
 							<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-								{heading}
-							</h2>
-							<p className="md:text-md">{description}</p>
-							<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-								{buttons.map((button, index) => (
-									<Button key={index} {...button}>
-										{button.title}
-									</Button>
-								))}
-							</div>
+					{heading || t("productCTA.heading")}
+				</h2>
+				<p className="md:text-md">{description || t("productCTA.description")}</p>
+				<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
+					<Button {...buttons[0]}>
+						{buttons[0].title || t("productCTA.contactButton")}
+					</Button>
+					<Button {...buttons[1]}>
+						{buttons[1].title || t("productCTA.inquiryButton")}
+					</Button>
+				</div>
 						</div>
 						<div className="flex items-center justify-center">
 							<img
@@ -39,17 +42,16 @@ export const ProductCTA = (props) => {
 };
 
 export const ProductCTADefaults = {
-	heading: "Ready to Bring Your Vision Into Reality?",
-	description:
-		"Contact us today for custom projects tailored to your unique needs and aspirations.",
+	heading: "", // Will be set via translation
+	description: "", // Will be set via translation
 	buttons: [
 		{
-			title: "Contact",
+			title: "", // Will be set via translation
 			variant: "primary",
 			className: `${buttonStyles.bubbleButton} ${buttonStyles.primary}`,
 		},
 		{
-			title: "Inquiry Now",
+			title: "", // Will be set via translation
 			variant: "secondary",
 			className: `${buttonStyles.bubbleButton} ${buttonStyles.secondary}`,
 		},

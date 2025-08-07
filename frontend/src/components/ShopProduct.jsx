@@ -10,24 +10,25 @@ import { Link } from "react-router";
 import buttonStyles from "../css/Button.module.css";
 
 export function ShopProduct() {
+	const { t } = useTranslation();
+	
 	return (
 		<section className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0">
 			<div className="mx-[5%] sm:max-w-md md:justify-self-start lg:mr-20 lg:ml-[5vw] lg:justify-self-end">
 				<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-					Discover Our Innovative 3D-Printed Products
+					{t("shopProduct.title")}
 				</h2>
 				<p className="text-medium">
-					Explore a world where creativity meets technology. Our unique
-					offerings empower local entrepreneurs to bring their visions to life.
+					{t("shopProduct.description")}
 				</p>
 				<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 					<Link to="/shop">
 						<Button
-							title="Shop"
+							title={t("shopProduct.shopButton")}
 							variant="primary"
 							className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 						>
-							Shop
+							{t("shopProduct.shopButton")}
 						</Button>
 					</Link>
 				</div>
