@@ -3,6 +3,7 @@
 		"home": "Beranda",
 		"creativity": "Kreativitas",
 		"ourMission": "Misi Kami",
+		"discover": "Temukan",
 		"innovation": "Inovasi",
 		"contactUs": "Hubungi Kami"
 	},
@@ -88,5 +89,43 @@
 		"description": "Sepertinya halaman yang Anda cari telah meluncur ke kosmos. Mari kita bawa Anda pulang ke rumah.",
 		"homeButton": "Beranda",
 		"contactButton": "Hubungi Kami"
+	},
+	"shopProduct": {
+		"title": "Temukan Produk Inovatif Cetak 3D Kami",
+		"description": "Jelajahi dunia di mana kreativitas bertemu teknologi. Penawaran unik kami memberdayakan pengusaha lokal untuk mewujudkan visi mereka.",
+		"shopButton": "Belanja"
+	},
+	"productCTA": {
+		"heading": "Siap Mewujudkan Visi Anda Menjadi Kenyataan?",
+		"description": "Hubungi kami hari ini untuk proyek kustom yang disesuaikan dengan kebutuhan dan aspirasi unik Anda.",
+		"contactButton": "Hubungi",
+		"inquiryButton": "Tanyakan Sekarang"
+	},
+	"buyProduct": {
+		"heading": "Mainan Fidget",
+		"price": "Rp 100.000",
+		"description": "Gantungan kunci kecil ini lebih dari sekadar aksesori—ini adalah bagian dari narasi Anda. Bawa ke mana-mana untuk mengekspresikan diri atau simpan sebagai teman yang berharga.",
+		"starsReviews": "bintang) • {{count}} ulasan",
+		"variantLabel": "Varian",
+		"quantityLabel": "Jumlah",
+		"quantityPlaceholder": "1",
+		"buyNowButton": "Beli sekarang",
+		"addToCartButton": "Tambah ke keranjang",
+		"freeShipping": "Gratis ongkir di atas Rp 750.000",
+		"showAllPhotos": "Tampilkan semua foto",
+		"optionOne": "Opsi satu",
+		"optionTwo": "Opsi dua",
+		"optionThree": "Opsi tiga",
+		"optionFour": "Opsi empat",
+		"optionFive": "Opsi lima",
+		"listItem1": "Sempurna untuk fokus dan ekspresi diri saat bepergian.",
+		"listItem2": "Teman saku untuk petualangan harian Anda.",
+		"listItem3": "Dirancang untuk kreativitas dan koneksi personal.",
+		"Tabdetails": "Detail",
+		"Tabshipping": "Pengiriman",
+		"Tabreturns": "Pengembalian",
+		"TabdetailsDescription": "Gantungan kunci kami dibuat dengan hati-hati, memastikan daya tahan dan gaya. Setiap bagian adalah ekspresi unik dari kepribadian Anda. Nikmati pengalaman berbelanja yang mulus dengan kebijakan pengembalian yang mudah.",
+		"TabshippingDescription": "Tergantung di mana Anda berada, pengiriman mungkin memakan waktu 1-2 minggu",
+		"TabreturnsDescription": "Saat ini, kami tidak memproses pengembalian apa pun. Namun, jika produk Anda mengalami masalah, silakan hubungi kami."
 	}
 }

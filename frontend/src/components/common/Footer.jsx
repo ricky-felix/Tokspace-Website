@@ -73,15 +73,6 @@ export function Footer() {
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
-										to="/#creativity"
-										onClick={(e) => handleScrollToSection(e, "creativity")}
-										className="text-black hover:text-[#ff6523] transition-colors duration-300"
-									>
-										{t("navbar.creativity")}
-									</Link>
-								</li>
-								<li className="py-2 text-sm font-semibold">
-									<Link
 										to="/#ourmission"
 										onClick={(e) => handleScrollToSection(e, "ourmission")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
@@ -91,8 +82,26 @@ export function Footer() {
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
-										to="/#steppers"
-										onClick={(e) => handleScrollToSection(e, "steppers")}
+										to="/#discover"
+										onClick={(e) => handleScrollToSection(e, "discover")}
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+									>
+										{t("navbar.discover")}
+									</Link>
+								</li>
+								<li className="py-2 text-sm font-semibold">
+									<Link
+										to="/#creativity"
+										onClick={(e) => handleScrollToSection(e, "creativity")}
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+									>
+										{t("navbar.creativity")}
+									</Link>
+								</li>
+								<li className="py-2 text-sm font-semibold">
+									<Link
+										to="/#innovation"
+										onClick={(e) => handleScrollToSection(e, "innovation")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
 										{t("navbar.innovation")}

@@ -90,14 +90,15 @@ export default function Home() {
 
 						{/* <motion.div
 							className="w-full"
-							id="ourmission"
+							id="discover"
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.1 }}
 							viewport={{ once: true }}
 						>
 							<ShopProduct />
-						</motion.div> */}
+						</motion.div>
+						*/}
 
 						<motion.div
 							className="w-full"
@@ -113,7 +114,7 @@ export default function Home() {
 
 						<motion.div
 							className="w-full"
-							id="steppers"
+							id="innovation"
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.3 }}

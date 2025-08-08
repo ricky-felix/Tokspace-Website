@@ -1,28 +1,65 @@
-"use client";
-
 import { Button } from "@relume_io/relume-ui";
-import React from "react";
+import { useTranslation } from "react-i18next";
+import buttonStyles from "../css/Button.module.css";
 
-export function ProductCTA() {
+export const ProductCTA = (props) => {
+	const { t } = useTranslation();
+	const { heading, description, buttons, image } = {
+		...ProductCTADefaults,
+		...props,
+	};
 	return (
-		<section className="relative px-[5%] py-16 md:py-24 lg:py-28">
-			<div className="container grid grid-rows-1 items-start gap-y-5 md:grid-cols-2 md:gap-x-12 md:gap-y-8 lg:gap-x-20 lg:gap-y-16">
-				<div>
-					<h1 className="heading-h2 font-bold">Ready to Bring Your Vision?</h1>
+		<>
+			<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+				<div className="container">
+					<div className="grid auto-cols-fr grid-cols-1 border border-border-primary lg:grid-cols-2">
+						<div className="flex flex-col justify-center p-8 md:p-12">
+							<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+					{heading || t("productCTA.heading")}
+				</h2>
+				<p className="md:text-md">{description || t("productCTA.description")}</p>
+				<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
+					<Button {...buttons[0]}>
+						{buttons[0].title || t("productCTA.contactButton")}
+					</Button>
+					<Button {...buttons[1]}>
+						{buttons[1].title || t("productCTA.inquiryButton")}
+					</Button>
 				</div>
-				<div>
-					<p className="text-medium">
-						Have a unique project in mind? Our team is here to help you
-						transform your ideas into reality with custom solutions tailored
-						just for you.
-					</p>
-					<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-						<Button title="Contact">Contact</Button>
+						</div>
+						<div className="flex items-center justify-center">
+							<img
+								src={image.src}
+								className="w-full object-cover"
+								alt={image.alt}
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</>
 	);
-}
+};
+
+export const ProductCTADefaults = {
+	heading: "", // Will be set via translation
+	description: "", // Will be set via translation
+	buttons: [
+		{
+			title: "", // Will be set via translation
+			variant: "primary",
+			className: `${buttonStyles.bubbleButton} ${buttonStyles.primary}`,
+		},
+		{
+			title: "", // Will be set via translation
+			variant: "secondary",
+			className: `${buttonStyles.bubbleButton} ${buttonStyles.secondary}`,
+		},
+	],
+	image: {
+		src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg",
+		alt: "Relume placeholder image",
+	},
+};
 
 export default ProductCTA;

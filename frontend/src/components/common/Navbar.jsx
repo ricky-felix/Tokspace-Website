@@ -149,10 +149,24 @@ export function Navbar() {
 					<nav className="flex flex-col gap-6 py-6 lg:flex-row lg:gap-8 lg:py-0">
 						<Link
 							to="/#home"
-							onClick={(e) => handleNavLinkClick(e, "home")}
+							onClick={(e) => handleNavLinkClick(e, "header")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.home")}
+						</Link>
+						<Link
+							to="/#creativity"
+							onClick={(e) => handleNavLinkClick(e, "ourmission")}
+							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
+						>
+							{t("navbar.ourMission")}
+						</Link>
+						<Link
+							to="/#ourmission"
+							onClick={(e) => handleNavLinkClick(e, "discover")}
+							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
+						>
+							{t("navbar.discover")}
 						</Link>
 						<Link
 							to="/#creativity"
@@ -160,13 +174,6 @@ export function Navbar() {
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.creativity")}
-						</Link>
-						<Link
-							to="/#ourmission"
-							onClick={(e) => handleNavLinkClick(e, "ourmission")}
-							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
-						>
-							{t("navbar.ourMission")}
 						</Link>
 						<Link
 							to="/#innovation"

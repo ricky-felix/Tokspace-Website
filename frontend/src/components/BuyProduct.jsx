@@ -5,7 +5,6 @@ import {
 	BreadcrumbLink,
 	BreadcrumbList,
 	BreadcrumbSeparator,
-	Button,
 	Carousel,
 	CarouselContent,
 	CarouselItem,
@@ -26,9 +25,13 @@ import {
 	TabsTrigger,
 } from "@relume_io/relume-ui";
 import { BiSolidStar, BiSolidStarHalf, BiStar } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
+import buttonStyles from "../css/Button.module.css";
+
 export const BuyProduct = (props) => {
+	const { t } = useTranslation();
 	const {
 		breadcrumbs,
 		heading,
@@ -47,7 +50,7 @@ export const BuyProduct = (props) => {
 		...ProductHeader2Defaults,
 		...props,
 	};
-	const [optionInput, setOptionInput] = useState("");
+	const [optionInput, setOptionInput] = useState("Option one");
 	const [quantityInput, setQuantityInput] = useState("");
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -60,7 +63,7 @@ export const BuyProduct = (props) => {
 		<header id="relume" className="px-[5%] py-12 md:py-16 lg:py-20">
 			<div className="container">
 				<div className="mb-8 flex flex-col gap-6 md:mb-12">
-					<Breadcrumb className="order-last flex flex-wrap items-center text-sm md:order-none">
+					{/* <Breadcrumb className="order-last flex flex-wrap items-center text-sm md:order-none">
 						<BreadcrumbList>
 							{breadcrumbs.map((item, index) => (
 								<React.Fragment key={index}>
@@ -73,20 +76,20 @@ export const BuyProduct = (props) => {
 								</React.Fragment>
 							))}
 						</BreadcrumbList>
-					</Breadcrumb>
+					</Breadcrumb> */}
 					<GalleryDialog images={galleryImages} showAllButton={showAllButton} />
 				</div>
 
 				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
 					<div>
 						<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
-							{heading}
+							{heading || t("buyProduct.heading")}
 						</h1>
-						<p>{description}</p>
+						<p>{description || t("buyProduct.description")}</p>
 						<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
 							{list.map((item, index) => (
 								<li key={index} className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
-									{item.title}
+									{item.title || t(`buyProduct.listItem${index + 1}`)}
 								</li>
 							))}
 						</ul>
@@ -94,37 +97,38 @@ export const BuyProduct = (props) => {
 					</div>
 					<div className="order-first md:order-none">
 						<h1 className="mb-4 text-4xl font-bold leading-[1.2] md:hidden">
-							{heading}
+							{heading || t("buyProduct.heading")}
 						</h1>
 						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
-							{price}
+							{price || t("buyProduct.price")}
 						</p>
 						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
 							<Star rating={rating.starsNumber} />
 							<p className="text-sm">{`(${rating.starsNumber} stars) • ${rating.review} reviews`}</p>
 						</div>
-						<form onSubmit={handleSubmit}>
+						{/* <form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-1 gap-6">
 								<div className="flex flex-col">
 									<Label className="mb-2">Variant</Label>
 									<div className="flex flex-wrap gap-4">
 										{options.map((option, index) => (
-											<Button
+											<button
 												key={index}
-												className="px-4 py-2"
-												asChild
+												type="button"
+												className={`${buttonStyles.bubbleButton} ${
+													optionInput === option.title
+														? buttonStyles.primary
+														: buttonStyles[option.variant || "secondary"]
+												} ${
+													option.disabled
+														? "opacity-25 pointer-events-none"
+														: ""
+												}`}
 												onClick={() => setOptionInput(option.title || "")}
-												{...option}
+												disabled={option.disabled}
 											>
-												<a
-													href={option.url}
-													className={clsx({
-														"pointer-events-none opacity-25": option.disabled,
-													})}
-												>
-													{option.title}
-												</a>
-											</Button>
+												{option.title}
+											</button>
 										))}
 									</div>
 								</div>
@@ -135,8 +139,11 @@ export const BuyProduct = (props) => {
 									<Input
 										type="number"
 										id="quantity"
-										placeholder={quantityInputPlaceholder}
-										className="w-16"
+										placeholder={
+											quantityInputPlaceholder ||
+											t("buyProduct.quantityInputPlaceholder")
+										}
+										className="w-full"
 										value={quantityInput}
 										onChange={(e) => setQuantityInput(e.target.value)}
 									/>
@@ -144,13 +151,30 @@ export const BuyProduct = (props) => {
 							</div>
 							<div className="mb-4 mt-8 flex flex-col gap-y-4">
 								{buttons.map((button, index) => (
-									<Button key={index} {...button}>
-										{button.title}
-									</Button>
+									<button
+										key={index}
+										type="submit"
+										className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
+									>
+										{button.title || t("buyProduct.buttons.buyNow")}
+									</button>
 								))}
 							</div>
-							<p className="text-center text-xs">{freeShipping}</p>
-						</form>
+							<p className="text-center text-xs">
+								{freeShipping || t("buyProduct.freeShipping")}
+							</p>
+						</form> */}
+						<div className="mb-4 mt-8 flex flex-col gap-y-4">
+							{buttons.map((button, index) => (
+								<button
+									key={index}
+									type="submit"
+									className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
+								>
+									{button.title || t("buyProduct.buyNowButton")}
+								</button>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -186,55 +210,62 @@ const Star = ({ rating }) => {
 const GalleryDialog = ({ images, showAllButton }) => {
 	const [selectedSlide, setSelectedSlide] = useState(0);
 	return (
-		<div className="relative">
-			<Dialog>
-				<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
-					<div>
-						<DialogTrigger asChild>
-							<button
-								className="block size-full"
-								onClick={() => setSelectedSlide(0)}
-							>
-								<img
-									src={images[0].src}
-									alt={images[0].alt}
-									className="aspect-[5/4] size-full object-cover"
-								/>
-							</button>
-						</DialogTrigger>
-					</div>
-					<div className="hidden md:grid md:grid-cols-2 md:gap-4">
-						{images.slice(1, 5).map((image, index) => (
-							<DialogTrigger key={index} asChild>
+		<>
+			<div className="relative">
+				<Dialog>
+					<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
+						<div>
+							<DialogTrigger asChild>
 								<button
-									className="block w-full"
-									onClick={() => setSelectedSlide(index + 1)}
+									className="block size-full"
+									onClick={() => setSelectedSlide(0)}
 								>
 									<img
-										src={image.src}
-										alt={image.alt}
+										src={images[0].src}
+										alt={images[0].alt}
 										className="aspect-[5/4] size-full object-cover"
 									/>
 								</button>
 							</DialogTrigger>
-						))}
+						</div>
+						<div className="hidden md:grid md:grid-cols-2 md:gap-4 relative">
+							{images.slice(1, 5).map((image, index) => (
+								<DialogTrigger key={index} asChild>
+									<button
+										className="block w-full"
+										onClick={() => setSelectedSlide(index + 1)}
+									>
+										<img
+											src={image.src}
+											alt={image.alt}
+											className="aspect-[5/4] size-full object-cover"
+										/>
+									</button>
+								</DialogTrigger>
+							))}
+
+							{/* Show all photos button positioned in bottom-right */}
+							<div className="absolute bottom-2 right-2 z-10 pointer-events-auto">
+								<GallerySheet
+									images={images}
+									showAllButton={showAllButton}
+									setSelectedSlide={setSelectedSlide}
+									selectedSlide={selectedSlide}
+								/>
+							</div>
+						</div>
 					</div>
-				</div>
-				<DialogContent
-					onCloseAutoFocus={(e) => e.preventDefault()}
-					closeIconPosition="inside"
-					closeIconClassName="text-text-alternative"
-				>
-					<Lightbox images={images} selectedSlide={selectedSlide} />
-				</DialogContent>
-			</Dialog>
-			<GallerySheet
-				images={images}
-				showAllButton={showAllButton}
-				setSelectedSlide={setSelectedSlide}
-				selectedSlide={selectedSlide}
-			/>
-		</div>
+					<DialogContent
+						onCloseAutoFocus={(e) => e.preventDefault()}
+						closeIconPosition="inside"
+						closeIconClassName="text-text-alternative z-[1001]"
+						className="z-[1001]"
+					>
+						<Lightbox images={images} selectedSlide={selectedSlide} />
+					</DialogContent>
+				</Dialog>
+			</div>
+		</>
 	);
 };
 
@@ -244,18 +275,18 @@ const GallerySheet = ({
 	selectedSlide,
 	setSelectedSlide,
 }) => {
+	const { t } = useTranslation();
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button
-					{...showAllButton}
-					className="absolute bottom-4 right-4 z-10 border-border-alternative"
+				<button
+					className={`${buttonStyles.bubbleButton} ${buttonStyles[showAllButton.variant || "secondary"]} !mb-0 bg-black/70 text-white hover:bg-black/80 transition-all duration-200 text-sm px-3 py-2 rounded-md shadow-md`}
 				>
-					{showAllButton.title}
-				</Button>
+					{showAllButton.title || t("buyProduct.showAllPhotos")}
+				</button>
 			</SheetTrigger>
-			<SheetContent side="bottom" className="size-full px-4">
-				<SheetClose />
+			<SheetContent side="bottom" className="size-full px-4 z-[1001]">
+				<SheetClose className="z-[1002]" />
 				<div className="container">
 					<div className="mx-auto max-w-lg">
 						<Dialog>
@@ -279,7 +310,8 @@ const GallerySheet = ({
 							<DialogContent
 								onCloseAutoFocus={(e) => e.preventDefault()}
 								closeIconPosition="inside"
-								closeIconClassName="text-text-alternative"
+								closeIconClassName="text-text-alternative z-[1003]"
+								className="z-[1002]"
 							>
 								<Lightbox images={images} selectedSlide={selectedSlide} />
 							</DialogContent>
@@ -375,46 +407,88 @@ const Lightbox = ({ images, selectedSlide }) => {
 };
 
 const InformationTabs = ({ tabs }) => {
+	const { t } = useTranslation();
+	const [activeTab, setActiveTab] = useState(tabs[0]?.value);
+
 	return (
-		<Tabs defaultValue={tabs[0].value}>
-			<TabsList className="mb-5 flex-wrap items-center gap-6 md:mb-6">
+		<div className="w-full">
+			<div className="mb-6 flex flex-wrap gap-2">
 				{tabs.map((tab, index) => (
-					<TabsTrigger
+					<button
 						key={index}
-						value={tab.value}
-						className="border-0 border-b-[1.5px] border-border-alternative px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
+						onClick={() => setActiveTab(tab.value)}
+						className={clsx(
+							"px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-in-out",
+							"border-2 relative overflow-hidden",
+							activeTab === tab.value
+								? [
+										"bg-gradient-to-r from-orange-500 to-red-500",
+										"text-white border-orange-500",
+										"shadow-lg shadow-orange-500/30",
+										"transform translate-y-0",
+									]
+								: [
+										"bg-white text-gray-600",
+										"border-gray-200 hover:border-gray-300",
+										"hover:bg-gray-50 hover:text-gray-800",
+										"hover:shadow-md hover:transform hover:-translate-y-0.5",
+									]
+						)}
 					>
-						{tab.trigger}
-					</TabsTrigger>
+						<span className="relative z-10">
+							{tab.trigger ||
+								t(
+									`buyProduct.${tab.value.charAt(0).toUpperCase() + tab.value.slice(1).replace("-", "")}`
+								)}
+						</span>
+						{activeTab === tab.value && (
+							<div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-20"></div>
+						)}
+					</button>
 				))}
-			</TabsList>
-			{tabs.map((tab, index) => (
-				<TabsContent
-					key={index}
-					value={tab.value}
-					className="data-[state=active]:animate-tabs"
-				>
-					<p>{tab.description}</p>
-				</TabsContent>
-			))}
-		</Tabs>
+			</div>
+
+			<div className="mt-4">
+				{tabs.map((tab, index) => (
+					<div
+						key={index}
+						className={clsx(
+							"transition-all duration-300 ease-in-out",
+							activeTab === tab.value
+								? "opacity-100 max-h-none"
+								: "opacity-0 max-h-0 overflow-hidden"
+						)}
+					>
+						{activeTab === tab.value && (
+							<div className="animate-fade-in">
+								<p className="text-gray-700 leading-relaxed">
+									{tab.description ||
+										t(
+											`buyProduct.${tab.value.charAt(0).toUpperCase() + tab.value.slice(1).replace("-", "")}Description`
+										)}
+								</p>
+							</div>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
 	);
 };
 
 export const ProductHeader2Defaults = {
 	breadcrumbs: [
-		{ url: "#", title: "Shop all" },
-		{ url: "#", title: "Category" },
-		{ url: "#", title: "Product name" },
+		// { url: "#", title: "Shop all" },
+		// { url: "#", title: "Category" },
+		// { url: "#", title: "Product name" },
 	],
-	heading: "Product name",
-	price: "$55",
+	heading: "", // Will be set via translation
+	price: "", // Will be set via translation
 	rating: {
 		review: 10,
-		starsNumber: 3.5,
+		starsNumber: 4.0,
 	},
-	description:
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.adsmad",
+	description: "", // Will be set via translation
 	galleryImages: [
 		{
 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
@@ -498,13 +572,13 @@ export const ProductHeader2Defaults = {
 		},
 	],
 	showAllButton: {
-		title: "Show all photos",
+		title: "", // Will be set via translation
 		variant: "secondary",
 		size: "sm",
 	},
 	buttons: [
-		{ title: "Add to cart" },
-		{ title: "Buy now", variant: "secondary" },
+		// { title: "Add to cart" },
+		{ title: "", variant: "primary" }, // Will be set via translation
 	],
 	options: [
 		{
@@ -512,40 +586,39 @@ export const ProductHeader2Defaults = {
 			url: "#",
 		},
 		{ title: "Option two", url: "#", variant: "secondary" },
-		{ title: "Option three", url: "#", variant: "secondary", disabled: true },
+		{ title: "Option three", url: "#", variant: "secondary" },
+		{ title: "Option four", url: "#", variant: "secondary" },
+		{ title: "Option five", url: "#", variant: "secondary" },
 	],
-	quantityInputPlaceholder: "1",
-	freeShipping: "Free shipping over $50",
+	quantityInputPlaceholder: "", // Will be set via translation
+	freeShipping: "", // Will be set via translation
 	list: [
 		{
-			title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			title: "", // Will be set via translation
 		},
 		{
-			title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			title: "", // Will be set via translation
 		},
 		{
-			title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			title: "", // Will be set via translation
 		},
 	],
 	defaultTabValue: "tab-details",
 	tabs: [
 		{
 			value: "tab-details",
-			trigger: "Details",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+			trigger: "", // Will be set via translation
+			description: "", // Will be set via translation
 		},
 		{
 			value: "tab-shipping",
-			trigger: "Shipping",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+			trigger: "", // Will be set via translation
+			description: "", // Will be set via translation
 		},
 		{
 			value: "tab-returns",
-			trigger: "Returns",
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+			trigger: "", // Will be set via translation
+			description: "", // Will be set via translation
 		},
 	],
 };
