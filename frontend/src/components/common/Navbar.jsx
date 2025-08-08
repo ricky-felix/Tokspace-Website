@@ -167,13 +167,13 @@ export function Navbar() {
 						>
 							{t("navbar.ourMission")}
 						</Link>
-						<Link
+						{/* <Link
 							to="/#ourmission"
 							onClick={(e) => handleNavLinkClick(e, "discover")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.discover")}
-						</Link>
+						</Link> */}
 						<Link
 							to="/#creativity"
 							onClick={(e) => handleNavLinkClick(e, "creativity")}
