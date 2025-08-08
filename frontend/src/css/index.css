@@ -1,13 +1,5 @@
 @import "tailwindcss";
-
-html {
-	scroll-behavior: smooth;
-}
-
-html,
-body {
-	background-color: #f5f7fa;
-}
+/* @import url("https://fonts.googleapis.com/css2?family=Baumans&family=Manrope:wght@200..800&display=swap"); */
 
 h1,
 h2,
@@ -15,7 +7,10 @@ h3,
 h4,
 h5,
 h6 {
-	color: #1c1f2a;
+	color: #1c1f2a !important;
+	font-family: "Baumans", Arial, sans-serif !important;
+	font-weight: 400 !important;
+	font-style: normal !important;
 }
 
 p,
@@ -23,5 +18,10 @@ li,
 ul,
 ol,
 a {
-	color: #6b7280;
+	color: #6b7280 !important;
+	font-family: "Manrope", Arial, sans-serif !important;
+}
+
+img[alt="Tokspace Logo"] {
+	clip-path: inset(2px 0 0 0); /* Crops 2px from top */
 }

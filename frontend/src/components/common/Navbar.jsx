@@ -85,7 +85,13 @@ export function Navbar() {
 			<div className="size-full lg:flex lg:items-center lg:justify-between">
 				<div className="flex min-h-16 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
 					<Link to="/">
-						<img src="./Tokspace-Logo.png" alt="Logo image" width="100px" />
+						<img
+							src="./Tokspace-Logo.png"
+							className="mb-6 inline-block sm:mb-0 border-0 outline-none ring-0"
+							style={{ border: "none", outline: "none", display: "block" }}
+							alt="Tokspace Logo"
+							width="100px"
+						/>
 					</Link>
 					<div className="flex items-center gap-3 lg:hidden">
 						{/* Mobile Language Switcher */}

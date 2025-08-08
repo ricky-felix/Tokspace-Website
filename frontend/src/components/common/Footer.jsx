@@ -142,17 +142,28 @@ export function Footer() {
 						</div>
 					</div>
 					<div className="rb-6 col-span-1 flex flex-col items-start justify-between pb-6 sm:flex-row sm:items-center md:pb-8 lg:col-span-2">
-						<a
-							href="#"
-							className="hover:opacity-80 transition-opacity duration-300"
+						<Link
+							to="/"
+							className="hover:opacity-80 transition-opacity duration-300 border-0 outline-none ring-0 focus:outline-none focus:ring-0"
+							style={{
+								border: "none",
+								outline: "none",
+								textDecoration: "none",
+							}}
 						>
 							<img
-								src="./Tokspace-Logo.webp"
+								src="./Tokspace-Logo.png"
 								alt="Tokspace Logo"
-								className="mb-6 inline-block sm:mb-0"
-								width="100px"
+								className="mb-6 inline-block sm:mb-0 border-0 outline-none ring-0"
+								style={{
+									border: "none",
+									outline: "none",
+									display: "block",
+									marginTop: "2px", // Add some top margin
+								}}
+								width="100"
 							/>
-						</a>
+						</Link>
 					</div>
 				</div>
 				<div className="flex flex-col-reverse items-start justify-between pt-6 pb-4 text-sm md:flex-row md:items-center md:pt-8 md:pb-0">

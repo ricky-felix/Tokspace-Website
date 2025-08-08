@@ -113,7 +113,7 @@ export function OurMission() {
 							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
 								01
 							</p>
-							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
+							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold text-left">
 								{t("ourMission.exploration")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
@@ -160,7 +160,7 @@ export function OurMission() {
 							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
 								02
 							</p>
-							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
+							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
 								{t("ourMission.community")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
@@ -205,7 +205,7 @@ export function OurMission() {
 							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
 								03
 							</p>
-							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
+							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
 								{t("ourMission.curiosity")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">
@@ -250,7 +250,7 @@ export function OurMission() {
 							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
 								04
 							</p>
-							<h2 className="hidden [writing-mode:vertical-rl] lg:mx-auto lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
+							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
 								{t("ourMission.sustainability")}
 							</h2>
 							<p className="text-xl font-bold md:text-2xl lg:hidden">

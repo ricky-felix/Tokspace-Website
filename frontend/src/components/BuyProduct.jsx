@@ -82,14 +82,14 @@ export const BuyProduct = (props) => {
 
 				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
 					<div>
-						<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
-							{heading || t("buyProduct.heading")}
-						</h1>
-						<p>{description || t("buyProduct.description")}</p>
+					<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
+						{heading || t("buyProduct.heading")}
+					</h1>
+					<p>{description || t("buyProduct.description")}</p>
 						<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
 							{list.map((item, index) => (
 								<li key={index} className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
-									{item.title || t(`buyProduct.listItem${index + 1}`)}
+									{item.title || t(`buyProduct.list.item${index + 1}`)}
 								</li>
 							))}
 						</ul>
@@ -97,16 +97,16 @@ export const BuyProduct = (props) => {
 					</div>
 					<div className="order-first md:order-none">
 						<h1 className="mb-4 text-4xl font-bold leading-[1.2] md:hidden">
-							{heading || t("buyProduct.heading")}
-						</h1>
-						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
-							{price || t("buyProduct.price")}
-						</p>
+						{heading || t("buyProduct.heading")}
+					</h1>
+					<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
+						{price || t("buyProduct.price")}
+					</p>
 						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
 							<Star rating={rating.starsNumber} />
 							<p className="text-sm">{`(${rating.starsNumber} stars) • ${rating.review} reviews`}</p>
 						</div>
-						{/* <form onSubmit={handleSubmit}>
+						<form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-1 gap-6">
 								<div className="flex flex-col">
 									<Label className="mb-2">Variant</Label>
@@ -137,44 +137,28 @@ export const BuyProduct = (props) => {
 										Quantity
 									</Label>
 									<Input
-										type="number"
-										id="quantity"
-										placeholder={
-											quantityInputPlaceholder ||
-											t("buyProduct.quantityInputPlaceholder")
-										}
-										className="w-full"
-										value={quantityInput}
-										onChange={(e) => setQuantityInput(e.target.value)}
-									/>
+											type="number"
+											id="quantity"
+											placeholder={quantityInputPlaceholder || t("buyProduct.quantityInputPlaceholder")}
+											className="w-full"
+											value={quantityInput}
+											onChange={(e) => setQuantityInput(e.target.value)}
+										/>
 								</div>
 							</div>
 							<div className="mb-4 mt-8 flex flex-col gap-y-4">
 								{buttons.map((button, index) => (
 									<button
-										key={index}
-										type="submit"
-										className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
-									>
-										{button.title || t("buyProduct.buttons.buyNow")}
-									</button>
+												key={index}
+												type="submit"
+												className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
+											>
+												{button.title || t("buyProduct.buttons.buyNow")}
+											</button>
 								))}
 							</div>
-							<p className="text-center text-xs">
-								{freeShipping || t("buyProduct.freeShipping")}
-							</p>
-						</form> */}
-						<div className="mb-4 mt-8 flex flex-col gap-y-4">
-							{buttons.map((button, index) => (
-								<button
-									key={index}
-									type="submit"
-									className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
-								>
-									{button.title || t("buyProduct.buyNowButton")}
-								</button>
-							))}
-						</div>
+							<p className="text-center text-xs">{freeShipping || t("buyProduct.freeShipping")}</p>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -282,7 +266,7 @@ const GallerySheet = ({
 				<button
 					className={`${buttonStyles.bubbleButton} ${buttonStyles[showAllButton.variant || "secondary"]} !mb-0 bg-black/70 text-white hover:bg-black/80 transition-all duration-200 text-sm px-3 py-2 rounded-md shadow-md`}
 				>
-					{showAllButton.title || t("buyProduct.showAllPhotos")}
+					{showAllButton.title || t("buyProduct.showAllButton.title")}
 				</button>
 			</SheetTrigger>
 			<SheetContent side="bottom" className="size-full px-4 z-[1001]">
@@ -435,12 +419,7 @@ const InformationTabs = ({ tabs }) => {
 									]
 						)}
 					>
-						<span className="relative z-10">
-							{tab.trigger ||
-								t(
-									`buyProduct.${tab.value.charAt(0).toUpperCase() + tab.value.slice(1).replace("-", "")}`
-								)}
-						</span>
+						<span className="relative z-10">{tab.trigger || t(`buyProduct.tabs.${tab.value}.trigger`)}</span>
 						{activeTab === tab.value && (
 							<div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-20"></div>
 						)}
@@ -462,11 +441,8 @@ const InformationTabs = ({ tabs }) => {
 						{activeTab === tab.value && (
 							<div className="animate-fade-in">
 								<p className="text-gray-700 leading-relaxed">
-									{tab.description ||
-										t(
-											`buyProduct.${tab.value.charAt(0).toUpperCase() + tab.value.slice(1).replace("-", "")}Description`
-										)}
-								</p>
+								{tab.description || t(`buyProduct.tabs.${tab.value}.description`)}
+							</p>
 							</div>
 						)}
 					</div>
@@ -482,13 +458,14 @@ export const ProductHeader2Defaults = {
 		// { url: "#", title: "Category" },
 		// { url: "#", title: "Product name" },
 	],
-	heading: "", // Will be set via translation
-	price: "", // Will be set via translation
+	heading: "Fidgeting Toy",
+	price: "Rp 100.000",
 	rating: {
 		review: 10,
 		starsNumber: 4.0,
 	},
-	description: "", // Will be set via translation
+	description:
+		"This small keychain is more than just an accessory—it's a piece of your narrative. Carry it everywhere to express yourself or simply keep it as a cherished companion.",
 	galleryImages: [
 		{
 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
@@ -572,13 +549,13 @@ export const ProductHeader2Defaults = {
 		},
 	],
 	showAllButton: {
-		title: "", // Will be set via translation
+		title: "Show all photos",
 		variant: "secondary",
 		size: "sm",
 	},
 	buttons: [
 		// { title: "Add to cart" },
-		{ title: "", variant: "primary" }, // Will be set via translation
+		{ title: "Buy now", variant: "primary" },
 	],
 	options: [
 		{
@@ -590,35 +567,38 @@ export const ProductHeader2Defaults = {
 		{ title: "Option four", url: "#", variant: "secondary" },
 		{ title: "Option five", url: "#", variant: "secondary" },
 	],
-	quantityInputPlaceholder: "", // Will be set via translation
-	freeShipping: "", // Will be set via translation
+	quantityInputPlaceholder: "1",
+	freeShipping: "Free shipping over $50",
 	list: [
 		{
-			title: "", // Will be set via translation
+			title: "Perfect for focus and self-expression on the go.",
 		},
 		{
-			title: "", // Will be set via translation
+			title: "A pocket-sized friend for your daily adventures.",
 		},
 		{
-			title: "", // Will be set via translation
+			title: "Designed for creativity and personal connection.",
 		},
 	],
 	defaultTabValue: "tab-details",
 	tabs: [
 		{
 			value: "tab-details",
-			trigger: "", // Will be set via translation
-			description: "", // Will be set via translation
+			trigger: "Details",
+			description:
+				"Our keychains are crafted with care, ensuring durability and style. Each piece is a unique expression of your personality. Enjoy a seamless shopping experience with our easy returns policy.",
 		},
 		{
 			value: "tab-shipping",
-			trigger: "", // Will be set via translation
-			description: "", // Will be set via translation
+			trigger: "Shipping",
+			description:
+				"Depending on where you are located, shipping might take 1-2 weeks",
 		},
 		{
 			value: "tab-returns",
-			trigger: "", // Will be set via translation
-			description: "", // Will be set via translation
+			trigger: "Returns",
+			description:
+				"Currently, we don't process any returns. If, however, your product run into any issue please do contact us.",
 		},
 	],
 };
