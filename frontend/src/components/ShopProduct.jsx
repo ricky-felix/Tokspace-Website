@@ -11,16 +11,14 @@ import buttonStyles from "../css/Button.module.css";
 
 export function ShopProduct() {
 	const { t } = useTranslation();
-	
+
 	return (
 		<section className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0">
 			<div className="mx-[5%] sm:max-w-md md:justify-self-start lg:mr-20 lg:ml-[5vw] lg:justify-self-end">
 				<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 					{t("shopProduct.title")}
 				</h2>
-				<p className="text-medium">
-					{t("shopProduct.description")}
-				</p>
+				<p className="text-medium">{t("shopProduct.description")}</p>
 				<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 					<Link to="/shop">
 						<Button
@@ -34,7 +32,7 @@ export function ShopProduct() {
 				</div>
 			</div>
 
-			<div className="flex items-center gap-4 overflow-hidden bg-scheme-foreground py-8 md:py-16 lg:h-screen">
+			<div className="flex items-center gap-4 overflow-hidden bg-scheme-foreground py-8 md:py-16 lg:h-screen bg-[#ffefe9]">
 				<div className="grid shrink-0 grid-cols-1 gap-y-4">
 					{/* First row - moving left */}
 					<motion.div
@@ -48,7 +46,7 @@ export function ShopProduct() {
 							ease: "linear",
 						}}
 					>
-						<div className="grid w-full grid-flow-col gap-4">
+						<div className="grid w-full grid-flow-col gap-4 ">
 							<div className="relative w-[60vw] pt-[75%] sm:w-[18rem] md:w-[26rem]">
 								<img
 									className="absolute inset-0 size-full rounded-image object-cover"

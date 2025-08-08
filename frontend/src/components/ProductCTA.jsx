@@ -9,35 +9,35 @@ export const ProductCTA = (props) => {
 		...props,
 	};
 	return (
-		<>
-			<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
-				<div className="container">
-					<div className="grid auto-cols-fr grid-cols-1 border border-border-primary lg:grid-cols-2">
-						<div className="flex flex-col justify-center p-8 md:p-12">
-							<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-					{heading || t("productCTA.heading")}
-				</h2>
-				<p className="md:text-md">{description || t("productCTA.description")}</p>
-				<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-					<Button {...buttons[0]}>
-						{buttons[0].title || t("productCTA.contactButton")}
-					</Button>
-					<Button {...buttons[1]}>
-						{buttons[1].title || t("productCTA.inquiryButton")}
-					</Button>
-				</div>
-						</div>
-						<div className="flex items-center justify-center">
-							<img
-								src={image.src}
-								className="w-full object-cover"
-								alt={image.alt}
-							/>
+		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28 ]">
+			<div className="container">
+				<div className="grid auto-cols-fr grid-cols-1 lg:grid-cols-2 bg-[#e9edf1] rounded-xl">
+					<div className="flex flex-col justify-center p-8 md:p-12">
+						<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+							{heading || t("productCTA.heading")}
+						</h2>
+						<p className="md:text-md">
+							{description || t("productCTA.description")}
+						</p>
+						<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
+							<Button {...buttons[0]}>
+								{buttons[0].title || t("productCTA.contactButton")}
+							</Button>
+							<Button {...buttons[1]}>
+								{buttons[1].title || t("productCTA.inquiryButton")}
+							</Button>
 						</div>
 					</div>
+					<div className="flex items-center justify-center">
+						<img
+							src={image.src}
+							className="w-full object-cover"
+							alt={image.alt}
+						/>
+					</div>
 				</div>
-			</section>
-		</>
+			</div>
+		</section>
 	);
 };
 
