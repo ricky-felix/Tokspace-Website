@@ -81,32 +81,35 @@ export function Navbar() {
 	return (
 		<section
 			id="relume"
-			// Changed from fixed to sticky positioning
-			className="sticky top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white lg:min-h-18 lg:px-[5%]"
-			// Updated inline style for sticky positioning
+			// Use fixed positioning for always visible navbar
+			className="fixed top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white shadow-sm lg:min-h-18 lg:px-[5%]"
+			// Explicit inline styles for cross-browser compatibility
 			style={{
-				position: "sticky",
+				position: "fixed",
 				top: 0,
+				left: 0,
+				right: 0,
 				zIndex: 999,
 				backgroundColor: "white",
+				boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
 			}}
 		>
 			<div className="size-full lg:flex lg:items-center lg:justify-between">
-				<div className="flex min-h-16 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
+				<div className="flex min-h-12 items-center justify-between px-4 md:min-h-16 md:px-[5%] lg:min-h-full lg:px-0">
 					<Link to="/">
 						<img
 							src="./Tokspace-Logo.png"
-							className="mb-6 inline-block sm:mb-0 border-0 outline-none ring-0"
+							className="mb-3 inline-block sm:mb-0 border-0 outline-none ring-0"
 							style={{ border: "none", outline: "none", display: "block" }}
 							alt="Tokspace Logo"
-							width="100px"
+							width="80px"
 						/>
 					</Link>
-					<div className="flex items-center gap-3 lg:hidden">
+					<div className="flex items-center gap-2 lg:hidden">
 						{/* Mobile Language Switcher */}
 						<MobileLanguageSwitcher isMobile={useActive.isMobile} />
 						<button
-							className="-mr-2 flex size-12 flex-col items-center justify-center"
+							className="-mr-1 flex size-10 flex-col items-center justify-center"
 							onClick={useActive.toggleMobileMenu}
 						>
 							<motion.span
@@ -158,10 +161,10 @@ export function Navbar() {
 					exit="close"
 					animate={useActive.animateMobileMenu}
 					transition={{ duration: 0.4 }}
-					className="overflow-hidden px-[5%] lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
+					className="overflow-hidden px-4 md:px-[5%] lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
 				>
 					{/* Navigation Links Container */}
-					<nav className="flex flex-col gap-6 py-6 lg:flex-row lg:gap-8 lg:py-0">
+					<nav className="flex flex-col gap-4 py-4 lg:flex-row lg:gap-8 lg:py-0">
 						<Link
 							to="/#home"
 							onClick={(e) => handleNavLinkClick(e, "header")}
@@ -205,7 +208,7 @@ export function Navbar() {
 					</div>
 
 					{/* Contact Button */}
-					<div className="mt-4 flex flex-col items-center gap-4 lg:mt-0 lg:ml-4 lg:flex-row">
+					<div className="mt-3 flex flex-col items-center gap-3 lg:mt-0 lg:ml-4 lg:flex-row">
 						<Link to="/contact-us">
 							<Button
 								title="Reach Out"
