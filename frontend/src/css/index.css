@@ -1,6 +1,23 @@
 @import "tailwindcss";
 /* @import url("https://fonts.googleapis.com/css2?family=Baumans&family=Manrope:wght@200..800&display=swap"); */
 
+/* REMOVE the height: 100% and overflow properties that are causing conflicts */
+html,
+body {
+	margin: 0;
+	padding: 0;
+	/* Remove these lines that are causing the issue:
+	height: 100% !important;
+	overflow-x: hidden !important;
+	overflow-y: auto !important;
+	*/
+}
+
+/* Let the body scroll naturally */
+body {
+	overflow-x: hidden; /* Only prevent horizontal scroll */
+}
+
 h1,
 h2,
 h3,

@@ -55,8 +55,9 @@ export default function Home() {
 			<Navbar />
 
 			{/* Always render content so videos start loading immediately */}
+			{/* REMOVED: min-h-screen overflow-x-hidden - these were causing the scrollbar issues */}
 			<div
-				className={`min-h-screen overflow-x-hidden transition-opacity duration-500 ${
+				className={`transition-opacity duration-500 ${
 					isLoading ? "opacity-0 pointer-events-none" : "opacity-100"
 				}`}
 				style={{
@@ -108,7 +109,7 @@ export default function Home() {
 					<motion.div
 						className="w-full"
 						id="creativity"
-						style={{ maxWidth: "100%", overflow: "hidden" }}
+						// REMOVED: style={{ maxWidth: "100%", overflow: "hidden" }} - this was redundant
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.2 }}
@@ -128,6 +129,9 @@ export default function Home() {
 						<Steppers />
 					</motion.div>
 				</div>
+
+				{/* MOVED Footer inside the main content area */}
+				<Footer />
 			</div>
 
 			{/* Skeleton overlay - shows on top while content loads underneath */}
@@ -136,8 +140,6 @@ export default function Home() {
 					<SkeletonLoader />
 				</div>
 			)}
-
-			<Footer />
 		</>
 	);
 }
