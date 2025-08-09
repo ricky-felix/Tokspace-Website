@@ -2,6 +2,8 @@ import { Button } from "@relume_io/relume-ui";
 import { useTranslation } from "react-i18next";
 import buttonStyles from "../css/Button.module.css";
 
+import { Link } from "react-router-dom";
+
 export const ProductCTA = (props) => {
 	const { t } = useTranslation();
 	const { heading, description, buttons, image } = {
@@ -20,12 +22,14 @@ export const ProductCTA = (props) => {
 							{description || t("productCTA.description")}
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-							<Button {...buttons[0]}>
-								{buttons[0].title || t("productCTA.contactButton")}
-							</Button>
-							<Button {...buttons[1]}>
+							<Link to="/contact-us">
+								<Button {...buttons[0]}>
+									{buttons[0].title || t("productCTA.contactButton")}
+								</Button>
+							</Link>
+							{/* <Button {...buttons[1]}>
 								{buttons[1].title || t("productCTA.inquiryButton")}
-							</Button>
+							</Button> */}
 						</div>
 					</div>
 					<div className="flex items-center justify-center">
