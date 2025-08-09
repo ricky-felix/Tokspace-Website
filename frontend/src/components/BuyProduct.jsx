@@ -52,6 +52,12 @@ export const BuyProduct = (props) => {
 	};
 	const [optionInput, setOptionInput] = useState("Option one");
 	const [quantityInput, setQuantityInput] = useState("");
+	
+	// Get current price based on selected option
+	const getCurrentPrice = () => {
+		const selectedOption = options.find(option => option.title === optionInput);
+		return selectedOption?.price || price || t("buyProduct.price");
+	};
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		console.log({
@@ -82,10 +88,10 @@ export const BuyProduct = (props) => {
 
 				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
 					<div>
-					<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
-						{heading || t("buyProduct.heading")}
-					</h1>
-					<p>{description || t("buyProduct.description")}</p>
+						<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
+							{heading || t("buyProduct.heading")}
+						</h1>
+						<p>{description || t("buyProduct.description")}</p>
 						<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
 							{list.map((item, index) => (
 								<li key={index} className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
@@ -97,10 +103,10 @@ export const BuyProduct = (props) => {
 					</div>
 					<div className="order-first md:order-none">
 						<h1 className="mb-4 text-4xl font-bold leading-[1.2] md:hidden">
-						{heading || t("buyProduct.heading")}
-					</h1>
-					<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
-						{price || t("buyProduct.price")}
+							{heading || t("buyProduct.heading")}
+						</h1>
+						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
+						{getCurrentPrice()}
 					</p>
 						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
 							<Star rating={rating.starsNumber} />
@@ -132,7 +138,7 @@ export const BuyProduct = (props) => {
 										))}
 									</div>
 								</div>
-								<div className="flex flex-col">
+								{/* <div className="flex flex-col">
 									<Label htmlFor="quantity" className="mb-2">
 										Quantity
 									</Label>
@@ -144,20 +150,22 @@ export const BuyProduct = (props) => {
 											value={quantityInput}
 											onChange={(e) => setQuantityInput(e.target.value)}
 										/>
-								</div>
+								</div> */}
 							</div>
 							<div className="mb-4 mt-8 flex flex-col gap-y-4">
 								{buttons.map((button, index) => (
 									<button
-												key={index}
-												type="submit"
-												className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
-											>
-												{button.title || t("buyProduct.buttons.buyNow")}
-											</button>
+										key={index}
+										type="submit"
+										className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
+									>
+										{button.title || t("buyProduct.buttons.buyNow")}
+									</button>
 								))}
 							</div>
-							<p className="text-center text-xs">{freeShipping || t("buyProduct.freeShipping")}</p>
+							<p className="text-center text-xs">
+								{freeShipping || t("buyProduct.freeShipping")}
+							</p>
 						</form>
 					</div>
 				</div>
@@ -419,7 +427,9 @@ const InformationTabs = ({ tabs }) => {
 									]
 						)}
 					>
-						<span className="relative z-10">{tab.trigger || t(`buyProduct.tabs.${tab.value}.trigger`)}</span>
+						<span className="relative z-10">
+							{tab.trigger || t(`buyProduct.tabs.${tab.value}.trigger`)}
+						</span>
 						{activeTab === tab.value && (
 							<div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-20"></div>
 						)}
@@ -441,8 +451,9 @@ const InformationTabs = ({ tabs }) => {
 						{activeTab === tab.value && (
 							<div className="animate-fade-in">
 								<p className="text-gray-700 leading-relaxed">
-								{tab.description || t(`buyProduct.tabs.${tab.value}.description`)}
-							</p>
+									{tab.description ||
+										t(`buyProduct.tabs.${tab.value}.description`)}
+								</p>
 							</div>
 						)}
 					</div>
@@ -561,11 +572,12 @@ export const ProductHeader2Defaults = {
 		{
 			title: "Option one",
 			url: "#",
+			price: "Rp 100.000",
 		},
-		{ title: "Option two", url: "#", variant: "secondary" },
-		{ title: "Option three", url: "#", variant: "secondary" },
-		{ title: "Option four", url: "#", variant: "secondary" },
-		{ title: "Option five", url: "#", variant: "secondary" },
+		{ title: "Option two", url: "#", variant: "secondary", price: "Rp 120.000" },
+		{ title: "Option three", url: "#", variant: "secondary", price: "Rp 150.000" },
+		{ title: "Option four", url: "#", variant: "secondary", price: "Rp 180.000" },
+		{ title: "Option five", url: "#", variant: "secondary", price: "Rp 200.000" },
 	],
 	quantityInputPlaceholder: "1",
 	freeShipping: "Free shipping over $50",
