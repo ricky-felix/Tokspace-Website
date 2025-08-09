@@ -89,16 +89,16 @@ export const BuyProduct = (props) => {
 				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
 					<div>
 						<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
-							{heading || t("buyProduct.heading")}
-						</h1>
-						<p>{description || t("buyProduct.description")}</p>
-						<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
-							{list.map((item, index) => (
-								<li key={index} className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
-									{item.title || t(`buyProduct.list.item${index + 1}`)}
-								</li>
-							))}
-						</ul>
+						{heading || t("buyProduct.heading")}
+					</h1>
+					<p>{description || t("buyProduct.description")}</p>
+					<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
+						{list.map((item, index) => (
+							<li key={index} className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
+								{item.title || t(`buyProduct.listItem${index + 1}`)}
+							</li>
+						))}
+					</ul>
 						<InformationTabs tabs={tabs} />
 					</div>
 					<div className="order-first md:order-none">
@@ -106,8 +106,8 @@ export const BuyProduct = (props) => {
 							{heading || t("buyProduct.heading")}
 						</h1>
 						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
-						{getCurrentPrice()}
-					</p>
+							{getCurrentPrice()}
+						</p>
 						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
 							<Star rating={rating.starsNumber} />
 							<p className="text-sm">{`(${rating.starsNumber} stars) • ${rating.review} reviews`}</p>
@@ -115,7 +115,7 @@ export const BuyProduct = (props) => {
 						<form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-1 gap-6">
 								<div className="flex flex-col">
-									<Label className="mb-2">Variant</Label>
+									<Label className="mb-2">{t("buyProduct.variantLabel")}</Label>
 									<div className="flex flex-wrap gap-4">
 										{options.map((option, index) => (
 											<button
@@ -143,13 +143,13 @@ export const BuyProduct = (props) => {
 										Quantity
 									</Label>
 									<Input
-											type="number"
-											id="quantity"
-											placeholder={quantityInputPlaceholder || t("buyProduct.quantityInputPlaceholder")}
-											className="w-full"
-											value={quantityInput}
-											onChange={(e) => setQuantityInput(e.target.value)}
-										/>
+																type="number"
+																id="quantity"
+																placeholder={quantityInputPlaceholder || t("buyProduct.quantityPlaceholder")}
+																className="w-full"
+																value={quantityInput}
+																onChange={(e) => setQuantityInput(e.target.value)}
+															/>
 								</div> */}
 							</div>
 							<div className="mb-4 mt-8 flex flex-col gap-y-4">

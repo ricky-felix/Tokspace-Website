@@ -56,7 +56,7 @@ export default function Home() {
 
 			{/* Always render content so videos start loading immediately */}
 			<div
-				className={`min-h-screen overflow-x-hidden transition-opacity duration-500 ${
+				className={`min-h-screen overflow-x-hidden overflow-y-hidden transition-opacity duration-500 ${
 					isLoading ? "opacity-0 pointer-events-none" : "opacity-100"
 				}`}
 				style={{
