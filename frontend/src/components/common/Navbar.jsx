@@ -1,3 +1,4 @@
+// Try this updated Navbar component with debugging
 "use client";
 
 import { Button, useMediaQuery } from "@relume_io/relume-ui";
@@ -80,7 +81,17 @@ export function Navbar() {
 	return (
 		<section
 			id="relume"
-			className="sticky top-0 z-[999] flex w-full items-center border-b border-border-primary bg-white lg:min-h-18 lg:px-[5%]"
+			// Updated sticky classes with more explicit positioning
+			className="fixed top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white lg:min-h-18 lg:px-[5%]"
+			// Add inline style as fallback
+			style={{
+				position: "fixed",
+				top: 0,
+				left: 0,
+				right: 0,
+				zIndex: 999,
+				backgroundColor: "white",
+			}}
 		>
 			<div className="size-full lg:flex lg:items-center lg:justify-between">
 				<div className="flex min-h-16 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">

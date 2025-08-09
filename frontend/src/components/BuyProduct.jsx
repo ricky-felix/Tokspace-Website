@@ -159,7 +159,7 @@ export const BuyProduct = (props) => {
 										type="submit"
 										className={`${buttonStyles.bubbleButton} ${buttonStyles[button.variant || "primary"]}`}
 									>
-										{button.title || t("buyProduct.buttons.buyNow")}
+										{button.title || t("buyProduct.buyNowButton")}
 									</button>
 								))}
 							</div>
