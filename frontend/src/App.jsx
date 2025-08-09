@@ -9,7 +9,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Homepage";
 import ContactUs from "./pages/ContactUsPage";
-// import ProductPage from "./pages/ProductPage";
+import ProductPage from "./pages/ProductPage";
 
 import NotFound404 from "./pages/NotFound404Page";
 

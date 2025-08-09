@@ -121,7 +121,7 @@ export function OurMission() {
 							</p>
 						</div>
 						<useSctoll.CardContent
-							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-auto"
+							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-hidden"
 							animate={{ height: useSctoll.animateHeight(0) }}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
@@ -168,7 +168,7 @@ export function OurMission() {
 							</p>
 						</div>
 						<useSctoll.CardContent
-							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-auto"
+							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-hidden"
 							animate={{ height: useSctoll.animateHeight(1) }}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
@@ -213,7 +213,7 @@ export function OurMission() {
 							</p>
 						</div>
 						<useSctoll.CardContent
-							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-auto"
+							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-hidden"
 							animate={{ height: useSctoll.animateHeight(2) }}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
@@ -258,7 +258,7 @@ export function OurMission() {
 							</p>
 						</div>
 						<useSctoll.CardContent
-							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-auto"
+							className="w-full overflow-hidden lg:h-full lg:w-auto lg:max-w-full lg:overflow-hidden"
 							animate={{ height: useSctoll.animateHeight(3) }}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>

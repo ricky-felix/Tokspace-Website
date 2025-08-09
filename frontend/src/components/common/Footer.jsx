@@ -120,6 +120,16 @@ export function Footer() {
 										{t("navbar.contactUs")}
 									</Link>
 								</li>
+								<li className="py-2 text-sm font-semibold">
+									<a
+										href="https://form.typeform.com/to/fkjdwnRR"
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{t("footer.bugReport")}
+									</a>
+								</li>
 
 								{/* <li className="py-2 text-sm font-semibold">
 									<a href="" target="_blank">

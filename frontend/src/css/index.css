@@ -42,3 +42,12 @@ a {
 img[alt="Tokspace Logo"] {
 	clip-path: inset(2px 0 0 0); /* Crops 2px from top */
 }
+
+* {
+	box-sizing: border-box !important;
+}
+
+body,
+html {
+	overflow-x: hidden !important;
+}
