@@ -50,12 +50,25 @@ export const BuyProduct = (props) => {
 		...ProductHeader2Defaults,
 		...props,
 	};
-	const [optionInput, setOptionInput] = useState("Option one");
+	const [optionInput, setOptionInput] = useState("");
 	const [quantityInput, setQuantityInput] = useState("");
+	
+	// Set initial option when component mounts
+	useEffect(() => {
+		if (!optionInput && options.length > 0) {
+			const firstOptionTitle = options[0].title || t("buyProduct.optionOne");
+			setOptionInput(firstOptionTitle);
+		}
+	}, [optionInput, options, t]);
 	
 	// Get current price based on selected option
 	const getCurrentPrice = () => {
-		const selectedOption = options.find(option => option.title === optionInput);
+		const optionKeys = ['optionOne', 'optionTwo', 'optionThree', 'optionFour', 'optionFive'];
+		const selectedOptionIndex = options.findIndex(option => {
+			const translatedTitle = option.title || t(`buyProduct.${optionKeys[options.indexOf(option)]}`);
+			return translatedTitle === optionInput;
+		});
+		const selectedOption = selectedOptionIndex >= 0 ? options[selectedOptionIndex] : options[0];
 		return selectedOption?.price || price || t("buyProduct.price");
 	};
 	const handleSubmit = (event) => {
@@ -117,25 +130,29 @@ export const BuyProduct = (props) => {
 								<div className="flex flex-col">
 									<Label className="mb-2">{t("buyProduct.variantLabel")}</Label>
 									<div className="flex flex-wrap gap-4">
-										{options.map((option, index) => (
-											<button
-												key={index}
-												type="button"
-												className={`${buttonStyles.bubbleButton} ${
-													optionInput === option.title
-														? buttonStyles.primary
-														: buttonStyles[option.variant || "secondary"]
-												} ${
-													option.disabled
-														? "opacity-25 pointer-events-none"
-														: ""
-												}`}
-												onClick={() => setOptionInput(option.title || "")}
-												disabled={option.disabled}
-											>
-												{option.title}
-											</button>
-										))}
+										{options.map((option, index) => {
+											const optionKeys = ['optionOne', 'optionTwo', 'optionThree', 'optionFour', 'optionFive'];
+											const translatedTitle = option.title || t(`buyProduct.${optionKeys[index]}`);
+											return (
+												<button
+													key={index}
+													type="button"
+													className={`${buttonStyles.bubbleButton} ${
+														optionInput === translatedTitle
+															? buttonStyles.primary
+															: buttonStyles[option.variant || "secondary"]
+													} ${
+														option.disabled
+															? "opacity-25 pointer-events-none"
+															: ""
+													}`}
+													onClick={() => setOptionInput(translatedTitle)}
+													disabled={option.disabled}
+												>
+													{translatedTitle}
+												</button>
+											);
+										})}
 									</div>
 								</div>
 								{/* <div className="flex flex-col">
@@ -274,7 +291,7 @@ const GallerySheet = ({
 				<button
 					className={`${buttonStyles.bubbleButton} ${buttonStyles[showAllButton.variant || "secondary"]} !mb-0 bg-black/70 text-white hover:bg-black/80 transition-all duration-200 text-sm px-3 py-2 rounded-md shadow-md`}
 				>
-					{showAllButton.title || t("buyProduct.showAllButton.title")}
+					{showAllButton.title || t("buyProduct.showAllPhotos")}
 				</button>
 			</SheetTrigger>
 			<SheetContent side="bottom" className="size-full px-4 z-[1001]">
@@ -428,8 +445,8 @@ const InformationTabs = ({ tabs }) => {
 						)}
 					>
 						<span className="relative z-10">
-							{tab.trigger || t(`buyProduct.tabs.${tab.value}.trigger`)}
-						</span>
+								{tab.trigger || t(`buyProduct.Tab${tab.value.replace('tab-', '')}`)}
+							</span>
 						{activeTab === tab.value && (
 							<div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-20"></div>
 						)}
@@ -450,11 +467,11 @@ const InformationTabs = ({ tabs }) => {
 					>
 						{activeTab === tab.value && (
 							<div className="animate-fade-in">
-								<p className="text-gray-700 leading-relaxed">
-									{tab.description ||
-										t(`buyProduct.tabs.${tab.value}.description`)}
-								</p>
-							</div>
+									<p className="text-gray-700 leading-relaxed">
+										{tab.description ||
+											t(`buyProduct.Tab${tab.value.replace('tab-', '')}Description`)}
+									</p>
+								</div>
 						)}
 					</div>
 				))}
@@ -469,14 +486,13 @@ export const ProductHeader2Defaults = {
 		// { url: "#", title: "Category" },
 		// { url: "#", title: "Product name" },
 	],
-	heading: "Fidgeting Toy",
-	price: "Rp 100.000",
+	heading: "", // Will be set via translation
+	price: "", // Will be set via translation
 	rating: {
 		review: 10,
 		starsNumber: 4.0,
 	},
-	description:
-		"This small keychain is more than just an accessory—it's a piece of your narrative. Carry it everywhere to express yourself or simply keep it as a cherished companion.",
+	description: "", // Will be set via translation
 	galleryImages: [
 		{
 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
@@ -560,57 +576,54 @@ export const ProductHeader2Defaults = {
 		},
 	],
 	showAllButton: {
-		title: "Show all photos",
+		title: "", // Will be set via translation
 		variant: "secondary",
 		size: "sm",
 	},
 	buttons: [
 		// { title: "Add to cart" },
-		{ title: "Buy now", variant: "primary" },
+		{ title: "", variant: "primary" }, // Will be set via translation
 	],
 	options: [
 		{
-			title: "Option one",
+			title: "", // Will be set via translation (optionOne)
 			url: "#",
 			price: "Rp 100.000",
 		},
-		{ title: "Option two", url: "#", variant: "secondary", price: "Rp 120.000" },
-		{ title: "Option three", url: "#", variant: "secondary", price: "Rp 150.000" },
-		{ title: "Option four", url: "#", variant: "secondary", price: "Rp 180.000" },
-		{ title: "Option five", url: "#", variant: "secondary", price: "Rp 200.000" },
+		{ title: "", url: "#", variant: "secondary", price: "Rp 120.000" }, // optionTwo
+		{ title: "", url: "#", variant: "secondary", price: "Rp 150.000" }, // optionThree
+		{ title: "", url: "#", variant: "secondary", price: "Rp 180.000" }, // optionFour
+		{ title: "", url: "#", variant: "secondary", price: "Rp 200.000" }, // optionFive
 	],
-	quantityInputPlaceholder: "1",
-	freeShipping: "Free shipping over $50",
+	quantityInputPlaceholder: "", // Will be set via translation
+	freeShipping: "", // Will be set via translation
 	list: [
 		{
-			title: "Perfect for focus and self-expression on the go.",
+			title: "", // Will be set via translation (listItem1)
 		},
 		{
-			title: "A pocket-sized friend for your daily adventures.",
+			title: "", // Will be set via translation (listItem2)
 		},
 		{
-			title: "Designed for creativity and personal connection.",
+			title: "", // Will be set via translation (listItem3)
 		},
 	],
 	defaultTabValue: "tab-details",
 	tabs: [
 		{
 			value: "tab-details",
-			trigger: "Details",
-			description:
-				"Our keychains are crafted with care, ensuring durability and style. Each piece is a unique expression of your personality. Enjoy a seamless shopping experience with our easy returns policy.",
+			trigger: "", // Will be set via translation (Tabdetails)
+			description: "", // Will be set via translation (TabdetailsDescription)
 		},
 		{
 			value: "tab-shipping",
-			trigger: "Shipping",
-			description:
-				"Depending on where you are located, shipping might take 1-2 weeks",
+			trigger: "", // Will be set via translation (Tabshipping)
+			description: "", // Will be set via translation (TabshippingDescription)
 		},
 		{
 			value: "tab-returns",
-			trigger: "Returns",
-			description:
-				"Currently, we don't process any returns. If, however, your product run into any issue please do contact us.",
+			trigger: "", // Will be set via translation (Tabreturns)
+			description: "", // Will be set via translation (TabreturnsDescription)
 		},
 	],
 };
