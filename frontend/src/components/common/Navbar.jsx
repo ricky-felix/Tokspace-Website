@@ -1,4 +1,4 @@
-// Try this updated Navbar component with debugging
+// Updated Navbar component with sticky positioning
 "use client";
 
 import { Button, useMediaQuery } from "@relume_io/relume-ui";
@@ -81,14 +81,12 @@ export function Navbar() {
 	return (
 		<section
 			id="relume"
-			// Updated sticky classes with more explicit positioning
-			className="fixed top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white lg:min-h-18 lg:px-[5%]"
-			// Add inline style as fallback
+			// Changed from fixed to sticky positioning
+			className="sticky top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white lg:min-h-18 lg:px-[5%]"
+			// Updated inline style for sticky positioning
 			style={{
-				position: "fixed",
+				position: "sticky",
 				top: 0,
-				left: 0,
-				right: 0,
 				zIndex: 999,
 				backgroundColor: "white",
 			}}
@@ -178,13 +176,13 @@ export function Navbar() {
 						>
 							{t("navbar.ourMission")}
 						</Link>
-						<Link
+						{/* <Link
 							to="/#ourmission"
 							onClick={(e) => handleNavLinkClick(e, "discover")}
 							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.discover")}
-						</Link>
+						</Link> */}
 						<Link
 							to="/#creativity"
 							onClick={(e) => handleNavLinkClick(e, "creativity")}

@@ -37,58 +37,6 @@ const useRelume = (features = []) => {
 
 export function OurMission() {
 	const { t } = useTranslation();
-	// const features = [
-	// 	{
-	// 		columnText: "01",
-	// 		verticalText: "Feature one",
-	// 		horizontalText: "Feature one",
-	// 		heading: "Short heading goes here",
-	// 		description:
-	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-	// 		image: {
-	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-	// 			alt: "Relume placeholder image 1",
-	// 		},
-	// 	},
-	// 	{
-	// 		columnText: "02",
-	// 		verticalText: "Feature two",
-	// 		horizontalText: "Feature two",
-	// 		heading: "Short heading goes here",
-	// 		description:
-	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-	// 		image: {
-	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-	// 			alt: "Relume placeholder image 2",
-	// 		},
-	// 	},
-	// 	{
-	// 		columnText: "03",
-	// 		verticalText: "Feature three",
-	// 		horizontalText: "Feature three",
-	// 		heading: "Short heading goes here",
-	// 		description:
-	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-	// 		image: {
-	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-	// 			alt: "Relume placeholder image 3",
-	// 		},
-	// 	},
-	// 	{
-	// 		columnText: "04",
-	// 		verticalText: "Feature four",
-	// 		horizontalText: "Feature four",
-	// 		heading: "Short heading goes here",
-	// 		description:
-	// 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-	// 		image: {
-	// 			src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-	// 			alt: "Relume placeholder image 4",
-	// 		},
-	// 	},
-	// ];
-
-	// const useSctoll = useRelume(features); // Pass features to the hook
 
 	const useSctoll = useRelume([{}, {}, {}, {}]); // Just pass 4 empty objects for length
 
@@ -110,14 +58,22 @@ export function OurMission() {
 						transition={{ duration: 0.3, ease: "easeInOut" }}
 					>
 						<div className="relative flex h-16 w-full min-w-full cursor-pointer items-center justify-center border-t border-border-primary py-8 md:h-20 lg:h-[90vh] lg:w-20 lg:min-w-20 lg:flex-col lg:justify-between lg:border-none">
-							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
+							<p className="absolute left-6 text-xl font-bold md:left-10 md:text-2xl lg:relative lg:left-0 lg:whitespace-nowrap">
 								01
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold text-left">
 								{t("ourMission.exploration")}
 							</h2>
-							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								{t("ourMission.exploration")}
+							<p className="text-sm font-bold md:text-lg lg:hidden leading-tight text-center px-1 break-words hyphens-auto">
+								{t("ourMission.exploration").split(" ").length > 1 ? (
+									<>
+										{t("ourMission.exploration").split(" ")[0]}
+										<br />
+										{t("ourMission.exploration").split(" ").slice(1).join(" ")}
+									</>
+								) : (
+									t("ourMission.exploration")
+								)}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -157,14 +113,22 @@ export function OurMission() {
 						transition={{ duration: 0.3, ease: "easeInOut" }}
 					>
 						<div className="relative flex h-16 w-full min-w-full cursor-pointer items-center justify-center border-t border-border-primary py-8 md:h-20 lg:h-[90vh] lg:w-20 lg:min-w-20 lg:flex-col lg:justify-between lg:border-none">
-							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
+							<p className="absolute left-6 text-xl font-bold md:left-10 md:text-2xl lg:relative lg:left-0 lg:whitespace-nowrap">
 								02
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
 								{t("ourMission.community")}
 							</h2>
-							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								{t("ourMission.community")}
+							<p className="text-sm font-bold md:text-lg lg:hidden leading-tight text-center px-1 break-words hyphens-auto">
+								{t("ourMission.community").split(" ").length > 1 ? (
+									<>
+										{t("ourMission.community").split(" ")[0]}
+										<br />
+										{t("ourMission.community").split(" ").slice(1).join(" ")}
+									</>
+								) : (
+									t("ourMission.community")
+								)}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -202,14 +166,22 @@ export function OurMission() {
 						transition={{ duration: 0.3, ease: "easeInOut" }}
 					>
 						<div className="relative flex h-16 w-full min-w-full cursor-pointer items-center justify-center border-t border-border-primary py-8 md:h-20 lg:h-[90vh] lg:w-20 lg:min-w-20 lg:flex-col lg:justify-between lg:border-none">
-							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
+							<p className="absolute left-6 text-xl font-bold md:left-10 md:text-2xl lg:relative lg:left-0 lg:whitespace-nowrap">
 								03
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
 								{t("ourMission.curiosity")}
 							</h2>
-							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								{t("ourMission.curiosity")}
+							<p className="text-sm font-bold md:text-lg lg:hidden leading-tight text-center px-1 break-words hyphens-auto">
+								{t("ourMission.curiosity").split(" ").length > 1 ? (
+									<>
+										{t("ourMission.curiosity").split(" ")[0]}
+										<br />
+										{t("ourMission.curiosity").split(" ").slice(1).join(" ")}
+									</>
+								) : (
+									t("ourMission.curiosity")
+								)}
 							</p>
 						</div>
 						<useSctoll.CardContent
@@ -247,14 +219,25 @@ export function OurMission() {
 						transition={{ duration: 0.3, ease: "easeInOut" }}
 					>
 						<div className="relative flex h-16 w-full min-w-full cursor-pointer items-center justify-center border-t border-border-primary py-8 md:h-20 lg:h-[90vh] lg:w-20 lg:min-w-20 lg:flex-col lg:justify-between lg:border-none">
-							<p className="absolute left-6 text-xl font-bold whitespace-nowrap md:left-10 md:text-2xl lg:relative lg:left-0">
+							<p className="absolute left-6 text-xl font-bold md:left-10 md:text-2xl lg:relative lg:left-0 lg:whitespace-nowrap">
 								04
 							</p>
 							<h2 className="hidden [writing-mode:vertical-rl] lg:block lg:rotate-180 lg:text-2xl lg:font-bold">
 								{t("ourMission.sustainability")}
 							</h2>
-							<p className="text-xl font-bold md:text-2xl lg:hidden">
-								{t("ourMission.sustainability")}
+							<p className="text-sm font-bold md:text-lg lg:hidden leading-tight text-center px-1 break-words hyphens-auto">
+								{t("ourMission.sustainability").split(" ").length > 1 ? (
+									<>
+										{t("ourMission.sustainability").split(" ")[0]}
+										<br />
+										{t("ourMission.sustainability")
+											.split(" ")
+											.slice(1)
+											.join(" ")}
+									</>
+								) : (
+									t("ourMission.sustainability")
+								)}
 							</p>
 						</div>
 						<useSctoll.CardContent
