@@ -13,10 +13,12 @@ export function Creativity() {
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
 				<div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
-					<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
+					<h2 className="mb-5 md:mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">
 						{t("creativity.title")}
-					</h1>
-					<p className="text-lg md:text-xl lg:text-2xl">{t("creativity.subtitle")}</p>
+					</h2>
+					<p className="text-base md:text-lg lg:text-xl">
+						{t("creativity.subtitle")}
+					</p>
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2">
 					<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 ">
@@ -26,10 +28,12 @@ export function Creativity() {
 									<p className="mb-2 font-semibold">
 										{t("creativity.createLabel")}
 									</p>
-									<h2 className="rb-5 mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
+									<h3 className="rb-5 mb-5 leading-[1.2] md:mb-6 text-2xl font-bold md:text-3xl lg:text-4xl">
 										{t("creativity.createTitle")}
-									</h2>
-									<p className="text-base md:text-lg lg:text-xl">{t("creativity.createDescription")}</p>
+									</h3>
+									<p className="text-base md:text-lg lg:text-xl">
+										{t("creativity.createDescription")}
+									</p>
 								</div>
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
@@ -54,7 +58,9 @@ export function Creativity() {
 									<h3 className="mb-2 text-2xl font-bold md:text-3xl lg:text-4xl">
 										{t("creativity.craftTitle")}
 									</h3>
-									<p className="text-base md:text-lg lg:text-xl">{t("creativity.craftDescription")}</p>
+									<p className="text-base md:text-lg lg:text-xl">
+										{t("creativity.craftDescription")}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -67,7 +73,9 @@ export function Creativity() {
 									<h3 className="mb-2 text-2xl font-bold md:text-3xl lg:text-4xl">
 										{t("creativity.experienceTitle")}
 									</h3>
-									<p className="text-base md:text-lg lg:text-xl">{t("creativity.experienceDescription")}</p>
+									<p className="text-base md:text-lg lg:text-xl">
+										{t("creativity.experienceDescription")}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -93,7 +101,9 @@ export function Creativity() {
 								<h3 className="mb-2 font-bold text-2xl md:text-3xl lg:text-4xl">
 									{t("creativity.inspireTitle")}
 								</h3>
-								<p className="text-base md:text-lg lg:text-xl">{t("creativity.inspireDescription")}</p>
+								<p className="text-base md:text-lg lg:text-xl">
+									{t("creativity.inspireDescription")}
+								</p>
 							</div>
 						</div>
 						<div className="flex flex-col sm:col-span-2 bg-[#DEE3E9] rounded-xl">
@@ -102,10 +112,12 @@ export function Creativity() {
 									<p className="mb-2 font-semibold">
 										{t("creativity.imagineLabel")}
 									</p>
-									<h2 className="rb-5 mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
+									<h3 className="rb-5 mb-5 leading-[1.2] text-2xl font-bold md:text-3xl lg:text-4xl">
 										{t("creativity.imagineTitle")}
-									</h2>
-									<p className="text-base md:text-lg lg:text-xl">{t("creativity.imagineDescription")}</p>
+									</h3>
+									<p className="text-base md:text-lg lg:text-xl">
+										{t("creativity.imagineDescription")}
+									</p>
 								</div>
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">

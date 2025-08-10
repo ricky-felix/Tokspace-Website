@@ -18,7 +18,9 @@ export function ShopProduct() {
 				<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 					{t("shopProduct.title")}
 				</h2>
-				<p className="text-medium">{t("shopProduct.description")}</p>
+				<p className="text-base md:text-lg lg:text-xl">
+					{t("shopProduct.description")}
+				</p>
 				<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 					<Link to="/shop">
 						<Button
