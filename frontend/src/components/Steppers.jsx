@@ -60,10 +60,10 @@ export function Steppers() {
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
 				<div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
-					<h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
+					<h2 className="mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 						{t("steppers.title")}
 					</h2>
-					<p className="md:text-md">{t("steppers.subtitle")}</p>
+					<p className="text-base md:text-lg lg:text-xl">{t("steppers.subtitle")}</p>
 				</div>
 				<Tabs defaultValue="tab-one">
 					<TabsList className="mb-12 flex-col md:mb-16 md:flex-row">
@@ -71,28 +71,28 @@ export function Steppers() {
 							value="tab-one"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
-							<h3 className="text-md leading-[1.4] font-bold md:text-xl">
+							<h3 className="text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
 								{t("steppers.step1Title")}
 							</h3>
-							<p>{t("steppers.step1Description")}</p>
+							<p className="text-base md:text-lg lg:text-xl">{t("steppers.step1Description")}</p>
 						</TabsTrigger>
 						<TabsTrigger
 							value="tab-two"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
-							<h3 className="text-md leading-[1.4] font-bold md:text-xl">
-								{t("steppers.step2Title")}
-							</h3>
-							<p>{t("steppers.step2Description")}</p>
+							<h3 className="text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
+							{t("steppers.step2Title")}
+						</h3>
+							<p className="text-base md:text-lg lg:text-xl">{t("steppers.step2Description")}</p>
 						</TabsTrigger>
 						<TabsTrigger
 							value="tab-three"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
-							<h3 className="text-md leading-[1.4] font-bold md:text-xl">
-								{t("steppers.step3Title")}
-							</h3>
-							<p>{t("steppers.step3Description")}</p>
+							<h3 className="text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
+							{t("steppers.step3Title")}
+						</h3>
+							<p className="text-base md:text-lg lg:text-xl">{t("steppers.step3Description")}</p>
 						</TabsTrigger>
 					</TabsList>
 					<TabsContent

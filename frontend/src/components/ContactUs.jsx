@@ -68,7 +68,7 @@ export function ContactUs() {
 					<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 						{t("contactUs.title")}
 					</h2>
-					<p className="md:text-md">{t("contactUs.subtitle")}</p>
+					<p className="text-base md:text-lg lg:text-xl">{t("contactUs.subtitle")}</p>
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-[1fr_1fr] md:gap-x-20 md:gap-y-16">
 					<form onSubmit={handleSubmit} className={formStyles.formContainer}>
@@ -153,7 +153,7 @@ export function ContactUs() {
 							<div className="mb-3 md:mb-4">
 								<BiEnvelope className="size-8" />
 							</div>
-							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
+							<h3 className="mb-2 text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
 								{t("contactUs.emailTitle")}
 							</h3>
 							<a className="underline" href="mailto:tokspace@outlook.co.id">
@@ -164,7 +164,7 @@ export function ContactUs() {
 							<div className="mb-3 md:mb-4">
 								<BiPhone className="size-8" />
 							</div>
-							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
+							<h3 className="mb-2 text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
 								{t("contactUs.whatsappTitle")}
 							</h3>
 							<a className="underline" href="https://wa.me/6287746161488">
@@ -175,10 +175,10 @@ export function ContactUs() {
 							<div className="mb-3 md:mb-4">
 								<BiMap className="size-8" />
 							</div>
-							<h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
+							<h3 className="mb-2 text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
 								{t("contactUs.locationTitle")}
 							</h3>
-							<p className="mb-2">{t("contactUs.location")}</p>
+							<p className="text-base md:text-lg lg:text-xl mb-2">{t("contactUs.location")}</p>
 						</div>
 					</div>
 				</div>

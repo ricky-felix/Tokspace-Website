@@ -37,10 +37,10 @@ export function Footer() {
 				<div className="border-b border-border-primary">
 					<div className="mb-12 grid grid-cols-1 gap-x-[8vw] gap-y-12 md:mb-18 md:gap-y-16 lg:mb-20 lg:grid-cols-[1fr_0.5fr] lg:gap-y-20">
 						<div className="rb-6 max-w-md">
-							<h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-6xl">
+							<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
 								{t("footer.exploreTitle")}
 							</h1>
-							<p>{t("footer.joinUs")}</p>
+							<p className="text-lg md:text-xl lg:text-2xl">{t("footer.joinUs")}</p>
 							<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 								<Button
 									title="Discover"

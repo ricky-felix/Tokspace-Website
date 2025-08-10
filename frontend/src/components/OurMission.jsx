@@ -44,10 +44,10 @@ export function OurMission() {
 		<section id="relume" className="py-16 md:py-24 lg:py-28 w-full">
 			<div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="rb-12 mb-12 w-full max-w-lg md:mb-18 lg:mb-20 mx-auto text-center">
-					<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-6xl">
+					<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
 						{t("ourMission.title")}
 					</h1>
-					<p className="md:text-md">{t("ourMission.subtitle")}</p>
+					<p className="text-lg md:text-xl lg:text-2xl">{t("ourMission.subtitle")}</p>
 				</div>
 				<div className="flex w-full flex-col overflow-hidden border border-border-primary lg:h-[90vh] lg:flex-row bg-[#E9EDF1]">
 					<motion.div
@@ -82,12 +82,12 @@ export function OurMission() {
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
-								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
+								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
 									{t("ourMission.explorationTitle")}
 								</h3>
-								<p className="md:text-md">
-									{t("ourMission.explorationDescription")}
-								</p>
+								<p className="text-base md:text-lg lg:text-xl">
+								{t("ourMission.explorationDescription")}
+							</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<div>
 										<iframe
@@ -137,12 +137,12 @@ export function OurMission() {
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
-								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									{t("ourMission.communityTitle")}
-								</h3>
-								<p className="md:text-md">
-									{t("ourMission.communityDescription")}
-								</p>
+								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
+								{t("ourMission.innovationTitle")}
+							</h3>
+							<p className="text-base md:text-lg lg:text-xl">
+					{t("ourMission.innovationDescription")}
+					</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe
 										src="https://player.vimeo.com/video/1103988016?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;&muted=1&amp;dnt=1"
@@ -190,12 +190,12 @@ export function OurMission() {
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
-								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									{t("ourMission.curiosityTitle")}
-								</h3>
-								<p className="md:text-md">
-									{t("ourMission.curiosityDescription")}
-								</p>
+								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
+								{t("ourMission.empowermentTitle")}
+							</h3>
+							<p className="text-base md:text-lg lg:text-xl">
+					{t("ourMission.empowermentDescription")}
+					</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe
 										src="https://player.vimeo.com/video/1103988720?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;&muted=1&amp;dnt=1"
@@ -246,12 +246,12 @@ export function OurMission() {
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
-								<h3 className="mb-5 text-4xl leading-[1.2] font-bold md:mb-6 md:text-5xl lg:text-6xl">
-									{t("ourMission.sustainabilityTitle")}
-								</h3>
-								<p className="md:text-md">
-									{t("ourMission.sustainabilityDescription")}
-								</p>
+								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
+								{t("ourMission.communityTitle")}
+							</h3>
+							<p className="text-base md:text-lg lg:text-xl">
+					{t("ourMission.communityDescription")}
+					</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
 									<iframe
 										src="https://player.vimeo.com/video/1103990201?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;muted=1&amp;dnt=1"

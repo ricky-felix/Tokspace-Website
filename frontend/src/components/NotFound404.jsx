@@ -20,7 +20,7 @@ export function NotFound404() {
 							initial={{ x: "-50%" }}
 							animate={{ x: "0%" }}
 							transition={{ type: "spring", bounce: 0 }}
-							className="block text-3xl font-bold md:text-5xl lg:text-7xl"
+							className="block text-5xl font-bold md:text-6xl lg:text-7xl"
 						>
 							{t("notFound.title1")}
 						</motion.span>
@@ -30,12 +30,12 @@ export function NotFound404() {
 							initial={{ x: "50%" }}
 							animate={{ x: "0%" }}
 							transition={{ type: "spring", bounce: 0 }}
-							className="mb-5 block text-3xl font-bold md:mb-6 md:text-5xl lg:text-7xl"
+							className="mb-5 block text-5xl font-bold md:mb-6 md:text-6xl lg:text-7xl"
 						>
 							{t("notFound.title2")}
 						</motion.span>
 					</h1>
-					<p className="md:text-md">{t("notFound.description")}</p>
+					<p className="text-lg md:text-xl lg:text-2xl">{t("notFound.description")}</p>
 					<div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
 						<Link to="/">
 							<Button

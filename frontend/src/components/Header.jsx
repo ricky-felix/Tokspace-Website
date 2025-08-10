@@ -52,22 +52,22 @@ export function Header() {
 	return (
 		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container">
-				<div className="rb-12 mb-12 grid grid-cols-1 items-start gap-x-12 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-y-8 lg:mb-20 lg:gap-x-20 lg:gap-y-16">
-					<div>
-						<h1 className="text-2xl font-bold md:text-4xl lg:text-6xl">
+				<div className="mb-12 grid grid-cols-1 gap-x-12 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-y-8 md:items-center lg:mb-20 lg:gap-x-20 lg:gap-y-16">
+					<div className="text-center md:text-left">
+						<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl">
 							{t("header.title")}
 						</h1>
 					</div>
-					<div>
-						<p className="md:text-md">{t("header.description")}</p>
+					<div className="text-center md:text-left">
+						<p className="text-base md:text-lg lg:text-xl">{t("header.description")}</p>
 						{/* <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 							<Button
-								title={t('header.learnMore')}
+								title={t("header.learnMore")}
 								variant="primary"
 								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 								onClick={scrollToOurMission}
 							>
-								{t('header.learnMore')}
+								{t("header.learnMore")}
 							</Button>
 						</div> */}
 					</div>

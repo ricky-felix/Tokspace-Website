@@ -1,21 +1,14 @@
 @import "tailwindcss";
-/* @import url("https://fonts.googleapis.com/css2?family=Baumans&family=Manrope:wght@200..800&display=swap"); */
 
-/* REMOVE the height: 100% and overflow properties that are causing conflicts */
 html,
 body {
 	margin: 0;
 	padding: 0;
-	/* Remove these lines that are causing the issue:
-	height: 100% !important;
 	overflow-x: hidden !important;
-	overflow-y: auto !important;
-	*/
 }
 
-/* Let the body scroll naturally */
-body {
-	overflow-x: hidden; /* Only prevent horizontal scroll */
+* {
+	box-sizing: border-box !important;
 }
 
 h1,
@@ -25,9 +18,16 @@ h4,
 h5,
 h6 {
 	color: #1c1f2a !important;
-	font-family: "Baumans", Arial, sans-serif !important;
-	font-weight: 400 !important;
+	font-family: "Baumans", "Work Sans", sans-serif !important;
 	font-style: normal !important;
+	font-optical-sizing: auto !important;
+	/*
+		* tailwind config:
+		* Option B - Bold Approach:
+		- H1: text-5xl md:text-6xl lg:text-7xl
+		- H2: text-4xl md:text-5xl lg:text-6xl
+		- H3: text-2xl md:text-3xl lg:text-4xl
+	*/
 }
 
 p,
@@ -36,18 +36,17 @@ ul,
 ol,
 a {
 	color: #6b7280 !important;
-	font-family: "Manrope", Arial, sans-serif !important;
+	font-family: "Manrope", "Work Sans", sans-serif !important;
+	font-optical-sizing: auto !important;
+	font-style: normal !important;
+	/*
+		* tailwind config
+		- <p> followed with H1, text-lg md:text-xl lg:text-2xl
+
+	*/
 }
 
+/* Crops 2px from top, for some reason there is a black line at the top */
 img[alt="Tokspace Logo"] {
-	clip-path: inset(2px 0 0 0); /* Crops 2px from top */
-}
-
-* {
-	box-sizing: border-box !important;
-}
-
-body,
-html {
-	overflow-x: hidden !important;
+	clip-path: inset(2px 0 0 0) !important;
 }

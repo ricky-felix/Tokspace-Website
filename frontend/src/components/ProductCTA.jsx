@@ -18,7 +18,7 @@ export const ProductCTA = (props) => {
 						<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 							{heading || t("productCTA.heading")}
 						</h2>
-						<p className="md:text-md">
+						<p className="text-base md:text-lg lg:text-xl">
 							{description || t("productCTA.description")}
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
