@@ -95,7 +95,7 @@ export default function Home() {
 						<OurMission />
 					</motion.div>
 
-					<motion.div
+					{/* <motion.div
 						className="w-full"
 						id="discover"
 						initial={{ opacity: 0, y: 20 }}
@@ -104,7 +104,7 @@ export default function Home() {
 						viewport={{ once: true }}
 					>
 						<ShopProduct />
-					</motion.div>
+					</motion.div> */}
 
 					<motion.div
 						className="w-full"
