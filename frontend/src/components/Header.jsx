@@ -1,13 +1,14 @@
 "use client";
 
 import { Button } from "@relume_io/relume-ui";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import buttonStyles from "../css/Button.module.css";
 
 export function Header() {
 	const { t } = useTranslation();
+	const videoRef = useRef(null);
 	const [windowWidth, setWindowWidth] = useState(
 		typeof window !== "undefined" ? window.innerWidth : 0
 	);
@@ -20,6 +21,35 @@ export function Header() {
 
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	// Force video to play when component mounts
+	useEffect(() => {
+		if (videoRef.current) {
+			const video = videoRef.current;
+			video.muted = true; // Ensure muted for autoplay
+
+			const playVideo = async () => {
+				try {
+					await video.play();
+					console.log("Video started playing");
+				} catch (error) {
+					console.error("Video play failed:", error);
+				}
+			};
+
+			// Try to play immediately
+			playVideo();
+
+			// Also try when video can play
+			video.addEventListener("canplay", playVideo);
+			video.addEventListener("loadeddata", playVideo);
+
+			return () => {
+				video.removeEventListener("canplay", playVideo);
+				video.removeEventListener("loadeddata", playVideo);
+			};
+		}
 	}, []);
 
 	const scrollToOurMission = () => {
@@ -59,30 +89,28 @@ export function Header() {
 						</h1>
 					</div>
 					<div className="text-center md:text-left">
-						<p className="text-base md:text-lg lg:text-xl">{t("header.description")}</p>
-						{/* <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-							<Button
-								title={t("header.learnMore")}
-								variant="primary"
-								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
-								onClick={scrollToOurMission}
-							>
-								{t("header.learnMore")}
-							</Button>
-						</div> */}
+						<p className="text-base md:text-lg lg:text-xl">
+							{t("header.description")}
+						</p>
 					</div>
 				</div>
 				<div className={getVideoContainerClasses()}>
-					<iframe
-						src="https://player.vimeo.com/video/1103973310?background=1&amp;autoplay=1&amp;loop=1&amp;byline=0&amp;title=0&amp;portrait=0&amp;muted=1&amp;dnt=1"
+					<video
+						ref={videoRef}
+						autoPlay
+						muted
+						loop
+						playsInline
+						preload="auto" // Eager loading
 						className="absolute inset-0 w-full h-full"
-						width="800"
-						height="720"
 						frameBorder="0"
-						allow="autoplay; fullscreen"
-						referrerPolicy="strict-origin-when-cross-origin"
-						title="Tokspace - Website - Clip 1"
-					/>
+					>
+						<source
+							src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-1.webm"
+							type="video/webm"
+						/>
+						Your browser does not support the video tag.
+					</video>
 				</div>
 			</div>
 		</section>

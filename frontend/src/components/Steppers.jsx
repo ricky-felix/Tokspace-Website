@@ -41,18 +41,19 @@ export function Steppers() {
 	};
 
 	// Video iframe component for reusability
-	const VideoIframe = ({ src, title }) => (
+	const VideoIframe = ({ src }) => (
 		<div className={getVideoContainerClasses()}>
-			<iframe
-				src={src}
-				className="absolute inset-0 w-full h-full"
-				width="800"
-				height="720"
+			<video
+				className="w-full h-full aspect-video"
+				autoPlay
+				muted
+				loop
+				playsInline
+				preload="auto" // Eager loading
 				frameBorder="0"
-				allow="autoplay; fullscreen"
-				referrerPolicy="strict-origin-when-cross-origin"
-				title={title}
-			/>
+			>
+				<source src={src} type="video/webm" />
+			</video>
 		</div>
 	);
 
@@ -63,7 +64,9 @@ export function Steppers() {
 					<h2 className="mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
 						{t("steppers.title")}
 					</h2>
-					<p className="text-base md:text-lg lg:text-xl">{t("steppers.subtitle")}</p>
+					<p className="text-base md:text-lg lg:text-xl">
+						{t("steppers.subtitle")}
+					</p>
 				</div>
 				<Tabs defaultValue="tab-one">
 					<TabsList className="mb-12 flex-col md:mb-16 md:flex-row">
@@ -74,53 +77,50 @@ export function Steppers() {
 							<h3 className="text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
 								{t("steppers.step1Title")}
 							</h3>
-							<p className="text-base md:text-lg lg:text-xl">{t("steppers.step1Description")}</p>
+							<p className="text-base md:text-lg lg:text-xl">
+								{t("steppers.step1Description")}
+							</p>
 						</TabsTrigger>
 						<TabsTrigger
 							value="tab-two"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
 							<h3 className="text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
-							{t("steppers.step2Title")}
-						</h3>
-							<p className="text-base md:text-lg lg:text-xl">{t("steppers.step2Description")}</p>
+								{t("steppers.step2Title")}
+							</h3>
+							<p className="text-base md:text-lg lg:text-xl">
+								{t("steppers.step2Description")}
+							</p>
 						</TabsTrigger>
 						<TabsTrigger
 							value="tab-three"
 							className="flex w-full flex-col gap-1 border-0 px-6 py-4 text-center whitespace-normal duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
 						>
 							<h3 className="text-2xl leading-[1.4] font-bold md:text-3xl lg:text-4xl">
-							{t("steppers.step3Title")}
-						</h3>
-							<p className="text-base md:text-lg lg:text-xl">{t("steppers.step3Description")}</p>
+								{t("steppers.step3Title")}
+							</h3>
+							<p className="text-base md:text-lg lg:text-xl">
+								{t("steppers.step3Description")}
+							</p>
 						</TabsTrigger>
 					</TabsList>
 					<TabsContent
 						value="tab-one"
 						className="data-[state=active]:animate-tabs"
 					>
-						<VideoIframe
-							src="https://player.vimeo.com/video/1103999740?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
-							title="Tokspace - Website - Clip 1"
-						/>
+						<VideoIframe src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-4-Design.webm" />
 					</TabsContent>
 					<TabsContent
 						value="tab-two"
 						className="data-[state=active]:animate-tabs"
 					>
-						<VideoIframe
-							src="https://player.vimeo.com/video/1104325374?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
-							title="Tokspace - Website - Clip 2"
-						/>
+						<VideoIframe src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-4-Ideation.webm" />
 					</TabsContent>
 					<TabsContent
 						value="tab-three"
 						className="data-[state=active]:animate-tabs"
 					>
-						<VideoIframe
-							src="https://player.vimeo.com/video/1104004919?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
-							title="Tokspace - Website - Clip 3"
-						/>
+						<VideoIframe src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-4-Prototype.webm" />
 					</TabsContent>
 				</Tabs>
 			</div>

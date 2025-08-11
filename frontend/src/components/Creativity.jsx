@@ -37,16 +37,22 @@ export function Creativity() {
 								</div>
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
-								<iframe
-									src="https://player.vimeo.com/video/1103995631?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+								<video
 									className="w-full aspect-video"
 									width="300"
 									height="300"
+									autoPlay
+									muted
+									loop
+									playsInline
+									preload="auto" // Eager loading
 									frameBorder="0"
-									allow="autoplay; fullscreen"
-									referrerPolicy="strict-origin-when-cross-origin"
-									title="Tokspace - Website - Clip 1"
-								></iframe>
+								>
+									<source
+										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Transforming_Ideas_into_Reality.webm"
+										type="video/webm"
+									/>
+								</video>
 							</div>
 						</div>
 						<div className="flex flex-col bg-[#DEE3E9] rounded-xl">
@@ -83,16 +89,22 @@ export function Creativity() {
 					<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8">
 						<div className="flex flex-col sm:col-span-2 sm:grid sm:auto-cols-fr sm:grid-cols-2 bg-[#DEE3E9] rounded-xl">
 							<div className="flex size-full flex-col items-center justify-center self-start">
-								<iframe
-									src="https://player.vimeo.com/video/1103996020?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+								<video
 									className="w-full aspect-video"
 									width="300"
 									height="300"
+									autoPlay
+									muted
+									loop
+									playsInline
+									preload="auto" // Eager loading
 									frameBorder="0"
-									allow="autoplay; fullscreen"
-									referrerPolicy="strict-origin-when-cross-origin"
-									title="Tokspace - Website - Clip 1"
-								></iframe>
+								>
+									<source
+										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Community.webm"
+										type="video/webm"
+									/>
+								</video>
 							</div>
 							<div className="block flex-col justify-center p-6 sm:flex">
 								<p className="mb-2 font-semibold">
@@ -121,16 +133,22 @@ export function Creativity() {
 								</div>
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
-								<iframe
-									src="https://player.vimeo.com/video/1103997132?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;muted=1&amp;dnt=1"
+								<video
 									className="w-full aspect-video"
 									width="300"
 									height="300"
+									autoPlay
+									muted
+									loop
+									playsInline
+									preload="auto" // Eager loading
 									frameBorder="0"
-									allow="autoplay; fullscreen"
-									referrerPolicy="strict-origin-when-cross-origin"
-									title="Tokspace - Website - Clip 1"
-								></iframe>
+								>
+									<source
+										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Launch_Ideas_Into_Space.webm"
+										type="video/webm"
+									/>
+								</video>
 							</div>
 						</div>
 					</div>

@@ -91,18 +91,22 @@ export function OurMission() {
 									{t("ourMission.explorationDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<div>
-										<iframe
-											src="https://player.vimeo.com/video/1103988039?controls=0&autoplay=1&loop=1&title=0&byline=0&portrait=0&badge=0&autopause=0&muted=1&dnt=1"
-											className="w-full aspect-video"
-											width="300"
-											height="300"
-											frameBorder="0"
-											allow="autoplay; fullscreen"
-											referrerPolicy="strict-origin-when-cross-origin"
-											title="Tokspace - Website - Clip 1"
-										></iframe>
-									</div>
+									<video
+										className="w-full aspect-video"
+										width="300"
+										height="300"
+										autoPlay
+										muted
+										loop
+										playsInline
+										preload="auto" // Eager loading
+										frameBorder="0"
+									>
+										<source
+											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Iteration_over_Perfection.webm"
+											type="video/webm"
+										/>
+									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>
@@ -140,22 +144,26 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
-									{t("ourMission.innovationTitle")}
+									{t("ourMission.communityTitle")}
 								</h3>
 								<p className="text-base md:text-lg lg:text-xl">
-									{t("ourMission.innovationDescription")}
+									{t("ourMission.communityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<iframe
-										src="https://player.vimeo.com/video/1103988016?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;&muted=1&amp;dnt=1"
+									<video
 										className="w-full aspect-video"
-										width="300"
-										height="300"
+										autoPlay
+										muted
+										loop
+										playsInline
+										preload="auto" // Eager loading
 										frameBorder="0"
-										allow="autoplay; fullscreen"
-										referrerPolicy="strict-origin-when-cross-origin"
-										title="Tokspace - Website - Clip 1"
-									></iframe>
+									>
+										<source
+											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Community.webm"
+											type="video/webm"
+										/>
+									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>
@@ -193,22 +201,26 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
-									{t("ourMission.empowermentTitle")}
+									{t("ourMission.curiosityTitle")}
 								</h3>
 								<p className="text-base md:text-lg lg:text-xl">
-									{t("ourMission.empowermentDescription")}
+									{t("ourMission.curiosityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<iframe
-										src="https://player.vimeo.com/video/1103988720?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;&muted=1&amp;dnt=1"
+									<video
 										className="w-full aspect-video"
-										width="300"
-										height="300"
+										autoPlay
+										muted
+										loop
+										playsInline
+										preload="auto" // Eager loading
 										frameBorder="0"
-										allow="autoplay; fullscreen"
-										referrerPolicy="strict-origin-when-cross-origin"
-										title="Tokspace - Website - Clip 1"
-									></iframe>
+									>
+										<source
+											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Sharing.webm"
+											type="video/webm"
+										/>
+									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>
@@ -249,22 +261,26 @@ export function OurMission() {
 						>
 							<div className="flex h-full flex-col px-6 pt-4 pb-8 md:px-10 md:pt-12 md:pb-12 lg:w-full lg:max-w-2xl lg:px-12 lg:pt-16 lg:pb-16">
 								<h3 className="mb-5 text-2xl leading-[1.2] font-bold md:mb-6 md:text-3xl lg:text-4xl">
-									{t("ourMission.communityTitle")}
+									{t("ourMission.sustainabilityTitle")}
 								</h3>
 								<p className="text-base md:text-lg lg:text-xl">
-									{t("ourMission.communityDescription")}
+									{t("ourMission.sustainabilityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<iframe
-										src="https://player.vimeo.com/video/1103990201?controls=0&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;muted=1&amp;dnt=1"
+									<video
 										className="w-full aspect-video"
-										width="300"
-										height="300"
+										autoPlay
+										muted
+										loop
+										playsInline
+										preload="auto" // Eager loading
 										frameBorder="0"
-										allow="autoplay; fullscreen"
-										referrerPolicy="strict-origin-when-cross-origin"
-										title="Tokspace - Website - Clip 1"
-									></iframe>
+									>
+										<source
+											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Sustainability.webm"
+											type="video/webm"
+										/>
+									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>
