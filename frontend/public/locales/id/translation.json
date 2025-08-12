@@ -128,5 +128,19 @@
 		"TabdetailsDescription": "Gantungan kunci kami dibuat dengan hati-hati, memastikan daya tahan dan gaya. Setiap bagian adalah ekspresi unik dari kepribadian Anda. Nikmati pengalaman berbelanja yang mulus dengan kebijakan pengembalian yang mudah.",
 		"TabshippingDescription": "Tergantung di mana Anda berada, pengiriman mungkin memakan waktu 1-2 minggu",
 		"TabreturnsDescription": "Saat ini, kami tidak memproses pengembalian apa pun. Namun, jika produk Anda mengalami masalah, silakan hubungi kami."
+	},
+	"faq": {
+		"title": "Pertanyaan yang Sering Diajukan",
+		"subtitle": "Temukan jawaban atas pertanyaan Anda tentang produk dan layanan kami di bawah ini.",
+		"question1": "Apa itu Tokspace?",
+		"answer1": "Tokspace adalah perusahaan teknologi kreatif yang menggabungkan desain dan teknologi. Kami fokus pada produk cetak 3D dan kit modular. Misi kami adalah memberdayakan pengusaha lokal melalui solusi inovatif.",
+		"question2": "Bagaimana cara kerja pencetakan 3D?",
+		"answer2": "Pencetakan 3D mengubah desain digital menjadi objek fisik lapis demi lapis. Teknologi ini memungkinkan pembuatan prototipe cepat dan kustomisasi. Di Tokspace, kami memanfaatkan ini untuk menciptakan produk unik yang memenuhi kebutuhan Anda.",
+		"question3": "Bisakah saya menyesuaikan produk?",
+		"answer3": "Tentu saja! Dalam waktu dekat, kami menawarkan opsi kustomisasi untuk banyak produk kami. Anda dapat memodifikasi desain sesuai gaya personal atau kebutuhan spesifik Anda. Nantikan!",
+		"question4": "Bahan apa yang Anda gunakan?",
+		"answer4": "Kami menggunakan bahan berkualitas tinggi dan ramah lingkungan untuk produk cetak 3D kami. Pilihan kami mencakup plastik biodegradable dan komposit tahan lama. Ini memastikan keberlanjutan dan daya tahan dalam pembelian Anda—termasuk kemasan kami!",
+		"question5": "Bagaimana cara memesan?",
+		"answer5": "Memesan itu mudah! Cukup jelajahi katalog produk kami, pilih item yang diinginkan, dan ikuti proses checkout. Jika Anda memiliki pertanyaan, tim dukungan kami siap membantu Anda."
 	}
 }

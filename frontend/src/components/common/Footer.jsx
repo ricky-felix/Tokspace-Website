@@ -40,7 +40,9 @@ export function Footer() {
 							<h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-6xl lg:text-7xl">
 								{t("footer.exploreTitle")}
 							</h1>
-							<p className="text-lg md:text-xl lg:text-2xl">{t("footer.joinUs")}</p>
+							<p className="text-lg md:text-xl lg:text-2xl">
+								{t("footer.joinUs")}
+							</p>
 							<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
 								<Button
 									title="Discover"
@@ -73,20 +75,20 @@ export function Footer() {
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
-										to="/#ourmission"
-										onClick={(e) => handleScrollToSection(e, "ourmission")}
-										className="text-black hover:text-[#ff6523] transition-colors duration-300"
-									>
-										{t("navbar.ourMission")}
-									</Link>
-								</li>
-								<li className="py-2 text-sm font-semibold">
-									<Link
 										to="/#discover"
 										onClick={(e) => handleScrollToSection(e, "discover")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
 										{t("navbar.discover")}
+									</Link>
+								</li>
+								<li className="py-2 text-sm font-semibold">
+									<Link
+										to="/#ourmission"
+										onClick={(e) => handleScrollToSection(e, "ourmission")}
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+									>
+										{t("navbar.ourMission")}
 									</Link>
 								</li>
 								<li className="py-2 text-sm font-semibold">

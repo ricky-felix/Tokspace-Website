@@ -4,6 +4,7 @@ import { Navbar } from "../components/common/Navbar";
 import { Footer } from "../components/common/Footer";
 
 import { BuyProduct } from "../components/BuyProduct";
+import { FAQ } from "../components/FAQ";
 import { ProductCTA } from "../components/ProductCTA";
 
 export default function Page() {
@@ -19,6 +20,7 @@ export default function Page() {
 			</div>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full">
+					<FAQ />
 					<ProductCTA />
 				</div>
 			</div>

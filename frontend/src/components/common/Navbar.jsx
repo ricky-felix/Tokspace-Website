@@ -82,7 +82,7 @@ export function Navbar() {
 		<section
 			id="relume"
 			// Use fixed positioning for always visible navbar
-			className="fixed top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white shadow-sm lg:min-h-18 lg:px-[5%]"
+			className="fixed top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white shadow-sm lg:min-h-20 lg:px-[5%] py-2"
 			// Explicit inline styles for cross-browser compatibility
 			style={{
 				position: "fixed",
@@ -95,7 +95,7 @@ export function Navbar() {
 			}}
 		>
 			<div className="size-full lg:flex lg:items-center lg:justify-between">
-				<div className="flex min-h-12 items-center justify-between px-4 md:min-h-16 md:px-[5%] lg:min-h-full lg:px-0">
+				<div className="flex min-h-14 items-center justify-between px-6 md:min-h-18 md:px-[5%] lg:min-h-full lg:px-0">
 					<Link to="/">
 						<img
 							src="./Tokspace-Logo.png"
@@ -105,11 +105,11 @@ export function Navbar() {
 							width="80px"
 						/>
 					</Link>
-					<div className="flex items-center gap-2 lg:hidden">
+					<div className="flex items-center gap-4 lg:hidden">
 						{/* Mobile Language Switcher */}
 						<MobileLanguageSwitcher isMobile={useActive.isMobile} />
 						<button
-							className="-mr-1 flex size-10 flex-col items-center justify-center"
+							className="-mr-1 flex size-12 flex-col items-center justify-center"
 							onClick={useActive.toggleMobileMenu}
 						>
 							<motion.span
@@ -161,42 +161,42 @@ export function Navbar() {
 					exit="close"
 					animate={useActive.animateMobileMenu}
 					transition={{ duration: 0.4 }}
-					className="overflow-hidden px-4 md:px-[5%] lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
+					className="overflow-hidden px-6 md:px-[5%] lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
 				>
 					{/* Navigation Links Container */}
-					<nav className="flex flex-col gap-4 py-4 lg:flex-row lg:gap-8 lg:py-0">
+					<nav className="flex flex-col gap-6 py-6 lg:flex-row lg:gap-10 lg:py-0">
 						<Link
 							to="/#home"
 							onClick={(e) => handleNavLinkClick(e, "header")}
-							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
+							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.home")}
 						</Link>
 						<Link
-							to="/#creativity"
-							onClick={(e) => handleNavLinkClick(e, "ourmission")}
-							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
-						>
-							{t("navbar.ourMission")}
-						</Link>
-						<Link
 							to="/#ourmission"
 							onClick={(e) => handleNavLinkClick(e, "discover")}
-							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
+							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.discover")}
 						</Link>
 						<Link
 							to="/#creativity"
+							onClick={(e) => handleNavLinkClick(e, "ourmission")}
+							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
+						>
+							{t("navbar.ourMission")}
+						</Link>
+						<Link
+							to="/#creativity"
 							onClick={(e) => handleNavLinkClick(e, "creativity")}
-							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
+							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.creativity")}
 						</Link>
 						<Link
 							to="/#innovation"
 							onClick={(e) => handleNavLinkClick(e, "innovation")}
-							className="block py-2 text-md font-semibold lg:px-3 lg:py-2 hover:text-[#ff6523] transition-colors"
+							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 						>
 							{t("navbar.innovation")}
 						</Link>
@@ -208,7 +208,7 @@ export function Navbar() {
 					</div>
 
 					{/* Contact Button */}
-					<div className="mt-3 flex flex-col items-center gap-3 lg:mt-0 lg:ml-4 lg:flex-row">
+					<div className="mt-6 flex flex-col items-center gap-4 lg:mt-0 lg:ml-6 lg:flex-row">
 						<Link to="/contact-us">
 							<Button
 								title="Reach Out"
