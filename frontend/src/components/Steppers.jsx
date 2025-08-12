@@ -71,6 +71,14 @@ export function Steppers() {
 			if (video.duration && video.duration > 0) {
 				const progress = (video.currentTime / video.duration) * 100;
 				setVideoProgress(progress);
+				console.log(
+					"Video progress:",
+					progress,
+					"Current time:",
+					video.currentTime,
+					"Duration:",
+					video.duration
+				);
 			}
 		};
 
@@ -157,73 +165,147 @@ export function Steppers() {
 		return `${baseClasses} ${getVideoAspectRatio()}`;
 	};
 
-	// Progress bar component
+	// Mobile-friendly Progress Bar component
 	const ProgressBar = () => (
 		<div className="mb-8 md:mb-12">
-			<div className="flex justify-between items-center mb-4">
+			{/* Mobile: Vertical tabs */}
+			<div className="md:hidden space-y-4 mb-6">
 				{steps.map((step, index) => {
-					let textColor = "text-gray-500";
+					let bgColor = "bg-white";
+					let textColor = "!text-gray-700";
+					let borderColor = "border-gray-300";
+					let numberBg = "bg-gray-100";
+					let numberColor = "!text-gray-600";
 
 					if (index < currentStep) {
-						textColor = "text-orange-400";
+						bgColor = "bg-orange-50";
+						textColor = "!text-orange-800";
+						borderColor = "border-orange-400";
+						numberBg = "bg-orange-400";
+						numberColor = "!text-white";
 					} else if (index === currentStep) {
-						textColor = "text-[#ff6523]";
+						bgColor = "bg-[#ff6523]";
+						textColor = "!text-white";
+						borderColor = "border-[#ff6523]";
+						numberBg = "bg-white";
+						numberColor = "!text-[#ff6523]";
 					}
 
 					return (
 						<div
 							key={step.id}
-							className="flex flex-col items-center text-center flex-1 cursor-pointer"
+							className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-300 ${bgColor} ${borderColor} hover:shadow-md shadow-sm`}
 							onClick={() => goToStep(index)}
 						>
-							<h4
-								className={`text-lg font-bold md:text-xl lg:text-2xl ${textColor} transition-colors duration-300 mb-1 hover:opacity-80`}
-							>
-								{step.title}
-							</h4>
-							<p
-								className={`text-xs md:text-sm lg:text-base ${textColor} transition-colors duration-300 hover:opacity-80`}
-							>
-								{step.description}
-							</p>
+							<div className="flex items-center justify-between">
+								<div className="flex-1">
+									<h4 className={`font-bold text-lg ${textColor} mb-1`}>
+										{step.title}
+									</h4>
+									<p className={`text-sm ${textColor} opacity-90`}>
+										{step.description}
+									</p>
+								</div>
+								<div
+									className={`ml-3 w-8 h-8 rounded-full flex items-center justify-center ${numberBg}`}
+								>
+									<span className={`text-sm font-bold ${numberColor}`}>
+										{index + 1}
+									</span>
+								</div>
+							</div>
+
+							{/* Progress indicator for current step */}
+							{index === currentStep && (
+								<div className="mt-3">
+									<div className="h-2 bg-black bg-opacity-20 rounded-full overflow-hidden">
+										<div
+											className="h-full bg-white transition-all duration-100 ease-linear rounded-full"
+											style={{
+												width: `${videoProgress}%`,
+												minWidth: videoProgress > 0 ? "2px" : "0px",
+											}}
+										/>
+									</div>
+									{/* Debug info - remove this later */}
+									<div className="text-xs !text-white mt-1 opacity-75">
+										Progress: {Math.round(videoProgress)}% | Loading:{" "}
+										{isVideoLoading ? "Yes" : "No"}
+									</div>
+								</div>
+							)}
 						</div>
 					);
 				})}
 			</div>
 
-			{/* Progress line */}
-			<div className="relative h-1 bg-gray-300 rounded-full overflow-hidden">
-				{steps.map((step, index) => {
-					const sectionWidth = 100 / steps.length;
-					const sectionStart = index * sectionWidth;
+			{/* Desktop: Horizontal tabs */}
+			<div className="hidden md:block">
+				<div className="flex justify-between items-center mb-4">
+					{steps.map((step, index) => {
+						let textColor = "text-gray-500";
 
-					let fillWidth = 0;
-					let fillColor = "bg-gray-300";
-
-					if (index < currentStep) {
-						fillWidth = sectionWidth;
-						fillColor = "bg-orange-300";
-					} else if (index === currentStep) {
-						if (videoProgress > 0) {
-							fillWidth = (videoProgress / 100) * sectionWidth;
-							fillColor = "bg-[#ff6523]";
-						} else if (isVideoLoading) {
-							fillColor = "bg-orange-200 animate-pulse";
-							fillWidth = sectionWidth * 0.1;
+						if (index < currentStep) {
+							textColor = "text-orange-400";
+						} else if (index === currentStep) {
+							textColor = "text-[#ff6523]";
 						}
-					}
 
-					return (
-						<div
-							key={`progress-${index}`}
-							className={`absolute top-0 h-full ${fillColor} transition-all duration-300 ease-out`}
-							style={{
-								left: `${sectionStart}%`,
-								width: `${fillWidth}%`,
-							}}
-						/>
-					);
-				})}
+						return (
+							<div
+								key={step.id}
+								className="flex flex-col items-center text-center flex-1 cursor-pointer"
+								onClick={() => goToStep(index)}
+							>
+								<h4
+									className={`text-lg font-bold md:text-xl lg:text-2xl ${textColor} transition-colors duration-300 mb-1 hover:opacity-80`}
+								>
+									{step.title}
+								</h4>
+								<p
+									className={`text-xs md:text-sm lg:text-base ${textColor} transition-colors duration-300 hover:opacity-80`}
+								>
+									{step.description}
+								</p>
+							</div>
+						);
+					})}
+				</div>
+
+				{/* Desktop Progress line */}
+				<div className="relative h-1 bg-gray-300 rounded-full overflow-hidden">
+					{steps.map((step, index) => {
+						const sectionWidth = 100 / steps.length;
+						const sectionStart = index * sectionWidth;
+
+						let fillWidth = 0;
+						let fillColor = "bg-gray-300";
+
+						if (index < currentStep) {
+							fillWidth = sectionWidth;
+							fillColor = "bg-orange-300";
+						} else if (index === currentStep) {
+							if (videoProgress > 0) {
+								fillWidth = (videoProgress / 100) * sectionWidth;
+								fillColor = "bg-[#ff6523]";
+							} else if (isVideoLoading) {
+								fillColor = "bg-orange-200 animate-pulse";
+								fillWidth = sectionWidth * 0.1;
+							}
+						}
+
+						return (
+							<div
+								key={`progress-${index}`}
+								className={`absolute top-0 h-full ${fillColor} transition-all duration-300 ease-out`}
+								style={{
+									left: `${sectionStart}%`,
+									width: `${fillWidth}%`,
+								}}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);

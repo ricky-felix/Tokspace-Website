@@ -80,7 +80,10 @@ export function Header() {
 	};
 
 	return (
-		<section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+		<section
+			id="relume"
+			className="px-[5%] pt-32 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-28"
+		>
 			<div className="container">
 				<div className="mb-12 grid grid-cols-1 gap-x-12 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-y-8 md:items-center lg:mb-20 lg:gap-x-20 lg:gap-y-16">
 					<div className="text-center md:text-left">
