@@ -101,7 +101,7 @@ export function Header() {
 						muted
 						loop
 						playsInline
-						preload="auto" // Eager loading
+						preload="eager"
 						className="absolute inset-0 w-full h-full"
 						frameBorder="0"
 					>

@@ -39,13 +39,11 @@ export function Creativity() {
 							<div className="flex w-full flex-col items-center justify-center self-start">
 								<video
 									className="w-full aspect-video"
-									width="300"
-									height="300"
 									autoPlay
 									muted
 									loop
 									playsInline
-									preload="auto" // Eager loading
+									preload="eager"
 									frameBorder="0"
 								>
 									<source
@@ -91,13 +89,11 @@ export function Creativity() {
 							<div className="flex size-full flex-col items-center justify-center self-start">
 								<video
 									className="w-full aspect-video"
-									width="300"
-									height="300"
 									autoPlay
 									muted
 									loop
 									playsInline
-									preload="auto" // Eager loading
+									preload="eager"
 									frameBorder="0"
 								>
 									<source
@@ -135,13 +131,11 @@ export function Creativity() {
 							<div className="flex w-full flex-col items-center justify-center self-start">
 								<video
 									className="w-full aspect-video"
-									width="300"
-									height="300"
 									autoPlay
 									muted
 									loop
 									playsInline
-									preload="auto" // Eager loading
+									preload="eager"
 									frameBorder="0"
 								>
 									<source

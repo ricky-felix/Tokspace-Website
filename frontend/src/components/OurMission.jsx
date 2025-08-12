@@ -99,7 +99,7 @@ export function OurMission() {
 										muted
 										loop
 										playsInline
-										preload="auto" // Eager loading
+										preload="eager"
 										frameBorder="0"
 									>
 										<source
@@ -156,7 +156,7 @@ export function OurMission() {
 										muted
 										loop
 										playsInline
-										preload="auto" // Eager loading
+										preload="eager"
 										frameBorder="0"
 									>
 										<source
@@ -213,7 +213,7 @@ export function OurMission() {
 										muted
 										loop
 										playsInline
-										preload="auto" // Eager loading
+										preload="eager"
 										frameBorder="0"
 									>
 										<source
@@ -273,7 +273,7 @@ export function OurMission() {
 										muted
 										loop
 										playsInline
-										preload="auto" // Eager loading
+										preload="eager"
 										frameBorder="0"
 									>
 										<source

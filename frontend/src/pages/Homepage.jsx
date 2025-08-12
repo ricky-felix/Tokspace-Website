@@ -45,7 +45,7 @@ export default function Home() {
 		// Hide skeleton after videos have had time to buffer
 		const timer = setTimeout(() => {
 			setIsLoading(false);
-		}, 2500); // 2 seconds - adjust based on your video loading time
+		}, 1500); // 1.5 seconds - adjust based on your video loading time
 
 		return () => clearTimeout(timer);
 	}, []);
@@ -82,6 +82,17 @@ export default function Home() {
 					</div>
 				</div>
 
+				{/* <motion.div
+					className="w-full"
+					id="discover"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.1 }}
+					viewport={{ once: true }}
+				>
+					<ShopProduct />
+				</motion.div> */}
+
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full"></div>
 					<motion.div
@@ -94,17 +105,6 @@ export default function Home() {
 					>
 						<OurMission />
 					</motion.div>
-
-					{/* <motion.div
-						className="w-full"
-						id="discover"
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.1 }}
-						viewport={{ once: true }}
-					>
-						<ShopProduct />
-					</motion.div> */}
 
 					<motion.div
 						className="w-full"
@@ -130,7 +130,6 @@ export default function Home() {
 					</motion.div>
 				</div>
 
-				{/* MOVED Footer inside the main content area */}
 				<Footer />
 			</div>
 
