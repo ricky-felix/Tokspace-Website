@@ -73,7 +73,7 @@ export function Footer() {
 										{t("footer.meetTokspace")}
 									</Link>
 								</li>
-								{/* <li className="py-2 text-sm font-semibold">
+								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/#discover"
 										onClick={(e) => handleScrollToSection(e, "discover")}
@@ -81,7 +81,7 @@ export function Footer() {
 									>
 										{t("navbar.discover")}
 									</Link>
-								</li> */}
+								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/#ourmission"
