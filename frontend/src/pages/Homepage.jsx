@@ -136,7 +136,7 @@ export default function Home() {
 			{/* Skeleton overlay - shows on top while content loads underneath */}
 			{/* {isLoading && (
 				<div className="fixed inset-0 bg-white z-50">
-					<SkeletonLoader />
+					<SkeletonLoaderHomepage />
 				</div>
 			)} */}
 		</>
