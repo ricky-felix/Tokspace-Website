@@ -2,7 +2,7 @@ import {
 	WHATSAPP_CONFIG,
 	generateWhatsAppURL,
 	formatCurrency,
-} from "../config/whatsapp";
+} from "../utils/whatsapp.js";
 
 export class WhatsAppService {
 	/**

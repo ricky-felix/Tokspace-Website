@@ -15,10 +15,10 @@ import "./i18n";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		<Suspense fallback={<Loading />}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Suspense>
+		{/* <Suspense fallback={<Loading />}> */}
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+		{/* </Suspense> */}
 	</StrictMode>
 );

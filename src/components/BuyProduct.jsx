@@ -20,9 +20,9 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
 import buttonStyles from "../css/Button.module.css";
-import { useProduct } from "../hooks/useProducts";
-import { WhatsAppService } from "../services/whatsappService";
-import { formatCurrency } from "../config/whatsapp";
+import { useProduct } from "../hooks/useProduct.js";
+import { WhatsAppService } from "../services/whatsappService.js";
+import { formatCurrency } from "../utils/whatsapp.js";
 
 export const BuyProduct = ({ productId, ...props }) => {
 	const { t, i18n } = useTranslation();

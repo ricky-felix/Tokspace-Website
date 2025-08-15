@@ -71,14 +71,14 @@ export function Steppers() {
 			if (video.duration && video.duration > 0) {
 				const progress = (video.currentTime / video.duration) * 100;
 				setVideoProgress(progress);
-				console.log(
-					"Video progress:",
-					progress,
-					"Current time:",
-					video.currentTime,
-					"Duration:",
-					video.duration
-				);
+				// console.log(
+				// 	"Video progress:",
+				// 	progress,
+				// 	"Current time:",
+				// 	video.currentTime,
+				// 	"Duration:",
+				// 	video.duration
+				// );
 			}
 		};
 

@@ -32,9 +32,9 @@ export function Header() {
 			const playVideo = async () => {
 				try {
 					await video.play();
-					console.log("Video started playing");
+					// console.log("Video started playing");
 				} catch (error) {
-					console.error("Video play failed:", error);
+					// console.error("Video play failed:", error);
 				}
 			};
 
