@@ -4,10 +4,10 @@ import "../css/index.css";
 
 import { useLocation } from "react-router";
 import { motion } from "framer-motion";
-import { SkeletonLoader } from "../components/SkeletonLoader";
 
 import { Navbar } from "../components/common/Navbar";
 import { Footer } from "../components/common/Footer";
+import { SkeletonLoaderHomepage } from "../components/common/SkeletonLoaderHomepage";
 
 import { Header } from "../components/Header";
 import { Creativity } from "../components/Creativity";
@@ -82,7 +82,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				{/* <motion.div
+				<motion.div
 					className="w-full"
 					id="discover"
 					initial={{ opacity: 0, y: 20 }}
@@ -91,7 +91,7 @@ export default function Home() {
 					viewport={{ once: true }}
 				>
 					<ShopProduct />
-				</motion.div> */}
+				</motion.div>
 
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full"></div>
@@ -134,11 +134,11 @@ export default function Home() {
 			</div>
 
 			{/* Skeleton overlay - shows on top while content loads underneath */}
-			{isLoading && (
+			{/* {isLoading && (
 				<div className="fixed inset-0 bg-white z-50">
 					<SkeletonLoader />
 				</div>
-			)}
+			)} */}
 		</>
 	);
 }
