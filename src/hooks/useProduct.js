@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import supabase from "../utils/supabase.js";
+import { supabase } from "../utils/supabase.js";
 
 // Hook to fetch a single product with all related data
 export const useProduct = (productId) => {

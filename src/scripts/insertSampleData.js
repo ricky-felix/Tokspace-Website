@@ -1,4 +1,5 @@
-import { supabase } from "../config/supabase.js";
+import "dotenv/config";
+import { supabase } from "../utils/supabase.js";
 
 const insertSampleProducts = async () => {
 	try {

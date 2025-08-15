@@ -82,7 +82,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<motion.div
+				{/* <motion.div
 					className="w-full"
 					id="discover"
 					initial={{ opacity: 0, y: 20 }}
@@ -91,7 +91,7 @@ export default function Home() {
 					viewport={{ once: true }}
 				>
 					<ShopProduct />
-				</motion.div>
+				</motion.div> */}
 
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full"></div>
