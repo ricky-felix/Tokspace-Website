@@ -7,11 +7,11 @@ import App from "./App.jsx";
 import "./i18n";
 
 // Loading component for suspense fallback
-const Loading = () => (
-  <div className="flex items-center justify-center h-screen">
-    <p>Loading...</p>
-  </div>
-);
+// const Loading = () => (
+//   <div className="flex items-center justify-center h-screen">
+//     <p>Loading...</p>
+//   </div>
+// );
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
