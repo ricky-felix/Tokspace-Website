@@ -6,30 +6,19 @@ import "./css/index.css";
 import App from "./App.jsx";
 import "./i18n";
 
-<<<<<<< HEAD
-/*
-	Loading component for suspense fallback
-	const Loading = () => (
-	  <div className="flex items-center justify-center h-screen">
-	    <p>Loading...</p>
-	  </div>
-	);
-*/
-=======
 // Loading component for suspense fallback
 // const Loading = () => (
 //   <div className="flex items-center justify-center h-screen">
 //     <p>Loading...</p>
 //   </div>
 // );
->>>>>>> 5322173e1c7dba1261fe8947e3dcb4390e87490e
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		{/* <Suspense fallback={<Loading />}> */}
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-		{/* </Suspense> */}
+		<Suspense fallback={<Loading />}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Suspense>
 	</StrictMode>
 );
