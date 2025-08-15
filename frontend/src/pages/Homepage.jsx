@@ -4,10 +4,10 @@ import "../css/index.css";
 
 import { useLocation } from "react-router";
 import { motion } from "framer-motion";
-import { SkeletonLoader } from "../components/SkeletonLoader";
 
 import { Navbar } from "../components/common/Navbar";
 import { Footer } from "../components/common/Footer";
+import { SkeletonLoaderHomepage } from "../components/common/SkeletonLoaderHomepage";
 
 import { Header } from "../components/Header";
 import { Creativity } from "../components/Creativity";
@@ -134,11 +134,11 @@ export default function Home() {
 			</div>
 
 			{/* Skeleton overlay - shows on top while content loads underneath */}
-			{isLoading && (
+			{/* {isLoading && (
 				<div className="fixed inset-0 bg-white z-50">
-					<SkeletonLoader />
+					<SkeletonLoaderHomepage />
 				</div>
-			)}
+			)} */}
 		</>
 	);
 }
