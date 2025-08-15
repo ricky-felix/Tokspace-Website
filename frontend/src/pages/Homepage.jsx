@@ -55,8 +55,7 @@ export default function Home() {
 			<Navbar />
 
 			{/* Always render content so videos start loading immediately */}
-			{/* REMOVED: min-h-screen overflow-x-hidden - these were causing the scrollbar issues */}
-			<div
+			{/* <div
 				className={`min-h-screen overflow-x-hidden overflow-y-hidden transition-opacity duration-500 ${
 					isLoading ? "opacity-0 pointer-events-none" : "opacity-100"
 				}`}
@@ -64,25 +63,25 @@ export default function Home() {
 					position: isLoading ? "absolute" : "relative",
 					zIndex: isLoading ? -1 : 1,
 				}}
-			>
-				<div className="bg-[#ffefe9]">
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-						<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full">
-							<motion.div
-								className="w-full bg"
-								id="header"
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.6 }}
-								viewport={{ once: true }}
-							>
-								<Header />
-							</motion.div>
-						</div>
+			> */}
+			<div className="bg-[#ffefe9]">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full">
+						<motion.div
+							className="w-full bg"
+							id="header"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6 }}
+							viewport={{ once: true }}
+						>
+							<Header />
+						</motion.div>
 					</div>
 				</div>
+			</div>
 
-				{/* <motion.div
+			{/* <motion.div
 					className="w-full"
 					id="discover"
 					initial={{ opacity: 0, y: 20 }}
@@ -93,45 +92,45 @@ export default function Home() {
 					<ShopProduct />
 				</motion.div> */}
 
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full"></div>
-					<motion.div
-						className="w-full"
-						id="ourmission"
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.1 }}
-						viewport={{ once: true }}
-					>
-						<OurMission />
-					</motion.div>
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full"></div>
+				<motion.div
+					className="w-full"
+					id="ourmission"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.1 }}
+					viewport={{ once: true }}
+				>
+					<OurMission />
+				</motion.div>
 
-					<motion.div
-						className="w-full"
-						id="creativity"
-						// REMOVED: style={{ maxWidth: "100%", overflow: "hidden" }} - this was redundant
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}
-						viewport={{ once: true }}
-					>
-						<Creativity />
-					</motion.div>
+				<motion.div
+					className="w-full"
+					id="creativity"
+					// REMOVED: style={{ maxWidth: "100%", overflow: "hidden" }} - this was redundant
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.2 }}
+					viewport={{ once: true }}
+				>
+					<Creativity />
+				</motion.div>
 
-					<motion.div
-						className="w-full"
-						id="innovation"
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.3 }}
-						viewport={{ once: true }}
-					>
-						<Steppers />
-					</motion.div>
-				</div>
-
-				<Footer />
+				<motion.div
+					className="w-full"
+					id="innovation"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.3 }}
+					viewport={{ once: true }}
+				>
+					<Steppers />
+				</motion.div>
 			</div>
+
+			<Footer />
+			{/* </div> */}
 
 			{/* Skeleton overlay - shows on top while content loads underneath */}
 			{/* {isLoading && (
