@@ -34,7 +34,7 @@ export function ShopProduct() {
 				</div>
 			</div>
 
-			<div className="flex items-center gap-4 overflow-hidden bg-scheme-foreground py-8 md:py-16 lg:h-screen bg-[#ffefe9]">
+			<div className="flex items-center gap-4 overflow-hidden bg-scheme-foreground py-8 md:py-16 lg:h-screen">
 				<div className="grid shrink-0 grid-cols-1 gap-y-4">
 					{/* First row - moving left */}
 					<motion.div

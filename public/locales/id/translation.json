@@ -5,7 +5,8 @@
 		"ourMission": "Misi Kami",
 		"discover": "Temukan",
 		"innovation": "Inovasi",
-		"contactUs": "Hubungi Kami"
+		"contactUs": "Hubungi Kami",
+		"shop": "Toko"
 	},
 	"footer": {
 		"exploreTitle": "Jelajahi Masa Depan Kreativitas",
@@ -16,7 +17,8 @@
 		"meetTokspace": "Kenali Tokspace",
 		"others": "LAINNYA",
 		"copyright": "Tokspace. 2025.",
-		"bugReport": "Laporkan Bug (Kendala)"
+		"bugReport": "Laporkan Bug (Kendala)",
+		"pages": "HALAMAN"
 	},
 	"header": {
 		"title": "Wujudkan Kreativitas Anda dengan Inovasi 3D",
@@ -127,7 +129,9 @@
 		"Tabreturns": "Pengembalian",
 		"TabdetailsDescription": "Gantungan kunci kami dibuat dengan hati-hati, memastikan daya tahan dan gaya. Setiap bagian adalah ekspresi unik dari kepribadian Anda. Nikmati pengalaman berbelanja yang mulus dengan kebijakan pengembalian yang mudah.",
 		"TabshippingDescription": "Tergantung di mana Anda berada, pengiriman mungkin memakan waktu 1-2 minggu",
-		"TabreturnsDescription": "Saat ini, kami tidak memproses pengembalian apa pun. Namun, jika produk Anda mengalami masalah, silakan hubungi kami."
+		"TabreturnsDescription": "Saat ini, kami tidak memproses pengembalian apa pun. Namun, jika produk Anda mengalami masalah, silakan hubungi kami.",
+		"notFoundTitle": "Produk tidak ditemukan",
+		"notFoundMessage": "Produk yang Anda cari tidak ditemukan."
 	},
 	"faq": {
 		"title": "Pertanyaan yang Sering Diajukan",

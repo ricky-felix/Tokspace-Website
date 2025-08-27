@@ -3,7 +3,7 @@ import { Navbar } from "../components/common/Navbar";
 import { ContactUs } from "../components/ContactUs";
 import { Footer } from "../components/common/Footer";
 
-export default function Page() {
+export default function ContactUsPage() {
 	return (
 		<>
 			<Navbar />

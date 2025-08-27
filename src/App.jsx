@@ -1,15 +1,11 @@
-// import { useState } from "react";
+// Fixed App.jsx - Add dynamic product routes
 import { Routes, Route } from "react-router-dom";
-
-// import { createClient } from "@supabase/supabase-js";
-// const supabase = createClient(
-// 	import.meta.env.VITE_SUPABASE_URL,
-// 	import.meta.env.VITE_SUPABASE_ANON_KEY
-// );
 
 import Home from "./pages/Homepage";
 import ContactUs from "./pages/ContactUsPage";
+
 import ProductPage from "./pages/ProductPage";
+import ProductsListPage from "./pages/ProductListPage";
 
 import NotFound404 from "./pages/NotFound404Page";
 
@@ -19,7 +15,12 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact-us" element={<ContactUs />} />
-				<Route path="/shop" element={<ProductPage />} />
+
+				{/* Products routes */}
+				<Route path="/shop" element={<ProductsListPage />} />
+				<Route path="/shop/:productId" element={<ProductPage />} />
+
+				{/* 404 - Keep this last */}
 				<Route path="*" element={<NotFound404 />} />
 			</Routes>
 		</div>

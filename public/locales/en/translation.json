@@ -5,18 +5,20 @@
 		"ourMission": "Our Mission",
 		"discover": "Discover",
 		"innovation": "Innovation",
-		"contactUs": "Contact Us"
+		"contactUs": "Contact Us",
+		"shop": "Shop"
 	},
 	"footer": {
 		"exploreTitle": "Explore the Future of Creativity",
 		"joinUs": "Join us in shaping tomorrow with innovative design and technology.",
 		"checkRoadmap": "Check out Roadmap! (COMING SOON)",
 		"joinCommunity": "Join Our Community! (COMING SOON)",
-		"homepage": "HOMEPAGE",
+		"home": "Home",
 		"meetTokspace": "Meet Tokspace",
 		"others": "OTHERS",
 		"copyright": "Tokspace. 2025.",
-		"bugReport": "Bug Report"
+		"bugReport": "Bug Report",
+		"pages": "PAGES"
 	},
 	"header": {
 		"title": "Unleash Your Creativity with 3D Innovation",
@@ -127,7 +129,9 @@
 		"Tabreturns": "Returns",
 		"TabdetailsDescription": "Our keychains are crafted with care, ensuring durability and style. Each piece is a unique expression of your personality. Enjoy a seamless shopping experience with our easy returns policy.",
 		"TabshippingDescription": "Depending on where you are located, shipping might take 1-2 weeks",
-		"TabreturnsDescription": "Currently, we don't process any returns. If, however, your product run into any issue please do contact us."
+		"TabreturnsDescription": "Currently, we don't process any returns. If, however, your product run into any issue please do contact us.",
+		"notFoundTitle": "Product not found",
+		"notFoundMessage": "The product you're looking for doesn't exist."
 	},
 	"faq": {
 		"title": "Frequently Asked Questions",
