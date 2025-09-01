@@ -174,7 +174,7 @@ export function Navbar() {
 					duration: 0.6,
 				}}
 			>
-				{/* Logo */}
+				{/* Logo - always left */}
 				<motion.div
 					variants={logoVariants}
 					initial="initial"
@@ -192,9 +192,10 @@ export function Navbar() {
 					</Link>
 				</motion.div>
 
-				{/* Desktop Navigation */}
-				<div className="hidden lg:flex items-center justify-center flex-1">
-					<nav className="flex items-center space-x-8">
+				{/* Everything else - right side */}
+				<div className="flex flex-1 justify-end items-center">
+					{/* Desktop Navigation */}
+					<div className="hidden lg:flex items-center space-x-8 mr-4">
 						<motion.div
 							variants={linkVariants}
 							initial="initial"
@@ -210,7 +211,6 @@ export function Navbar() {
 								Home
 							</Link>
 						</motion.div>
-
 						<motion.div
 							variants={linkVariants}
 							initial="initial"
@@ -226,112 +226,110 @@ export function Navbar() {
 								Shop
 							</Link>
 						</motion.div>
-					</nav>
-				</div>
+					</div>
 
-				{/* Desktop Right Section */}
-				<div className="hidden lg:flex items-center space-x-4">
-					<motion.div
-						initial={{ opacity: 0, x: 20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.3, duration: 0.3 }}
-					>
-						<LanguageSwitcher />
-					</motion.div>
-
-					<motion.div
-						initial={{ opacity: 0, x: 20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.4, duration: 0.3 }}
-					>
-						<Link to="/contact-us">
-							<motion.div
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-								transition={{ type: "spring", stiffness: 400, damping: 17 }}
-							>
-								<Button
-									title="Contact Us"
-									size="sm"
-									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+					{/* Desktop Right Section */}
+					<div className="hidden lg:flex items-center space-x-4">
+						<motion.div
+							initial={{ opacity: 0, x: 20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.3, duration: 0.3 }}
+						>
+							<LanguageSwitcher />
+						</motion.div>
+						<motion.div
+							initial={{ opacity: 0, x: 20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.4, duration: 0.3 }}
+						>
+							<Link to="/contact-us">
+								<motion.div
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+									transition={{ type: "spring", stiffness: 400, damping: 17 }}
 								>
-									{t("navbar.contactUs")}
-								</Button>
-							</motion.div>
-						</Link>
-					</motion.div>
-				</div>
+									<Button
+										title="Contact Us"
+										size="sm"
+										className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+									>
+										{t("navbar.contactUs")}
+									</Button>
+								</motion.div>
+							</Link>
+						</motion.div>
+					</div>
 
-				{/* Mobile Right Section */}
-				<div className="flex items-center space-x-3 lg:hidden">
-					<motion.div
-						initial={{ opacity: 0, x: 20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.3, duration: 0.3 }}
-					>
-						<Link to="/contact-us">
-							<motion.div
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-							>
-								<Button
-									title="Contact Us"
-									size="sm"
-									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary} text-sm px-3 py-2`}
+					{/* Mobile Right Section */}
+					<div className="flex items-center space-x-3 lg:hidden">
+						<motion.div
+							initial={{ opacity: 0, x: 20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.3, duration: 0.3 }}
+						>
+							<Link to="/contact-us">
+								<motion.div
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
 								>
-									Contact Us
-								</Button>
-							</motion.div>
-						</Link>
-					</motion.div>
-
-					<motion.button
-						className="flex size-10 flex-col items-center justify-center"
-						onClick={useActive.toggleMobileMenu}
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
-						initial={{ opacity: 0, x: 20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.4, duration: 0.3 }}
-					>
-						<motion.span
-							className="my-[2px] h-0.5 w-5 bg-black"
-							animate={useActive.animateMobileMenuButtonSpan}
-							variants={{
-								open: { translateY: 6, transition: { delay: 0.1 } },
-								rotatePhase: { rotate: -45, transition: { delay: 0.2 } },
-								closed: {
-									translateY: 0,
-									rotate: 0,
-									transition: { duration: 0.2 },
-								},
-							}}
-						/>
-						<motion.span
-							className="my-[2px] h-0.5 w-5 bg-black"
-							animate={useActive.animateMobileMenu}
-							variants={{
-								open: { width: 0, transition: { duration: 0.1 } },
-								closed: {
-									width: "1.25rem",
-									transition: { delay: 0.3, duration: 0.2 },
-								},
-							}}
-						/>
-						<motion.span
-							className="my-[2px] h-0.5 w-5 bg-black"
-							animate={useActive.animateMobileMenuButtonSpan}
-							variants={{
-								open: { translateY: -6, transition: { delay: 0.1 } },
-								rotatePhase: { rotate: 45, transition: { delay: 0.2 } },
-								closed: {
-									translateY: 0,
-									rotate: 0,
-									transition: { duration: 0.2 },
-								},
-							}}
-						/>
-					</motion.button>
+									<Button
+										title="Contact Us"
+										size="sm"
+										className={`${buttonStyles.bubbleButton} ${buttonStyles.primary} text-sm px-3 py-2`}
+									>
+										Contact Us
+									</Button>
+								</motion.div>
+							</Link>
+						</motion.div>
+						<motion.button
+							className="flex size-10 flex-col items-center justify-center"
+							onClick={useActive.toggleMobileMenu}
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.9 }}
+							initial={{ opacity: 0, x: 20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.4, duration: 0.3 }}
+						>
+							<motion.span
+								className="my-[2px] h-0.5 w-5 bg-black"
+								animate={useActive.animateMobileMenuButtonSpan}
+								variants={{
+									open: { translateY: 6, transition: { delay: 0.1 } },
+									rotatePhase: { rotate: -45, transition: { delay: 0.2 } },
+									closed: {
+										translateY: 0,
+										rotate: 0,
+										transition: { duration: 0.2 },
+									},
+								}}
+							/>
+							<motion.span
+								className="my-[2px] h-0.5 w-5 bg-black"
+								animate={useActive.animateMobileMenu}
+								variants={{
+									open: { width: 0, transition: { duration: 0.1 } },
+									closed: {
+										width: "1.25rem",
+										transition: { delay: 0.3, duration: 0.2 },
+									},
+								}}
+							/>
+							<motion.span
+								className="my-[2px] h-0.5 w-5 bg-black"
+								animate={useActive.animateMobileMenuButtonSpan}
+								variants={{
+									open: { translateY: -6, transition: { delay: 0.1 } },
+									rotatePhase: { rotate: 45, transition: { delay: 0.2 } },
+									closed: {
+										translateY: 0,
+										rotate: 0,
+										transition: { duration: 0.2 },
+									},
+								}}
+							/>
+						</motion.button>
+					</div>
 				</div>
 				{/* Mobile Menu */}
 				<motion.div
@@ -375,7 +373,6 @@ export function Navbar() {
 								Home
 							</Link>
 						</motion.div>
-
 						<motion.div
 							variants={{
 								open: { opacity: 1, y: 0 },
@@ -390,7 +387,6 @@ export function Navbar() {
 								Shop
 							</Link>
 						</motion.div>
-
 						<motion.div
 							variants={{
 								open: { opacity: 1, y: 0 },
@@ -404,7 +400,6 @@ export function Navbar() {
 				</motion.div>
 			</motion.section>
 
-			{/* Spacer to prevent content from hiding under fixed navbar */}
 			<div className="h-16 md:h-18 lg:h-20"></div>
 		</>
 	);

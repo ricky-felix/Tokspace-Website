@@ -56,7 +56,7 @@ export const BuyProduct = ({ productId, ...props }) => {
 	}, [product]);
 
 	const handleWhatsAppOrder = () => {
-		if (!product) return;
+		if (!product) return null;
 
 		const orderData = {
 			productName: product.name,

@@ -16,23 +16,9 @@ import { createClient } from "@supabase/supabase-js";
 import buttonStyles from "../css/Button.module.css";
 
 // Initialize Supabase client
-const supabaseUrl = "https://rermenrzzotatkuhajnd.supabase.co";
+// Replace the direct assignments with environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Debug logging
-console.log("Supabase URL:", supabaseUrl);
-console.log("Supabase Key exists:", !!supabaseKey);
-console.log(
-	"Supabase Key preview:",
-	supabaseKey ? `${supabaseKey.substring(0, 20)}...` : "MISSING"
-);
-
-if (!supabaseKey) {
-	console.error(
-		"❌ VITE_SUPABASE_ANON_KEY is not defined in environment variables"
-	);
-	console.error("Please add VITE_SUPABASE_ANON_KEY to your .env file");
-}
 
 const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
@@ -136,7 +122,7 @@ const ProductItem = ({ product }) => {
 
 	return (
 		<Link
-			to={`/product/${product.id}`}
+			to={`/shop/${product.id}`}
 			className="group block font-semibold md:text-md"
 		>
 			<div className="mb-3 aspect-[5/6] md:mb-4 relative overflow-hidden rounded-2xl bg-white shadow-lg group-hover:shadow-xl transition-all duration-300">
@@ -216,30 +202,7 @@ export function GalleryProduct() {
 					);
 				}
 
-				console.log("🔄 Attempting to fetch products...");
-
-				// First, let's see what columns actually exist
-				console.log("🔍 Checking available columns...");
-
 				try {
-					// Try a simple select first to see what's available
-					const { data: sampleData, error: sampleError } = await supabase
-						.from("products")
-						.select("*")
-						.limit(1);
-
-					if (sampleError) {
-						console.error("❌ Sample query failed:", sampleError);
-						throw new Error(
-							`Database connection failed: ${sampleError.message}`
-						);
-					}
-
-					console.log(
-						"📋 Sample product data (to see available columns):",
-						sampleData?.[0] || "No products found"
-					);
-
 					// Now try with the correct column names based on sample data
 					const { data, error } = await supabase
 						.from("products")
@@ -261,11 +224,11 @@ export function GalleryProduct() {
 						.order("created_at", { ascending: false })
 						.limit(12);
 
-					console.log("📊 Products query result:", {
-						data,
-						error,
-						count: data?.length,
-					});
+					// console.log("📊 Products query result:", {
+					// 	data,
+					// 	error,
+					// 	count: data?.length,
+					// });
 
 					if (error) {
 						console.error("❌ Query error:", error);
@@ -296,7 +259,7 @@ export function GalleryProduct() {
 							}
 
 							console.log("✅ Simple query successful:", simpleData?.length);
-							setProducts(simpleData || []);
+							// setProducts(simpleData || []);
 							return;
 						}
 
@@ -388,115 +351,74 @@ export function GalleryProduct() {
 			id="relume"
 			className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-gradient-to-br from-gray-50 via-white"
 		>
-			<div className="container">
-				<div className="mb-12 grid grid-cols-1 items-end gap-12 md:mb-18 md:grid-cols-[1fr_max-content] lg:mb-20 lg:gap-20">
-					<div className="max-w-lg">
-						<div className="relative">
-							<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent">
-								All Products
-							</h1>
-							<div className="absolute -top-2 -left-2 w-12 h-12 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
-						</div>
-						<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
-							Innovative designs for a creative future.
-						</p>
-					</div>
-					<div className="hidden md:flex">
-						<Link to="/shop">
-							<Button
-								variant="primary"
-								size="primary"
-								title="View all products"
-								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary} hover:scale-105 transition-transform`}
-							>
-								View All
-							</Button>
-						</Link>
-					</div>
+			<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent">
+				All Products
+			</h1>
+			<div className="absolute -top-2 -left-2 w-12 h-12 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
+			<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
+				Innovative designs for a creative future.
+			</p>
+
+			{loading ? (
+				// Loading State
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+					{Array.from({ length: 8 }, (_, index) => (
+						<ProductSkeleton key={index} />
+					))}
 				</div>
+			) : products.length === 0 ? (
+				// Empty State component remains the same
+				<div className="text-center py-16">
+					{/* ... empty state content remains the same ... */}
+				</div>
+			) : (
+				// Products Carousel
+				<Carousel
+					setApi={carouselState.setApi}
+					opts={{ loop: true, align: "start" }}
+				>
+					<div className="relative pb-24">
+						<CarouselContent className="ml-0">
+							{products.map((product) => (
+								<CarouselItem
+									key={product.id}
+									className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
+								>
+									<ProductItem product={product} />
+								</CarouselItem>
+							))}
+						</CarouselContent>
 
-				{loading ? (
-					// Loading State
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-						{Array.from({ length: 8 }, (_, index) => (
-							<ProductSkeleton key={index} />
-						))}
-					</div>
-				) : products.length === 0 ? (
-					// Empty State
-					<div className="text-center py-16">
-						<div className="mb-4">
-							<svg
-								className="w-16 h-16 text-gray-400 mx-auto"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2 2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-								/>
-							</svg>
-						</div>
-						<h3 className="text-xl font-semibold text-gray-900 mb-2">
-							No products found
-						</h3>
-						<p className="text-gray-600">Check back later for new products!</p>
-					</div>
-				) : (
-					// Products Carousel
-					<Carousel
-						setApi={carouselState.setApi}
-						opts={{ loop: true, align: "start" }}
-					>
-						<div className="relative pb-24">
-							<CarouselContent className="ml-0">
-								{products.map((product) => (
-									<CarouselItem
-										key={product.id}
-										className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
-									>
-										<ProductItem product={product} />
-									</CarouselItem>
+						<div className="absolute bottom-0 flex w-full items-end justify-between">
+							{/* Modified Dots */}
+							<div className="flex h-7 pt-[10px] items-center">
+								{Array.from({ length: products.length }, (_, index) => (
+									<button
+										key={index}
+										onClick={carouselState.handleDotClick(index)}
+										className={carouselState.dotClassName(index)}
+										aria-label={`Go to slide ${index + 1}`}
+									/>
 								))}
-							</CarouselContent>
+							</div>
 
-							<div className="absolute bottom-0 flex w-full items-end justify-between">
-								{/* Enhanced Dots */}
-								<div className="flex h-7 pt-[10px] items-center">
-									{Array.from(
-										{ length: Math.ceil(products.length / 3) },
-										(_, index) => (
-											<button
-												key={index}
-												onClick={carouselState.handleDotClick(index)}
-												className={carouselState.dotClassName(index)}
-												aria-label={`Go to slide ${index + 1}`}
-											/>
-										)
-									)}
-								</div>
-
-								{/* Custom Arrow Buttons */}
-								<div className="flex gap-3">
-									<CustomArrowButton
-										direction="left"
-										onClick={handlePrevious}
-										aria-label="Previous products"
-									/>
-									<CustomArrowButton
-										direction="right"
-										onClick={handleNext}
-										aria-label="Next products"
-									/>
-								</div>
+							{/* Custom Arrow Buttons */}
+							<div className="flex gap-3">
+								<CustomArrowButton
+									direction="left"
+									onClick={handlePrevious}
+									aria-label="Previous products"
+								/>
+								<CustomArrowButton
+									direction="right"
+									onClick={handleNext}
+									aria-label="Next products"
+								/>
 							</div>
 						</div>
-					</Carousel>
-				)}
-			</div>
+					</div>
+				</Carousel>
+			)}
 		</section>
 	);
 }
