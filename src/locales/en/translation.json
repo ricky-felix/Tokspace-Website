@@ -142,5 +142,16 @@
 		"answer4": "We use high-quality, eco-friendly materials for our 3D-printed products. Our selection includes biodegradable plastics and durable composites. This ensures both sustainability and longevity in your purchase—this includes our packaging!",
 		"question5": "How to place an order?",
 		"answer5": "Placing an order is easy! Simply browse our product catalog, select your desired items, and follow the checkout process. If you have questions, our support team is here to assist you."
+	},
+	"gallery": {
+		"title": "All Products",
+		"subtitle": "Innovative designs for a creative future.",
+		"unavailable": "Unavailable",
+		"reviews": "{{count}} reviews",
+		"errors": {
+			"loadFailed": "Unable to load products",
+			"tryAgain": "Try Again",
+			"networkError": "Network connection failed. Please check your internet connection and Supabase project status."
+		}
 	}
 }

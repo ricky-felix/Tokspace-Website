@@ -1,21 +1,23 @@
-import React from "react";
-import { Navbar } from "../components/common/Navbar";
-import { Footer } from "../components/common/Footer";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { NotFound404 } from "../components/NotFound404";
 
 export default function NotFound404Page() {
+	const navigate = useNavigate();
+	const { t } = useTranslation();
+
+	useEffect(() => {
+		// Log 404 errors for monitoring
+		console.error(`404 Error: ${window.location.pathname}`);
+	}, []);
+
 	return (
-		<>
-			<Navbar />
-			<div className="bg-[#ffefe9]">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full">
-						<NotFound404 />
-					</div>
-				</div>
-			</div>
-			<Footer />
-		</>
+		<div className="min-h-screen">
+			<NotFound404
+				onGoBack={() => navigate(-1)}
+				onGoHome={() => navigate("/")}
+			/>
+		</div>
 	);
 }

@@ -142,5 +142,16 @@
 		"answer4": "Kami menggunakan bahan berkualitas tinggi dan ramah lingkungan untuk produk cetak 3D kami. Pilihan kami mencakup plastik biodegradable dan komposit tahan lama. Ini memastikan keberlanjutan dan daya tahan dalam pembelian Anda—termasuk kemasan kami!",
 		"question5": "Bagaimana cara memesan?",
 		"answer5": "Memesan itu mudah! Cukup jelajahi katalog produk kami, pilih item yang diinginkan, dan ikuti proses checkout. Jika Anda memiliki pertanyaan, tim dukungan kami siap membantu Anda."
+	},
+	"gallery": {
+		"title": "Semua Produk",
+		"subtitle": "Desain inovatif untuk masa depan kreatif.",
+		"unavailable": "Tidak Tersedia",
+		"reviews": "{{count}} ulasan",
+		"errors": {
+			"loadFailed": "Tidak dapat memuat produk",
+			"tryAgain": "Coba Lagi",
+			"networkError": "Koneksi jaringan gagal. Periksa koneksi internet dan status proyek Supabase Anda."
+		}
 	}
 }

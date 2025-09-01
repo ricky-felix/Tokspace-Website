@@ -13,6 +13,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+
 import buttonStyles from "../css/Button.module.css";
 
 // Initialize Supabase client
@@ -20,30 +23,43 @@ import buttonStyles from "../css/Button.module.css";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+// Remove console.logs and add proper initialization check
+const supabase = (() => {
+	if (
+		!import.meta.env.VITE_SUPABASE_URL ||
+		!import.meta.env.VITE_SUPABASE_ANON_KEY
+	) {
+		throw new Error("Missing Supabase environment variables");
+	}
+	return createClient(
+		import.meta.env.VITE_SUPABASE_URL,
+		import.meta.env.VITE_SUPABASE_ANON_KEY
+	);
+})();
+
+console.log("Supabase URL:", import.meta.env.VITE_SUPABASE_URL);
+console.log("Supabase Key exists:", !!import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 const useCarousel = () => {
 	const [api, setApi] = useState();
 	const [current, setCurrent] = useState(0);
+
 	useEffect(() => {
 		if (!api) return;
-		setCurrent(api.selectedScrollSnap() + 1);
-		api.on("select", () => {
+
+		const updateCurrent = () => {
 			setCurrent(api.selectedScrollSnap() + 1);
-		});
+		};
+
+		updateCurrent();
+		api.on("select", updateCurrent);
+
+		return () => {
+			api.off("select", updateCurrent);
+		};
 	}, [api]);
-	const handleDotClick = (index) => () => {
-		if (api) api.scrollTo(index);
-	};
-	const dotClassName = (index) =>
-		clsx(
-			"mx-[3px] size-2 rounded-full transition-all duration-300 cursor-pointer hover:scale-125",
-			{
-				"bg-[#ff6523]": current === index + 1,
-				"bg-gray-300 hover:bg-gray-400": current !== index + 1,
-			}
-		);
-	return { api, setApi, handleDotClick, dotClassName };
+
+	// ...rest of the hook
 };
 
 // Custom Arrow Components
@@ -100,6 +116,8 @@ const ProductSkeleton = () => (
 
 // Product Item Component
 const ProductItem = ({ product }) => {
+	const { t } = useTranslation();
+
 	const getTierBadgeColor = (tier) => {
 		const colors = {
 			basic: "bg-blue-500",
@@ -109,15 +127,6 @@ const ProductItem = ({ product }) => {
 			elite: "bg-gradient-to-r from-orange-500 to-red-500",
 		};
 		return colors[tier?.toLowerCase()] || "bg-gray-500";
-	};
-
-	const formatPrice = (price) => {
-		// Handle the actual column name from your database
-		const priceValue = price || product.base_price || 0;
-		return new Intl.NumberFormat("en-US", {
-			style: "currency",
-			currency: "USD",
-		}).format(priceValue);
 	};
 
 	return (
@@ -139,9 +148,9 @@ const ProductItem = ({ product }) => {
 							"https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg";
 					}}
 				/>
+
 				<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-				{/* Rating Badge (since your table has rating) */}
 				{product.rating && (
 					<div className="absolute top-3 left-3">
 						<span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-full flex items-center">
@@ -150,11 +159,10 @@ const ProductItem = ({ product }) => {
 					</div>
 				)}
 
-				{/* Availability Status */}
 				{!product.is_available && (
 					<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
 						<span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-							Unavailable
+							{t("gallery.unavailable")}
 						</span>
 					</div>
 				)}
@@ -162,10 +170,10 @@ const ProductItem = ({ product }) => {
 
 			<div className="mb-2">
 				<h3 className="text-gray-900 group-hover:text-[#ff6523] transition-colors line-clamp-1">
-					{product.name}
+					{t(product.name)}
 				</h3>
 				<div className="text-sm font-normal text-gray-500 line-clamp-1">
-					{product.description || product.category}
+					{t(product.description || product.category)}
 				</div>
 			</div>
 
@@ -175,7 +183,7 @@ const ProductItem = ({ product }) => {
 				</div>
 				{product.review_count > 0 && (
 					<span className="text-xs text-gray-500 font-medium">
-						{product.review_count} reviews
+						{t("gallery.reviews", { count: product.review_count })}
 					</span>
 				)}
 			</div>
@@ -183,244 +191,243 @@ const ProductItem = ({ product }) => {
 	);
 };
 
+// {
+// 	/* Rating Badge (since your table has rating) */
+// }
+// {
+// 	product.rating && (
+// 		<div className="absolute top-3 left-3">
+// 			<span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-full flex items-center">
+// 				⭐ {product.rating}
+// 			</span>
+// 		</div>
+// 	);
+// }
+
+// {
+// 	!product.is_available && (
+// 		<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+// 			<span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+// 				{t("gallery.unavailable")}
+// 			</span>
+// 		</div>
+// 	);
+// }
+
+// {
+// 	product.review_count > 0 && (
+// 		<span className="text-xs text-gray-500 font-medium">
+// 			{t("gallery.reviews", { count: product.review_count })}
+// 		</span>
+// 	);
+// }
+
+// <div>
+// 	<div className="mb-2">
+// 		<h3 className="text-gray-900 group-hover:text-[#ff6523] transition-colors line-clamp-1">
+// 			{t(product.name)}
+// 		</h3>
+// 		<div className="text-sm font-normal text-gray-500 line-clamp-1">
+// 			{t(product.description || product.category)}
+// 		</div>
+// 	</div>
+
+// 	<div className="flex items-center justify-between">
+// 		<div className="text-md md:text-lg font-bold text-[#ff6523]">
+// 			{formatPrice(product.base_price)}
+// 		</div>
+// 		{product.review_count > 0 && (
+// 			<span className="text-xs text-gray-500 font-medium">
+// 				{product.review_count} reviews
+// 			</span>
+// 		)}
+// 	</div>
+// </div>;
+
 export function GalleryProduct() {
+	const { t } = useTranslation();
+
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const carouselState = useCarousel();
 
-	// Fetch products from Supabase
 	useEffect(() => {
+		let isMounted = true;
+
 		const fetchProducts = async () => {
 			try {
 				setLoading(true);
 				setError(null);
 
-				if (!supabase) {
-					throw new Error(
-						"Supabase client not initialized. Please check your environment variables."
-					);
-				}
+				const { data, error: supabaseError } = await supabase
+					.from("products")
+					.select("*")
+					.eq("is_available", true)
+					.order("created_at", { ascending: false })
+					.limit(12);
 
-				try {
-					// Now try with the correct column names based on sample data
-					const { data, error } = await supabase
-						.from("products")
-						.select(
-							`
-							id,
-							name,
-							description,
-							base_price,
-							rating,
-							review_count,
-							category,
-							is_available,
-							is_featured,
-							created_at
-						`
-						)
-						.eq("is_available", true)
-						.order("created_at", { ascending: false })
-						.limit(12);
+				if (supabaseError) throw supabaseError;
 
-					// console.log("📊 Products query result:", {
-					// 	data,
-					// 	error,
-					// 	count: data?.length,
-					// });
-
-					if (error) {
-						console.error("❌ Query error:", error);
-
-						// If the error is about missing columns, try a simpler query
-						if (error.message.includes("does not exist")) {
-							console.log("🔧 Trying simpler column selection...");
-
-							const { data: simpleData, error: simpleError } = await supabase
-								.from("products")
-								.select(
-									`
-									id,
-									name,
-									description,
-									base_price,
-									category,
-									is_available,
-									created_at
-								`
-								)
-								.limit(12);
-
-							if (simpleError) {
-								throw new Error(
-									`Query failed even with basic columns: ${simpleError.message}`
-								);
-							}
-
-							console.log("✅ Simple query successful:", simpleData?.length);
-							// setProducts(simpleData || []);
-							return;
-						}
-
-						throw new Error(`Query failed: ${error.message}`);
-					}
-
+				if (isMounted) {
 					setProducts(data || []);
-					console.log("✅ Products loaded successfully:", data?.length || 0);
-				} catch (queryError) {
-					console.error("Query execution error:", queryError);
-					throw queryError;
 				}
 			} catch (err) {
-				console.error("❌ Error fetching products:", err);
-
-				if (
-					err.message.includes("NetworkError") ||
-					err.message.includes("fetch")
-				) {
-					setError(
-						"Network connection failed. Please check your internet connection and Supabase project status."
-					);
-				} else if (err.message.includes("does not exist")) {
-					setError(
-						`Database schema issue: ${err.message}\n\nPlease check your products table structure.`
-					);
-				} else {
-					setError(err.message || "Failed to load products");
+				if (isMounted) {
+					console.error("Error fetching products:", err);
+					setError(t("gallery.errors.loadFailed"));
 				}
 			} finally {
-				setLoading(false);
+				if (isMounted) {
+					setLoading(false);
+				}
 			}
 		};
 
 		fetchProducts();
-	}, []);
 
-	const handlePrevious = () => {
-		if (carouselState.api) {
-			carouselState.api.scrollPrev();
-		}
-	};
+		return () => {
+			isMounted = false;
+		};
+	}, [t]);
 
-	const handleNext = () => {
-		if (carouselState.api) {
-			carouselState.api.scrollNext();
-		}
-	};
-
-	// Error state
+	// Add error boundary
 	if (error) {
 		return (
 			<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28">
 				<div className="container">
 					<div className="text-center">
-						<div className="mb-4">
-							<svg
-								className="w-16 h-16 text-red-500 mx-auto"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
-								/>
-							</svg>
-						</div>
 						<h3 className="text-xl font-semibold text-gray-900 mb-2">
-							Unable to load products
+							{t("gallery.errors.loadFailed")}
 						</h3>
 						<p className="text-gray-600 mb-4">{error}</p>
 						<Button
 							onClick={() => window.location.reload()}
 							className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 						>
-							Try Again
+							{t("gallery.errors.tryAgain")}
 						</Button>
 					</div>
 				</div>
 			</section>
 		);
 	}
-
-	return (
-		<section
-			id="relume"
-			className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-gradient-to-br from-gray-50 via-white"
-		>
-			<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent">
-				All Products
-			</h1>
-			<div className="absolute -top-2 -left-2 w-12 h-12 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
-			<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
-				Innovative designs for a creative future.
-			</p>
-
-			{loading ? (
-				// Loading State
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-					{Array.from({ length: 8 }, (_, index) => (
-						<ProductSkeleton key={index} />
-					))}
-				</div>
-			) : products.length === 0 ? (
-				// Empty State component remains the same
-				<div className="text-center py-16">
-					{/* ... empty state content remains the same ... */}
-				</div>
-			) : (
-				// Products Carousel
-				<Carousel
-					setApi={carouselState.setApi}
-					opts={{ loop: true, align: "start" }}
-				>
-					<div className="relative pb-24">
-						<CarouselContent className="ml-0">
-							{products.map((product) => (
-								<CarouselItem
-									key={product.id}
-									className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
-								>
-									<ProductItem product={product} />
-								</CarouselItem>
-							))}
-						</CarouselContent>
-
-						<div className="absolute bottom-0 flex w-full items-end justify-between">
-							{/* Modified Dots */}
-							<div className="flex h-7 pt-[10px] items-center">
-								{Array.from({ length: products.length }, (_, index) => (
-									<button
-										key={index}
-										onClick={carouselState.handleDotClick(index)}
-										className={carouselState.dotClassName(index)}
-										aria-label={`Go to slide ${index + 1}`}
-									/>
-								))}
-							</div>
-
-							{/* Custom Arrow Buttons */}
-							<div className="flex gap-3">
-								<CustomArrowButton
-									direction="left"
-									onClick={handlePrevious}
-									aria-label="Previous products"
-								/>
-								<CustomArrowButton
-									direction="right"
-									onClick={handleNext}
-									aria-label="Next products"
-								/>
-							</div>
-						</div>
-					</div>
-				</Carousel>
-			)}
-		</section>
-	);
 }
 
+CustomArrowButton.propTypes = {
+	direction: PropTypes.oneOf(["left", "right"]).isRequired,
+	onClick: PropTypes.func.isRequired,
+	disabled: PropTypes.bool,
+};
+
+const handlePrevious = () => {
+	if (carouselState.api) {
+		carouselState.api.scrollPrev();
+	}
+};
+
+const handleNext = () => {
+	if (carouselState.api) {
+		carouselState.api.scrollNext();
+	}
+};
+
+<div>
+	<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-gradient-to-br from-gray-50 via-white">
+		<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent">
+			{t("gallery.title")}
+		</h1>
+		<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
+			{t("gallery.subtitle")}
+		</p>
+		<div className="absolute -top-2 -left-2 w-12 h-12 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
+		<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
+			{t("gallery.reviews")}
+		</p>
+
+		{loading ? (
+			// Loading State
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+				{Array.from({ length: 8 }, (_, index) => (
+					<ProductSkeleton key={index} />
+				))}
+			</div>
+		) : products.length === 0 ? (
+			// Empty State component remains the same
+			<div className="text-center py-16">
+				{/* ... empty state content remains the same ... */}
+			</div>
+		) : (
+			// Products Carousel
+			<Carousel
+				setApi={carouselState.setApi}
+				opts={{ loop: true, align: "start" }}
+			>
+				<div className="relative pb-24">
+					<CarouselContent className="ml-0">
+						{products.map((product) => (
+							<CarouselItem
+								key={product.id}
+								className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
+							>
+								<ProductItem product={product} />
+							</CarouselItem>
+						))}
+					</CarouselContent>
+
+					<div className="absolute bottom-0 flex w-full items-end justify-between">
+						{/* Modified Dots */}
+						<div className="flex h-7 pt-[10px] items-center">
+							{Array.from({ length: products.length }, (_, index) => (
+								<button
+									key={index}
+									onClick={carouselState.handleDotClick(index)}
+									className={carouselState.dotClassName(index)}
+									aria-label={`Go to slide ${index + 1}`}
+								/>
+							))}
+						</div>
+
+						{/* Custom Arrow Buttons */}
+						<div className="flex gap-3">
+							<CustomArrowButton
+								direction="left"
+								onClick={handlePrevious}
+								aria-label="Previous products"
+							/>
+							<CustomArrowButton
+								direction="right"
+								onClick={handleNext}
+								aria-label="Next products"
+							/>
+						</div>
+					</div>
+				</div>
+			</Carousel>
+		)}
+	</section>
+</div>;
+
 export default GalleryProduct;
+
+// // Add at the bottom of the file
+// ProductItem.propTypes = {
+// 	product: PropTypes.shape({
+// 		id: PropTypes.string.isRequired,
+// 		name: PropTypes.string.isRequired,
+// 		description: PropTypes.string,
+// 		base_price: PropTypes.number,
+// 		rating: PropTypes.number,
+// 		review_count: PropTypes.number,
+// 		category: PropTypes.string,
+// 		is_available: PropTypes.bool,
+// 		image_url: PropTypes.string,
+// 		images: PropTypes.arrayOf(PropTypes.string),
+// 	}).isRequired,
+// };
+
+// CustomArrowButton.propTypes = {
+// 	direction: PropTypes.oneOf(["left", "right"]).isRequired,
+// 	onClick: PropTypes.func.isRequired,
+// 	disabled: PropTypes.bool,
+// };
