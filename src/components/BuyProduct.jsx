@@ -84,7 +84,24 @@ export const BuyProduct = ({ productId, ...props }) => {
 		return formatCurrency(price * quantity);
 	};
 
-	// Loading state
+	if (!productId) {
+		return (
+			<div className="px-[5%] py-12 md:py-16 lg:py-20">
+				<div className="container">
+					<div className="text-center">
+						<h2 className="text-2xl font-bold text-gray-900 mb-4">
+							{t("buyProduct.notFoundTitle") || "Product not found"}
+						</h2>
+						<p className="text-gray-600">
+							{t("buyProduct.notFoundMessage") ||
+								"The product you're looking for doesn't exist."}
+						</p>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	if (loading) {
 		return (
 			<div className="px-[5%] py-12 md:py-16 lg:py-20">
