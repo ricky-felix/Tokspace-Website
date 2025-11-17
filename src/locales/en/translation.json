@@ -98,8 +98,14 @@
 		"description": "Explore a world where creativity meets technology. Our unique offerings empower local entrepreneurs to bring their visions to life.",
 		"shopButton": "Shop"
 	},
-	"productCTA": {
+	"productCTADetailPage": {
 		"heading": "Ready to Bring Your Vision Into Reality?",
+		"description": "Contact us today for custom projects tailored to your unique needs and aspirations.",
+		"contactButton": "Contact",
+		"inquiryButton": "Inquiry Now"
+	},
+	"productCTAListingPage": {
+		"heading": "Got a Custom Design in Mind for Printing?",
 		"description": "Contact us today for custom projects tailored to your unique needs and aspirations.",
 		"contactButton": "Contact",
 		"inquiryButton": "Inquiry Now"

@@ -98,8 +98,14 @@
 		"description": "Jelajahi dunia di mana kreativitas bertemu teknologi. Penawaran unik kami memberdayakan pengusaha lokal untuk mewujudkan visi mereka.",
 		"shopButton": "Belanja"
 	},
-	"productCTA": {
+	"productCTADetailPage": {
 		"heading": "Siap Mewujudkan Visi Anda Menjadi Kenyataan?",
+		"description": "Hubungi kami hari ini untuk proyek kustom yang disesuaikan dengan kebutuhan dan aspirasi unik Anda.",
+		"contactButton": "Hubungi",
+		"inquiryButton": "Tanyakan Sekarang"
+	},
+	"productCTAListingPage": {
+		"heading": "Punya Custom Design yang ingin Anda cetak?",
 		"description": "Hubungi kami hari ini untuk proyek kustom yang disesuaikan dengan kebutuhan dan aspirasi unik Anda.",
 		"contactButton": "Hubungi",
 		"inquiryButton": "Tanyakan Sekarang"

@@ -356,59 +356,19 @@ export function Navbar() {
 					exit="close"
 					className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-sm border-b border-border-primary overflow-hidden lg:hidden"
 				>
-					<div className="px-4 py-6 space-y-4">
+					<nav className="px-4 py-6 space-y-2">
 						<motion.div
 							variants={{
 								open: { opacity: 1, y: 0 },
 								close: { opacity: 0, y: -20 },
 							}}
 						>
-							{t("navbar.home")}
-						</Link>
-						<Link
-							to="/#ourmission"
-							onClick={(e) => handleNavLinkClick(e, "discover")}
-							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-						>
-							{t("navbar.discover")}
-						</Link>
-						<Link
-							to="/#creativity"
-							onClick={(e) => handleNavLinkClick(e, "ourmission")}
-							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-						>
-							{t("navbar.ourMission")}
-						</Link>
-						<Link
-							to="/#creativity"
-							onClick={(e) => handleNavLinkClick(e, "creativity")}
-							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-						>
-							{t("navbar.creativity")}
-						</Link>
-						<Link
-							to="/#innovation"
-							onClick={(e) => handleNavLinkClick(e, "innovation")}
-							className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-						>
-							{t("navbar.innovation")}
-						</Link>
-					</nav>
-
-					{/* Desktop Language Switcher - Hidden on mobile */}
-					<div className="hidden lg:block">
-						<LanguageSwitcher />
-					</div>
-
-					{/* Contact Button */}
-					<div className="mt-6 flex flex-col items-center gap-4 lg:mt-0 lg:ml-6 lg:flex-row">
-						<Link to="/contact-us">
-							<Button
-								title="Reach Out"
-								size="sm"
-								className={`w-full ${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+							<Link
+								to="/"
+								onClick={() => useActive.toggleMobileMenu()}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 							>
-								Home
+								{t("navbar.home")}
 							</Link>
 						</motion.div>
 						<motion.div
@@ -418,11 +378,11 @@ export function Navbar() {
 							}}
 						>
 							<Link
-								to="/shop"
-								className="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
-								onClick={() => useActive.toggleMobileMenu()}
+								to="/#discover"
+								onClick={(e) => handleNavLinkClick(e, "discover")}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 							>
-								Shop
+								{t("navbar.discover")}
 							</Link>
 						</motion.div>
 						<motion.div
@@ -430,11 +390,60 @@ export function Navbar() {
 								open: { opacity: 1, y: 0 },
 								close: { opacity: 0, y: -20 },
 							}}
-							className="pt-2 border-t border-gray-200"
 						>
-							<LanguageSwitcher />
+							<Link
+								to="/#ourmission"
+								onClick={(e) => handleNavLinkClick(e, "ourmission")}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
+							>
+								{t("navbar.ourMission")}
+							</Link>
 						</motion.div>
-					</div>
+						<motion.div
+							variants={{
+								open: { opacity: 1, y: 0 },
+								close: { opacity: 0, y: -20 },
+							}}
+						>
+							<Link
+								to="/#creativity"
+								onClick={(e) => handleNavLinkClick(e, "creativity")}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
+							>
+								{t("navbar.creativity")}
+							</Link>
+						</motion.div>
+						<motion.div
+							variants={{
+								open: { opacity: 1, y: 0 },
+								close: { opacity: 0, y: -20 },
+							}}
+						>
+							<Link
+								to="/#innovation"
+								onClick={(e) => handleNavLinkClick(e, "innovation")}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
+							>
+								{t("navbar.innovation")}
+							</Link>
+						</motion.div>
+
+						<div className="mt-6 flex flex-col items-center gap-4 lg:mt-0 lg:ml-6 lg:flex-row">
+							<Link
+								to="/contact-us"
+								onClick={() => useActive.toggleMobileMenu()}
+							>
+								<Button
+									title="Reach Out"
+									size="sm"
+									className={`w-full ${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+								>
+									{t("navbar.contactUs")}
+								</Button>
+							</Link>
+							<LanguageSwitcher />
+						</div>
+					</nav>
 				</motion.div>
 			</motion.section>
 

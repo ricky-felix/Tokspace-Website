@@ -26,10 +26,13 @@ import {
 	TabsTrigger,
 } from "@relume_io/relume-ui";
 import React, { Fragment, useEffect, useState } from "react";
+import { supabase } from "../utils/supabase.js";
+import { BiSolidStar, BiSolidStarHalf, BiStar } from "react-icons/bi";
+import clsx from "clsx";
 
 import buttonStyles from "../css/Button.module.css";
 
-const Star = () => {
+const Star = ({ rating }) => {
 	const fullStars = Math.floor(rating);
 	const hasHalfStar = rating % 1 !== 0;
 	return (
@@ -39,7 +42,7 @@ const Star = () => {
 				const isHalfStar = hasHalfStar && i === fullStars;
 
 				return (
-					<div key={i}>
+					<div key={i} className="text-yellow-400">
 						{isFullStar ? (
 							<BiSolidStar />
 						) : isHalfStar ? (
@@ -54,7 +57,7 @@ const Star = () => {
 	);
 };
 
-const useGalleyDialog = () => {
+const useGalleryDialog = () => {
 	const [selectedSlide, setSelectedSlide] = useState(0);
 	const handleSelectSlide = (number) => () => {
 		setSelectedSlide(number);
@@ -67,7 +70,7 @@ const useGalleyDialog = () => {
 	};
 };
 
-const useLightbox = () => {
+const useLightbox = (selectedSlide) => {
 	const [mainApi, setMainApi] = useState();
 	const [thumbApi, setThumbApi] = useState();
 	const [current, setCurrent] = useState(selectedSlide);
@@ -98,23 +101,44 @@ const useLightbox = () => {
 	};
 };
 
-const useGalleyDialog = () => {
-	const [selectedSlide, setSelectedSlide] = useState(0);
-	const handleSelectSlide = (number) => () => {
-		setSelectedSlide(number);
-	};
-	const preventDefault = (e) => e.preventDefault();
-	return {
-		selectedSlide,
-		handleSelectSlide,
-		preventDefault,
-	};
-};
+ 
 
-export function BuyProduct() {
-	const useActive = useGalleyDialog();
-	const useActive = useLightbox(useActive.selectedSlide);
-	const useActive = useGalleyDialog();
+export function BuyProduct({ productId }) {
+	const gallery = useGalleryDialog();
+	const lightbox = useLightbox(gallery.selectedSlide);
+	const useActive = { ...gallery, ...lightbox };
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!productId) return;
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const { data, error: err } = await supabase
+          .from("products")
+          .select(
+            `id,name,description,price,color,stock_quantity,
+             product_images (image_url, alt_text, display_order, is_primary)`
+          )
+          .eq("id", productId)
+          .eq("is_available", true)
+          .single();
+        if (err) throw err;
+        const sortedImages = (data?.product_images || []).sort(
+          (a, b) => (a.display_order ?? 0) - (b.display_order ?? 0)
+        );
+        setProduct({ ...data, product_images: sortedImages });
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [productId]);
 	return (
 		<header id="relume" className="px-[5%] py-12 md:py-16 lg:py-20">
 			<div className="container">
@@ -594,9 +618,9 @@ export function BuyProduct() {
 				</div>
 				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
 					<div>
-						<h1 className="hidden text-4xl leading-[1.2] font-bold md:mb-8 md:block md:text-5xl lg:text-6xl">
-							Fidgeting Toy
-						</h1>
+                        <h1 className="hidden text-4xl leading-[1.2] font-bold md:mb-8 md:block md:text-5xl lg:text-6xl">
+                            {product?.name || "Fidgeting Toy"}
+                        </h1>
 						<p>
 							This small keychain is more than just an accessory—it's a piece of
 							your narrative. Carry it everywhere to express yourself or simply
@@ -668,12 +692,14 @@ export function BuyProduct() {
 						</Tabs>
 					</div>
 					<div className="order-first md:order-none">
-						<h1 className="mb-4 text-4xl leading-[1.2] font-bold md:hidden">
-							Fidgeting Toy
-						</h1>
-						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
-							$55
-						</p>
+                        <h1 className="mb-4 text-4xl leading-[1.2] font-bold md:hidden">
+                            {product?.name || "Fidgeting Toy"}
+                        </h1>
+                        <p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
+                            {product?.price !== undefined && product?.price !== null
+                              ? new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(Number(product.price))
+                              : "$55"}
+                        </p>
 						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
 							<Star rating={3.5} />
 							<p className="text-sm">(3.5 stars) • 10 reviews</p>

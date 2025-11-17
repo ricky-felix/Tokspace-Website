@@ -4,9 +4,9 @@ import { Navbar } from "../components/common/Navbar";
 import { Footer } from "../components/common/Footer";
 import { BuyProduct } from "../components/BuyProduct";
 import { FAQ } from "../components/FAQ";
-import { ProductCTA } from "../components/ProductCTA";
+import { ProductCTADetailPage } from "../components/ProductCTADetailPage";
 
-export default function ProductPage() {
+export default function ProductDetailPage() {
 	const { productId } = useParams();
 
 	if (!productId) {
@@ -24,7 +24,7 @@ export default function ProductPage() {
 				</div>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<FAQ />
-					<ProductCTA />
+					<ProductCTADetailPage />
 				</div>
 			</main>
 			<Footer />

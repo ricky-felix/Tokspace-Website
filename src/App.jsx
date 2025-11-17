@@ -4,8 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Homepage";
 import ContactUs from "./pages/ContactUsPage";
 
-import ProductPage from "./pages/ProductPage";
-import ProductsListPage from "./pages/ProductListPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductListingPage from "./pages/ProductListingPage";
 
 import NotFound404 from "./pages/NotFound404Page";
 
@@ -17,8 +17,8 @@ function App() {
 				<Route path="/contact-us" element={<ContactUs />} />
 
 				{/* Products routes */}
-				<Route path="/shop" element={<ProductsListPage />} />
-				<Route path="/shop/:productId" element={<ProductPage />} />
+                <Route path="/shop" element={<ProductListingPage />} />
+                <Route path="/shop/:productId" element={<ProductDetailPage />} />
 
 				{/* 404 - Keep this last */}
 				<Route path="*" element={<NotFound404 />} />

@@ -4,10 +4,10 @@ import buttonStyles from "../css/Button.module.css";
 
 import { Link } from "react-router-dom";
 
-export const ProductCTA = (props) => {
+export const ProductCTAListingPage = (props) => {
 	const { t } = useTranslation();
 	const { heading, description, buttons, image } = {
-		...ProductCTADefaults,
+		...ProductCTAListingPageDefaults,
 		...props,
 	};
 	return (
@@ -16,19 +16,19 @@ export const ProductCTA = (props) => {
 				<div className="grid auto-cols-fr grid-cols-1 lg:grid-cols-2 bg-[#e9edf1] rounded-xl">
 					<div className="flex flex-col justify-center p-8 md:p-12">
 						<h2 className="rb-5 mb-5 text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-							{heading || t("productCTA.heading")}
+							{heading || t("productCTAListingPage.heading")}
 						</h2>
 						<p className="text-base md:text-lg lg:text-xl">
-							{description || t("productCTA.description")}
+							{description || t("productCTAListingPage.description")}
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
 							<Link to="/contact-us">
 								<Button {...buttons[0]}>
-									{buttons[0].title || t("productCTA.contactButton")}
+									{buttons[0].title || t("productCTAListingPage.contactButton")}
 								</Button>
 							</Link>
 							{/* <Button {...buttons[1]}>
-								{buttons[1].title || t("productCTA.inquiryButton")}
+								{buttons[1].title || t("productCTAListingPage.inquiryButton")}
 							</Button> */}
 						</div>
 					</div>
@@ -45,7 +45,7 @@ export const ProductCTA = (props) => {
 	);
 };
 
-export const ProductCTADefaults = {
+export const ProductCTAListingPageDefaults = {
 	heading: "", // Will be set via translation
 	description: "", // Will be set via translation
 	buttons: [
@@ -66,4 +66,4 @@ export const ProductCTADefaults = {
 	},
 };
 
-export default ProductCTA;
+export default ProductCTAListingPage;

@@ -11,30 +11,17 @@ import {
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../utils/supabase.js";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import buttonStyles from "../css/Button.module.css";
 
-// Initialize Supabase client with proper error handling
-const supabase = (() => {
-	if (
-		!import.meta.env.VITE_SUPABASE_URL ||
-		!import.meta.env.VITE_SUPABASE_ANON_KEY
-	) {
-		console.error("Missing Supabase environment variables");
-		return null;
-	}
-	return createClient(
-		import.meta.env.VITE_SUPABASE_URL,
-		import.meta.env.VITE_SUPABASE_ANON_KEY
-	);
-})();
+// Use shared Supabase client
 
 // Price formatting utility
 const formatPrice = (price) => {
-	if (!price) return "Price not available";
+	if (price === undefined || price === null) return "Price not available";
 	return new Intl.NumberFormat("id-ID", {
 		style: "currency",
 		currency: "IDR",
@@ -204,17 +191,24 @@ const ProductItem = ({ product }) => {
 					{t(product.name)}
 				</h3>
 				<div className="text-sm font-normal text-gray-500 line-clamp-1">
-					{t(product.description || product.category)}
+					{t(product.description || "")}
 				</div>
 			</div>
 
 			<div className="flex items-center justify-between">
-				<div className="text-md md:text-lg font-bold text-[#ff6523]">
-					{formatPrice(product.base_price)}
+				<div className="flex items-center gap-2">
+					{product.compare_at_price ? (
+						<span className="text-sm text-gray-500 line-through">
+							{formatPrice(product.compare_at_price)}
+						</span>
+					) : null}
+					<span className="text-md md:text-lg font-bold text-[#ff6523]">
+						{formatPrice(product.price)}
+					</span>
 				</div>
-				{product.review_count > 0 && (
-					<span className="text-xs text-gray-500 font-medium">
-						{t("gallery.reviews", { count: product.review_count })}
+				{!product.is_available && (
+					<span className="text-xs text-red-600 font-medium">
+						{t("gallery.unavailable")}
 					</span>
 				)}
 			</div>
@@ -227,13 +221,10 @@ ProductItem.propTypes = {
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
 		description: PropTypes.string,
-		base_price: PropTypes.number,
-		rating: PropTypes.number,
-		review_count: PropTypes.number,
-		category: PropTypes.string,
+		price: PropTypes.number.isRequired,
+		compare_at_price: PropTypes.number,
 		is_available: PropTypes.bool,
 		image_url: PropTypes.string,
-		images: PropTypes.arrayOf(PropTypes.string),
 	}).isRequired,
 };
 
@@ -298,7 +289,10 @@ export function GalleryProduct() {
 
 				const { data, error: supabaseError } = await supabase
 					.from("products")
-					.select("*")
+					.select(
+						`id,name,description,price,is_available,category_id,
+                         product_images (image_url, alt_text, display_order, is_primary)`
+					)
 					.eq("is_available", true)
 					.order("created_at", { ascending: false })
 					.limit(12);
@@ -306,7 +300,20 @@ export function GalleryProduct() {
 				if (supabaseError) throw supabaseError;
 
 				if (isMounted) {
-					setProducts(data || []);
+					const normalized = (data || []).map((p) => {
+						const primary =
+							p.product_images?.find((img) => img.is_primary) ||
+							p.product_images?.[0];
+						return {
+							...p,
+							price: Number(p.price),
+							compare_at_price: p.compare_at_price
+								? Number(p.compare_at_price)
+								: null,
+							image_url: primary?.image_url || null,
+						};
+					});
+					setProducts(normalized);
 				}
 			} catch (err) {
 				if (isMounted) {
@@ -350,7 +357,7 @@ export function GalleryProduct() {
 	}
 
 	return (
-		<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+		<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28">
 			<div className="container relative">
 				{/* Header */}
 				<div className="mb-12 text-center relative">
