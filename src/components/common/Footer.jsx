@@ -70,7 +70,25 @@ export function Footer() {
 										onClick={(e) => handleScrollToSection(e, "header")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t("footer.home")}
+										{t("footer.meetTokspace")}
+									</Link>
+								</li>
+								<li className="py-2 text-sm font-semibold">
+									<Link
+										to="/#discover"
+										onClick={(e) => handleScrollToSection(e, "discover")}
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+									>
+										{t("navbar.discover")}
+									</Link>
+								</li>
+								<li className="py-2 text-sm font-semibold">
+									<Link
+										to="/#ourmission"
+										onClick={(e) => handleScrollToSection(e, "ourmission")}
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+									>
+										{t("navbar.ourMission")}
 									</Link>
 								</li>
 								<li className="py-2 text-sm font-semibold">
