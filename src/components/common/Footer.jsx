@@ -17,7 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export function Footer() {
 	const location = useLocation();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const handleScrollToSection = (e, sectionId) => {
 		if (location.pathname === "/") {
@@ -62,7 +62,7 @@ export function Footer() {
 						<div className="grid grid-cols-1 items-start gap-x-6 gap-y-5 sm:grid-cols-2 sm:gap-x-6 md:gap-x-8 md:gap-y-4">
 							<ul>
 								<li className="py-2 text-sm font-bold text-[#1c1f2a]">
-									{t("footer.pages")}
+									{t("footer.page")}
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link

@@ -1,45 +1,36 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import Backend from "i18next-http-backend";
+import enTranslation from "./locales/en/translation.json";
+import idTranslation from "./locales/id/translation.json";
 
-i18n
-	// load translation using http -> see /public/locales
-	.use(Backend)
-	// detect user language
-	.use(LanguageDetector)
-	// pass the i18n instance to react-i18next
-	.use(initReactI18next)
-	// init i18next
-	.init({
-		debug: false, // change to true to show it on console.log()
+// Initialize with English and Indonesian translations
+const initializeTranslations = async () => {
+	await i18n.use(initReactI18next).init({
+		resources: {
+			en: { translation: enTranslation },
+			id: { translation: idTranslation }
+		},
+		lng: "en",
 		fallbackLng: "en",
-		supportedLngs: ["en", "id"],
 		interpolation: {
-			escapeValue: false, // not needed for react as it escapes by default
-		},
-		backend: {
-			// path where resources get loaded from
-			loadPath: "/locales/{{lng}}/{{ns}}.json",
-		},
-		detection: {
-			// order and from where user language should be detected
-			order: [
-				"querystring",
-				"cookie",
-				"localStorage",
-				"sessionStorage",
-				"navigator",
-				"htmlTag",
-			],
-			// keys or params to lookup language from
-			lookupQuerystring: "lng",
-			lookupCookie: "i18next",
-			lookupLocalStorage: "i18nextLng",
-			lookupSessionStorage: "i18nextLng",
-			// cache user language on
-			caches: ["localStorage", "cookie"],
+			escapeValue: false,
 		},
 	});
+};
+
+// Load translations for a specific language
+export const loadLanguageAsync = async (language) => {
+	if (language === "en" || language === "id") return; // Both English and Indonesian are preloaded
+	
+	try {
+		// For other languages, we would need to load them dynamically
+		// This could be implemented in the future if needed
+		console.log(`No translation available for ${language}, using fallback language`);
+	} catch (error) {
+		console.error(`Failed to load ${language} translations:`, error);
+	}
+};
+
+initializeTranslations();
 
 export default i18n;

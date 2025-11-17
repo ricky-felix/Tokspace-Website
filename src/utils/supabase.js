@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Check if running in Node.js environment
 const isNode = typeof process !== "undefined" && process.env;
 =======
@@ -14,21 +15,22 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(`Missing environment variables: ${missing.join(", ")}`);
 }
 >>>>>>> b60475d04599e2a561478312c848612bb4d3bdc5
+=======
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+>>>>>>> 49021b2678479017d4633f00e455f629d1513f6e
 
-const supabaseUrl = isNode
-	? process.env.VITE_SUPABASE_URL
-	: import.meta.env.VITE_SUPABASE_URL;
+if (!supabaseUrl || !supabaseKey) {
+	throw new Error("Missing Supabase environment variables");
+}
 
-const supabaseAnonKey = isNode
-	? process.env.VITE_SUPABASE_ANON_KEY
-	: import.meta.env.VITE_SUPABASE_ANON_KEY;
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
-const supabaseServiceKey = isNode
-	? process.env.VITE_SUPABASE_SERVICE_ROLE_KEY
-	: import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
-
-export const supabase = createClient(
-	supabaseUrl,
-	supabaseAnonKey,
-	supabaseServiceKey
-);
+export const handleSupabaseError = (error) => {
+	console.error("Supabase error:", error);
+	if (error.message === "JWT expired") {
+		// Handle session expiration
+		window.location.reload();
+	}
+	return error.message;
+};
