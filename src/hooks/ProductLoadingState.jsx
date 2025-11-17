@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase, handleSupabaseError } from "../utils/supabase";
 
-export function useProduct(productId) {
+// Renamed to avoid conflict with useProduct.js
+export function useProductLoadingState(productId) {
 	const [product, setProduct] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);

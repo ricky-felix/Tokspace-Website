@@ -1,38 +1,36 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import resourcesToBackend from 'i18next-resources-to-backend';
-import { createInstance } from 'i18next';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import enTranslation from "./locales/en/translation.json";
+import idTranslation from "./locales/id/translation.json";
 
-export const createI18n = async (language: string) => {
-    const i18n = createInstance();
-
-    await i18n
-        .use(initReactI18next)
-        .use(resourcesToBackend(async (language: string) => {
-            return import(`../locales/${language}.ts`).then(module => module.default);
-        }))
-        .init({
-            lng: language,
-            fallbackLng: 'en',
-            interpolation: {
-                escapeValue: false
-            }
-        });
-
-    return i18n;
+// Initialize with English and Indonesian translations
+const initializeTranslations = async () => {
+	await i18n.use(initReactI18next).init({
+		resources: {
+			en: { translation: enTranslation },
+			id: { translation: idTranslation }
+		},
+		lng: "en",
+		fallbackLng: "en",
+		interpolation: {
+			escapeValue: false,
+		},
+	});
 };
 
-i18n
-    .use(initReactI18next)
-    .use(resourcesToBackend(async (language: string) => {
-        return import(`./locales/${language}.ts`).then(module => module.default);
-    }))
-    .init({
-        lng: localStorage.getItem('preferredLanguage') || 'en',
-        fallbackLng: 'en',
-        interpolation: {
-            escapeValue: false
-        }
-    });
+// Load translations for a specific language
+export const loadLanguageAsync = async (language) => {
+	if (language === "en" || language === "id") return; // Both English and Indonesian are preloaded
+	
+	try {
+		// For other languages, we would need to load them dynamically
+		// This could be implemented in the future if needed
+		console.log(`No translation available for ${language}, using fallback language`);
+	} catch (error) {
+		console.error(`Failed to load ${language} translations:`, error);
+	}
+};
+
+initializeTranslations();
 
 export default i18n;

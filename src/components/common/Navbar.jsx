@@ -200,7 +200,6 @@ export function Navbar() {
 							variants={linkVariants}
 							initial="initial"
 							whileHover="hover"
-							initial={{ opacity: 0, y: -10 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1, duration: 0.3 }}
 						>
@@ -208,14 +207,13 @@ export function Navbar() {
 								to="/"
 								className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
 							>
-								Home
+								{t("navbar.home")}
 							</Link>
 						</motion.div>
 						<motion.div
 							variants={linkVariants}
 							initial="initial"
 							whileHover="hover"
-							initial={{ opacity: 0, y: -10 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.2, duration: 0.3 }}
 						>
@@ -223,7 +221,7 @@ export function Navbar() {
 								to="/shop"
 								className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
 							>
-								Shop
+								{t("navbar.shop")}
 							</Link>
 						</motion.div>
 					</div>

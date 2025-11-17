@@ -12,24 +12,19 @@ import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
-
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import buttonStyles from "../css/Button.module.css";
 
-// Initialize Supabase client
-// Replace the direct assignments with environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Remove console.logs and add proper initialization check
+// Initialize Supabase client with proper error handling
 const supabase = (() => {
 	if (
 		!import.meta.env.VITE_SUPABASE_URL ||
 		!import.meta.env.VITE_SUPABASE_ANON_KEY
 	) {
-		throw new Error("Missing Supabase environment variables");
+		console.error("Missing Supabase environment variables");
+		return null;
 	}
 	return createClient(
 		import.meta.env.VITE_SUPABASE_URL,
@@ -37,21 +32,32 @@ const supabase = (() => {
 	);
 })();
 
-console.log("Supabase URL:", import.meta.env.VITE_SUPABASE_URL);
-console.log("Supabase Key exists:", !!import.meta.env.VITE_SUPABASE_ANON_KEY);
+// Price formatting utility
+const formatPrice = (price) => {
+	if (!price) return "Price not available";
+	return new Intl.NumberFormat("id-ID", {
+		style: "currency",
+		currency: "IDR",
+		minimumFractionDigits: 0,
+	}).format(price);
+};
 
+// Custom carousel hook
 const useCarousel = () => {
 	const [api, setApi] = useState();
 	const [current, setCurrent] = useState(0);
+	const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		if (!api) return;
+
+		setCount(api.scrollSnapList().length);
+		setCurrent(api.selectedScrollSnap() + 1);
 
 		const updateCurrent = () => {
 			setCurrent(api.selectedScrollSnap() + 1);
 		};
 
-		updateCurrent();
 		api.on("select", updateCurrent);
 
 		return () => {
@@ -59,7 +65,40 @@ const useCarousel = () => {
 		};
 	}, [api]);
 
-	// ...rest of the hook
+	const handleDotClick = (index) => () => {
+		if (api) {
+			api.scrollTo(index);
+		}
+	};
+
+	const dotClassName = (index) =>
+		clsx(
+			"mr-[6px] block size-2 cursor-pointer rounded-full transition-colors duration-300",
+			current === index + 1 ? "bg-[#ff6523]" : "bg-gray-300"
+		);
+
+	const handlePrevious = () => {
+		if (api) {
+			api.scrollPrev();
+		}
+	};
+
+	const handleNext = () => {
+		if (api) {
+			api.scrollNext();
+		}
+	};
+
+	return {
+		api,
+		setApi,
+		current,
+		count,
+		handleDotClick,
+		dotClassName,
+		handlePrevious,
+		handleNext,
+	};
 };
 
 // Custom Arrow Components
@@ -78,7 +117,6 @@ const CustomArrowButton = ({ direction, onClick, disabled }) => {
 				"flex items-center justify-center"
 			)}
 		>
-			{/* Arrow Icon */}
 			<svg
 				className={clsx(
 					"w-5 h-5 transition-all duration-300 text-gray-600 group-hover:text-[#ff6523]",
@@ -95,11 +133,15 @@ const CustomArrowButton = ({ direction, onClick, disabled }) => {
 					d="M9 5l7 7-7 7"
 				/>
 			</svg>
-
-			{/* Ripple Effect */}
 			<div className="absolute inset-0 rounded-full bg-[#ff6523] opacity-0 group-active:opacity-20 transition-opacity duration-150"></div>
 		</button>
 	);
+};
+
+CustomArrowButton.propTypes = {
+	direction: PropTypes.oneOf(["left", "right"]).isRequired,
+	onClick: PropTypes.func.isRequired,
+	disabled: PropTypes.bool,
 };
 
 // Loading Skeleton Component
@@ -117,17 +159,6 @@ const ProductSkeleton = () => (
 // Product Item Component
 const ProductItem = ({ product }) => {
 	const { t } = useTranslation();
-
-	const getTierBadgeColor = (tier) => {
-		const colors = {
-			basic: "bg-blue-500",
-			standard: "bg-green-500",
-			pro: "bg-orange-500",
-			advanced: "bg-purple-500",
-			elite: "bg-gradient-to-r from-orange-500 to-red-500",
-		};
-		return colors[tier?.toLowerCase()] || "bg-gray-500";
-	};
 
 	return (
 		<Link
@@ -191,62 +222,59 @@ const ProductItem = ({ product }) => {
 	);
 };
 
-// {
-// 	/* Rating Badge (since your table has rating) */
-// }
-// {
-// 	product.rating && (
-// 		<div className="absolute top-3 left-3">
-// 			<span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-full flex items-center">
-// 				⭐ {product.rating}
-// 			</span>
-// 		</div>
-// 	);
-// }
+ProductItem.propTypes = {
+	product: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		description: PropTypes.string,
+		base_price: PropTypes.number,
+		rating: PropTypes.number,
+		review_count: PropTypes.number,
+		category: PropTypes.string,
+		is_available: PropTypes.bool,
+		image_url: PropTypes.string,
+		images: PropTypes.arrayOf(PropTypes.string),
+	}).isRequired,
+};
 
-// {
-// 	!product.is_available && (
-// 		<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-// 			<span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-// 				{t("gallery.unavailable")}
-// 			</span>
-// 		</div>
-// 	);
-// }
-
-// {
-// 	product.review_count > 0 && (
-// 		<span className="text-xs text-gray-500 font-medium">
-// 			{t("gallery.reviews", { count: product.review_count })}
-// 		</span>
-// 	);
-// }
-
-// <div>
-// 	<div className="mb-2">
-// 		<h3 className="text-gray-900 group-hover:text-[#ff6523] transition-colors line-clamp-1">
-// 			{t(product.name)}
-// 		</h3>
-// 		<div className="text-sm font-normal text-gray-500 line-clamp-1">
-// 			{t(product.description || product.category)}
-// 		</div>
-// 	</div>
-
-// 	<div className="flex items-center justify-between">
-// 		<div className="text-md md:text-lg font-bold text-[#ff6523]">
-// 			{formatPrice(product.base_price)}
-// 		</div>
-// 		{product.review_count > 0 && (
-// 			<span className="text-xs text-gray-500 font-medium">
-// 				{product.review_count} reviews
-// 			</span>
-// 		)}
-// 	</div>
-// </div>;
-
-export function GalleryProduct() {
+// Empty State Component
+const EmptyState = () => {
 	const { t } = useTranslation();
 
+	return (
+		<div className="text-center py-16">
+			<div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+				<svg
+					className="w-12 h-12 text-gray-400"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={1.5}
+						d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9l3-3 3 3"
+					/>
+				</svg>
+			</div>
+			<h3 className="text-xl font-semibold text-gray-900 mb-2">
+				{t("gallery.empty.title")}
+			</h3>
+			<p className="text-gray-600 mb-4">{t("gallery.empty.description")}</p>
+			<Button
+				onClick={() => window.location.reload()}
+				className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+			>
+				{t("gallery.empty.refresh")}
+			</Button>
+		</div>
+	);
+};
+
+// Main Component
+export function GalleryProduct() {
+	const { t } = useTranslation();
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -256,6 +284,14 @@ export function GalleryProduct() {
 		let isMounted = true;
 
 		const fetchProducts = async () => {
+			if (!supabase) {
+				if (isMounted) {
+					setError(t("gallery.errors.configError"));
+					setLoading(false);
+				}
+				return;
+			}
+
 			try {
 				setLoading(true);
 				setError(null);
@@ -291,14 +327,14 @@ export function GalleryProduct() {
 		};
 	}, [t]);
 
-	// Add error boundary
+	// Error state
 	if (error) {
 		return (
 			<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28">
 				<div className="container">
 					<div className="text-center">
 						<h3 className="text-xl font-semibold text-gray-900 mb-2">
-							{t("gallery.errors.loadFailed")}
+							{t("gallery.errors.title")}
 						</h3>
 						<p className="text-gray-600 mb-4">{error}</p>
 						<Button
@@ -312,122 +348,81 @@ export function GalleryProduct() {
 			</section>
 		);
 	}
+
+	return (
+		<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+			<div className="container relative">
+				{/* Header */}
+				<div className="mb-12 text-center relative">
+					<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent mb-4">
+						{t("gallery.title")}
+					</h1>
+					<p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
+						{t("gallery.subtitle")}
+					</p>
+					<div className="absolute -top-2 -left-2 w-12 h-12 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
+				</div>
+
+				{/* Content */}
+				{loading ? (
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+						{Array.from({ length: 8 }, (_, index) => (
+							<ProductSkeleton key={index} />
+						))}
+					</div>
+				) : products.length === 0 ? (
+					<EmptyState />
+				) : (
+					<Carousel
+						setApi={carouselState.setApi}
+						opts={{ loop: true, align: "start" }}
+						className="w-full"
+					>
+						<div className="relative pb-24">
+							<CarouselContent className="ml-0">
+								{products.map((product) => (
+									<CarouselItem
+										key={product.id}
+										className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
+									>
+										<ProductItem product={product} />
+									</CarouselItem>
+								))}
+							</CarouselContent>
+
+							<div className="absolute bottom-0 flex w-full items-end justify-between">
+								{/* Dots */}
+								<div className="flex h-7 pt-[10px] items-center">
+									{Array.from({ length: carouselState.count }, (_, index) => (
+										<button
+											key={index}
+											onClick={carouselState.handleDotClick(index)}
+											className={carouselState.dotClassName(index)}
+											aria-label={`Go to slide ${index + 1}`}
+										/>
+									))}
+								</div>
+
+								{/* Navigation Arrows */}
+								<div className="flex gap-3">
+									<CustomArrowButton
+										direction="left"
+										onClick={carouselState.handlePrevious}
+										aria-label="Previous products"
+									/>
+									<CustomArrowButton
+										direction="right"
+										onClick={carouselState.handleNext}
+										aria-label="Next products"
+									/>
+								</div>
+							</div>
+						</div>
+					</Carousel>
+				)}
+			</div>
+		</section>
+	);
 }
 
-CustomArrowButton.propTypes = {
-	direction: PropTypes.oneOf(["left", "right"]).isRequired,
-	onClick: PropTypes.func.isRequired,
-	disabled: PropTypes.bool,
-};
-
-const handlePrevious = () => {
-	if (carouselState.api) {
-		carouselState.api.scrollPrev();
-	}
-};
-
-const handleNext = () => {
-	if (carouselState.api) {
-		carouselState.api.scrollNext();
-	}
-};
-
-<div>
-	<section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 bg-gradient-to-br from-gray-50 via-white">
-		<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent">
-			{t("gallery.title")}
-		</h1>
-		<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
-			{t("gallery.subtitle")}
-		</p>
-		<div className="absolute -top-2 -left-2 w-12 h-12 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
-		<p className="text-base md:text-lg lg:text-xl text-gray-600 mt-4">
-			{t("gallery.reviews")}
-		</p>
-
-		{loading ? (
-			// Loading State
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-				{Array.from({ length: 8 }, (_, index) => (
-					<ProductSkeleton key={index} />
-				))}
-			</div>
-		) : products.length === 0 ? (
-			// Empty State component remains the same
-			<div className="text-center py-16">
-				{/* ... empty state content remains the same ... */}
-			</div>
-		) : (
-			// Products Carousel
-			<Carousel
-				setApi={carouselState.setApi}
-				opts={{ loop: true, align: "start" }}
-			>
-				<div className="relative pb-24">
-					<CarouselContent className="ml-0">
-						{products.map((product) => (
-							<CarouselItem
-								key={product.id}
-								className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
-							>
-								<ProductItem product={product} />
-							</CarouselItem>
-						))}
-					</CarouselContent>
-
-					<div className="absolute bottom-0 flex w-full items-end justify-between">
-						{/* Modified Dots */}
-						<div className="flex h-7 pt-[10px] items-center">
-							{Array.from({ length: products.length }, (_, index) => (
-								<button
-									key={index}
-									onClick={carouselState.handleDotClick(index)}
-									className={carouselState.dotClassName(index)}
-									aria-label={`Go to slide ${index + 1}`}
-								/>
-							))}
-						</div>
-
-						{/* Custom Arrow Buttons */}
-						<div className="flex gap-3">
-							<CustomArrowButton
-								direction="left"
-								onClick={handlePrevious}
-								aria-label="Previous products"
-							/>
-							<CustomArrowButton
-								direction="right"
-								onClick={handleNext}
-								aria-label="Next products"
-							/>
-						</div>
-					</div>
-				</div>
-			</Carousel>
-		)}
-	</section>
-</div>;
-
 export default GalleryProduct;
-
-// // Add at the bottom of the file
-// ProductItem.propTypes = {
-// 	product: PropTypes.shape({
-// 		id: PropTypes.string.isRequired,
-// 		name: PropTypes.string.isRequired,
-// 		description: PropTypes.string,
-// 		base_price: PropTypes.number,
-// 		rating: PropTypes.number,
-// 		review_count: PropTypes.number,
-// 		category: PropTypes.string,
-// 		is_available: PropTypes.bool,
-// 		image_url: PropTypes.string,
-// 		images: PropTypes.arrayOf(PropTypes.string),
-// 	}).isRequired,
-// };
-
-// CustomArrowButton.propTypes = {
-// 	direction: PropTypes.oneOf(["left", "right"]).isRequired,
-// 	onClick: PropTypes.func.isRequired,
-// 	disabled: PropTypes.bool,
-// };

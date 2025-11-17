@@ -5,18 +5,20 @@
 		"ourMission": "Misi Kami",
 		"discover": "Temukan",
 		"innovation": "Inovasi",
-		"contactUs": "Hubungi Kami"
+		"contactUs": "Hubungi Kami",
+		"shop": "Toko"
 	},
 	"footer": {
 		"exploreTitle": "Jelajahi Masa Depan Kreativitas",
 		"joinUs": "Bergabunglah dengan kami, membentuk masa depan dengan desain dan teknologi inovatif.",
 		"checkRoadmap": "Lihat Roadmap! (SEGERA HADIR)",
 		"joinCommunity": "Bergabung dengan Komunitas Kami! (SEGERA HADIR)",
-		"homepage": "BERANDA",
+		"homepage": "Beranda",
 		"meetTokspace": "Kenali Tokspace",
 		"others": "LAINNYA",
 		"copyright": "Tokspace. 2025.",
-		"bugReport": "Laporkan Bug (Kendala)"
+		"bugReport": "Laporkan Bug (Kendala)",
+		"page": "HALAMAN"
 	},
 	"header": {
 		"title": "Wujudkan Kreativitas Anda dengan Inovasi 3D",
@@ -127,7 +129,9 @@
 		"Tabreturns": "Pengembalian",
 		"TabdetailsDescription": "Gantungan kunci kami dibuat dengan hati-hati, memastikan daya tahan dan gaya. Setiap bagian adalah ekspresi unik dari kepribadian Anda. Nikmati pengalaman berbelanja yang mulus dengan kebijakan pengembalian yang mudah.",
 		"TabshippingDescription": "Tergantung di mana Anda berada, pengiriman mungkin memakan waktu 1-2 minggu",
-		"TabreturnsDescription": "Saat ini, kami tidak memproses pengembalian apa pun. Namun, jika produk Anda mengalami masalah, silakan hubungi kami."
+		"TabreturnsDescription": "Saat ini, kami tidak memproses pengembalian apa pun. Namun, jika produk Anda mengalami masalah, silakan hubungi kami.",
+		"notFoundTitle": "Produk tidak ditemukan",
+		"notFoundMessage": "Produk yang Anda cari tidak ditemukan."
 	},
 	"faq": {
 		"title": "Pertanyaan yang Sering Diajukan",
@@ -143,15 +147,48 @@
 		"question5": "Bagaimana cara memesan?",
 		"answer5": "Memesan itu mudah! Cukup jelajahi katalog produk kami, pilih item yang diinginkan, dan ikuti proses checkout. Jika Anda memiliki pertanyaan, tim dukungan kami siap membantu Anda."
 	},
+	"headerProduct": {
+		"title": "Lihat Toko Produk Inovatif Kami",
+		"subtitle": "Jelajahi produk cetak 3D dan kit modular kami yang mendefinisikan ulang kreativitas dan fungsionalitas dengan solusi desain inovatif.",
+		"badges": {
+			"printing": "Cetak 3D",
+			"kits": "Kit Modular",
+			"solutions": "Solusi Kreatif"
+		},
+		"info": {
+			"owners": {
+				"title": "Pemilik",
+				"content": "Tim Tokspace, Ko-Kreator, dan Desainer"
+			},
+			"date": {
+				"title": "Tanggal Lahir",
+				"content": "Juli 2025"
+			},
+			"license": {
+				"title": "Lisensi",
+				"content": "CC-BY-SA-4.0\n(Creative Commons Attribution Share Alike 4.0 International)"
+			},
+			"social": {
+				"title": "Media Sosial",
+				"link": "Klik di sini"
+			}
+		}
+	},
 	"gallery": {
 		"title": "Semua Produk",
-		"subtitle": "Desain inovatif untuk masa depan kreatif.",
+		"subtitle": "Desain inovatif untuk masa depan kreatif",
 		"unavailable": "Tidak Tersedia",
 		"reviews": "{{count}} ulasan",
+		"empty": {
+			"title": "Tidak Ada Produk Ditemukan",
+			"description": "Kami tidak dapat menemukan produk saat ini",
+			"refresh": "Segarkan Halaman"
+		},
 		"errors": {
+			"title": "Gagal Memuat Produk",
 			"loadFailed": "Tidak dapat memuat produk",
-			"tryAgain": "Coba Lagi",
-			"networkError": "Koneksi jaringan gagal. Periksa koneksi internet dan status proyek Supabase Anda."
+			"configError": "Kesalahan konfigurasi",
+			"tryAgain": "Coba Lagi"
 		}
 	}
 }

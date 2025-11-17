@@ -3,8 +3,11 @@
 import { Badge } from "@relume_io/relume-ui";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function HeaderProduct() {
+	const { t } = useTranslation();
+
 	const handleScrollToSection = (e, section) => {
 		e.preventDefault();
 		// Add your scroll logic here
@@ -18,15 +21,13 @@ export function HeaderProduct() {
 					<div className="space-y-6">
 						<div className="relative">
 							<h1 className="text-5xl font-bold md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 bg-clip-text text-transparent leading-tight">
-								Check Out Our Innovative Product Shop
+								{t("headerProduct.title")}
 							</h1>
 							<div className="absolute -top-2 -left-2 w-16 h-16 bg-orange-100 rounded-full blur-xl opacity-60 animate-pulse"></div>
 						</div>
 
 						<p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
-							Explore our cutting-edge 3D-printed products and modular kits that
-							redefine creativity and functionality with innovative design
-							solutions.
+							{t("headerProduct.subtitle")}
 						</p>
 
 						{/* Enhanced Badge Section */}
@@ -34,19 +35,19 @@ export function HeaderProduct() {
 							<div className="inline-flex items-center px-4 py-2 bg-white rounded-full border-2 border-orange-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-orange-300 group">
 								<div className="w-2 h-2 bg-orange-500 rounded-full mr-2 group-hover:animate-pulse"></div>
 								<span className="text-sm font-semibold text-gray-700 group-hover:text-orange-600">
-									3D Printing
+									{t("headerProduct.badges.printing")}
 								</span>
 							</div>
 							<div className="inline-flex items-center px-4 py-2 bg-white rounded-full border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-blue-300 group">
 								<div className="w-2 h-2 bg-blue-500 rounded-full mr-2 group-hover:animate-pulse"></div>
 								<span className="text-sm font-semibold text-gray-700 group-hover:text-blue-600">
-									Modular Kits
+									{t("headerProduct.badges.kits")}
 								</span>
 							</div>
 							<div className="inline-flex items-center px-4 py-2 bg-white rounded-full border-2 border-purple-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-purple-300 group">
 								<div className="w-2 h-2 bg-purple-500 rounded-full mr-2 group-hover:animate-pulse"></div>
 								<span className="text-sm font-semibold text-gray-700 group-hover:text-purple-600">
-									Creative Solutions
+									{t("headerProduct.badges.solutions")}
 								</span>
 							</div>
 						</div>
@@ -72,10 +73,12 @@ export function HeaderProduct() {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-lg font-bold text-gray-800">Owners</h3>
+								<h3 className="text-lg font-bold text-gray-800">
+									{t("headerProduct.info.owners.title")}
+								</h3>
 							</div>
 							<p className="text-base md:text-lg text-gray-600 font-medium">
-								Tokspace Team, Co-Creators, and Designers
+								{t("headerProduct.info.owners.content")}
 							</p>
 						</div>
 
@@ -98,11 +101,11 @@ export function HeaderProduct() {
 									</svg>
 								</div>
 								<h3 className="text-lg font-bold text-gray-800">
-									Date of Birth
+									{t("headerProduct.info.date.title")}
 								</h3>
 							</div>
 							<p className="text-base md:text-lg text-gray-600 font-medium">
-								July 2025
+								{t("headerProduct.info.date.content")}
 							</p>
 						</div>
 
@@ -124,11 +127,12 @@ export function HeaderProduct() {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-lg font-bold text-gray-800">License</h3>
+								<h3 className="text-lg font-bold text-gray-800">
+									{t("headerProduct.info.license.title")}
+								</h3>
 							</div>
 							<p className="text-base md:text-lg text-gray-600 font-medium">
-								CC-BY-SA-4.0 <br />
-								(Creative Commons Attribution Share Alike 4.0 International)
+								{t("headerProduct.info.license.content")}
 							</p>
 						</div>
 
@@ -151,7 +155,7 @@ export function HeaderProduct() {
 									</svg>
 								</div>
 								<h3 className="text-lg font-bold text-gray-800">
-									Social Media
+									{t("headerProduct.info.social.title")}
 								</h3>
 							</div>
 							<Link
@@ -159,7 +163,7 @@ export function HeaderProduct() {
 								onClick={(e) => handleScrollToSection(e, "innovation")}
 								className="relative inline-flex items-center text-base md:text-lg font-medium text-orange-600 hover:text-orange-700 transition-colors duration-300 group-hover:underline decoration-2 underline-offset-2"
 							>
-								Click here
+								{t("headerProduct.info.social.link")}
 								<svg
 									className="w-4 h-4 ml-1 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
 									fill="none"

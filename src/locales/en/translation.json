@@ -5,18 +5,20 @@
 		"ourMission": "Our Mission",
 		"discover": "Discover",
 		"innovation": "Innovation",
-		"contactUs": "Contact Us"
+		"contactUs": "Contact Us",
+		"shop": "Shop"
 	},
 	"footer": {
 		"exploreTitle": "Explore the Future of Creativity",
 		"joinUs": "Join us in shaping tomorrow with innovative design and technology.",
 		"checkRoadmap": "Check out Roadmap! (COMING SOON)",
 		"joinCommunity": "Join Our Community! (COMING SOON)",
-		"homepage": "HOMEPAGE",
+		"homepage": "Home",
 		"meetTokspace": "Meet Tokspace",
 		"others": "OTHERS",
 		"copyright": "Tokspace. 2025.",
-		"bugReport": "Bug Report"
+		"bugReport": "Bug Report",
+		"page": "PAGES"
 	},
 	"header": {
 		"title": "Unleash Your Creativity with 3D Innovation",
@@ -127,7 +129,9 @@
 		"Tabreturns": "Returns",
 		"TabdetailsDescription": "Our keychains are crafted with care, ensuring durability and style. Each piece is a unique expression of your personality. Enjoy a seamless shopping experience with our easy returns policy.",
 		"TabshippingDescription": "Depending on where you are located, shipping might take 1-2 weeks",
-		"TabreturnsDescription": "Currently, we don't process any returns. If, however, your product run into any issue please do contact us."
+		"TabreturnsDescription": "Currently, we don't process any returns. If, however, your product run into any issue please do contact us.",
+		"notFoundTitle": "Product not found",
+		"notFoundMessage": "The product you're looking for doesn't exist."
 	},
 	"faq": {
 		"title": "Frequently Asked Questions",
@@ -143,15 +147,48 @@
 		"question5": "How to place an order?",
 		"answer5": "Placing an order is easy! Simply browse our product catalog, select your desired items, and follow the checkout process. If you have questions, our support team is here to assist you."
 	},
+	"headerProduct": {
+		"title": "Check Out Our Innovative Product Store",
+		"subtitle": "Explore our 3D printed products and modular kits that redefine creativity and functionality with innovative design solutions.",
+		"badges": {
+			"printing": "3D Printing",
+			"kits": "Modular Kits",
+			"solutions": "Creative Solutions"
+		},
+		"info": {
+			"owners": {
+				"title": "Owners",
+				"content": "Tokspace Team, Co-Creators, and Designers"
+			},
+			"date": {
+				"title": "Birth Date",
+				"content": "July 2025"
+			},
+			"license": {
+				"title": "License",
+				"content": "CC-BY-SA-4.0\n(Creative Commons Attribution Share Alike 4.0 International)"
+			},
+			"social": {
+				"title": "Social Media",
+				"link": "Click here"
+			}
+		}
+	},
 	"gallery": {
 		"title": "All Products",
-		"subtitle": "Innovative designs for a creative future.",
+		"subtitle": "Innovative designs for a creative future",
 		"unavailable": "Unavailable",
 		"reviews": "{{count}} reviews",
+		"empty": {
+			"title": "No Products Found",
+			"description": "We couldn't find any products at the moment",
+			"refresh": "Refresh Page"
+		},
 		"errors": {
+			"title": "Failed to Load Products",
 			"loadFailed": "Unable to load products",
-			"tryAgain": "Try Again",
-			"networkError": "Network connection failed. Please check your internet connection and Supabase project status."
+			"configError": "Configuration error",
+			"tryAgain": "Try Again"
 		}
 	}
 }
