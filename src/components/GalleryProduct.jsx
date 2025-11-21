@@ -17,8 +17,6 @@ import PropTypes from "prop-types";
 
 import buttonStyles from "../css/Button.module.css";
 
-// Use shared Supabase client
-
 // Price formatting utility
 const formatPrice = (price) => {
 	if (price === undefined || price === null) return "Price not available";
@@ -132,34 +130,37 @@ CustomArrowButton.propTypes = {
 };
 
 // Loading Skeleton Component
-const ProductSkeleton = () => (
+const CategorySkeleton = () => (
 	<div className="animate-pulse">
 		<div className="mb-3 aspect-[5/6] md:mb-4 bg-gray-200 rounded-2xl"></div>
 		<div className="mb-2">
-			<div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+			<div className="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
 			<div className="h-3 bg-gray-200 rounded w-1/2"></div>
 		</div>
-		<div className="h-4 bg-gray-200 rounded w-1/4"></div>
+		<div className="flex gap-2 mb-2">
+			<div className="h-3 bg-gray-200 rounded w-16"></div>
+			<div className="h-3 bg-gray-200 rounded w-16"></div>
+		</div>
+		<div className="h-4 bg-gray-200 rounded w-1/3"></div>
 	</div>
 );
 
-// Product Item Component
-const ProductItem = ({ product }) => {
+// Category Item Component
+const CategoryItem = ({ category }) => {
 	const { t } = useTranslation();
 
 	return (
 		<Link
-			to={`/shop/${product.id}`}
+			to={`/shop/${category.firstProductId}`}
 			className="group block font-semibold md:text-md"
 		>
-			<div className="mb-3 aspect-[5/6] md:mb-4 relative overflow-hidden rounded-2xl bg-white shadow-lg group-hover:shadow-xl transition-all duration-300">
+			<div className="mb-3 aspect-[5/6] md:mb-4 relative overflow-hidden rounded-2xl bg-white transition-all duration-300">
 				<img
 					src={
-						product.image_url ||
-						product.images?.[0] ||
+						category.image_url ||
 						"https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
 					}
-					alt={product.name}
+					alt={category.name}
 					className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
 					onError={(e) => {
 						e.target.src =
@@ -168,63 +169,60 @@ const ProductItem = ({ product }) => {
 				/>
 
 				<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-				{product.rating && (
-					<div className="absolute top-3 left-3">
-						<span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-full flex items-center">
-							⭐ {product.rating}
-						</span>
-					</div>
-				)}
-
-				{!product.is_available && (
-					<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-						<span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-							{t("gallery.unavailable")}
-						</span>
-					</div>
-				)}
 			</div>
 
 			<div className="mb-2">
 				<h3 className="text-gray-900 group-hover:text-[#ff6523] transition-colors line-clamp-1">
-					{t(product.name)}
+					{category.name}
 				</h3>
 				<div className="text-sm font-normal text-gray-500 line-clamp-1">
-					{t(product.description || "")}
+					{category.description || ""}
 				</div>
+			</div>
+
+			{/* Available Colors Preview */}
+			<div className="flex gap-1.5 mb-2 flex-wrap items-center">
+				{category.availableColors?.slice(0, 5).map((color, idx) => (
+					<span
+						key={idx}
+						className="text-xs px-2 py-0.5 bg-gray-100 text-gray-700 rounded capitalize"
+					>
+						{color}
+					</span>
+				))}
+				{category.availableColors?.length > 5 && (
+					<span className="text-xs text-gray-500">
+						+{category.availableColors.length - 5} more
+					</span>
+				)}
 			</div>
 
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-2">
-					{product.compare_at_price ? (
-						<span className="text-sm text-gray-500 line-through">
-							{formatPrice(product.compare_at_price)}
-						</span>
-					) : null}
 					<span className="text-md md:text-lg font-bold text-[#ff6523]">
-						{formatPrice(product.price)}
+						{formatPrice(category.minPrice)}
 					</span>
 				</div>
-				{!product.is_available && (
-					<span className="text-xs text-red-600 font-medium">
-						{t("gallery.unavailable")}
-					</span>
-				)}
+				<span className="text-xs text-gray-500">
+					{category.productCount}{" "}
+					{category.productCount === 1 ? "color" : "colors"}
+				</span>
 			</div>
 		</Link>
 	);
 };
 
-ProductItem.propTypes = {
-	product: PropTypes.shape({
+CategoryItem.propTypes = {
+	category: PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
+		slug: PropTypes.string.isRequired,
 		description: PropTypes.string,
-		price: PropTypes.number.isRequired,
-		compare_at_price: PropTypes.number,
-		is_available: PropTypes.bool,
+		productCount: PropTypes.number.isRequired,
+		minPrice: PropTypes.number.isRequired,
 		image_url: PropTypes.string,
+		availableColors: PropTypes.arrayOf(PropTypes.string),
+		firstProductId: PropTypes.string.isRequired,
 	}).isRequired,
 };
 
@@ -266,7 +264,7 @@ const EmptyState = () => {
 // Main Component
 export function GalleryProduct() {
 	const { t } = useTranslation();
-	const [products, setProducts] = useState([]);
+	const [categories, setCategories] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const carouselState = useCarousel();
@@ -274,7 +272,7 @@ export function GalleryProduct() {
 	useEffect(() => {
 		let isMounted = true;
 
-		const fetchProducts = async () => {
+		const fetchCategories = async () => {
 			if (!supabase) {
 				if (isMounted) {
 					setError(t("gallery.errors.configError"));
@@ -287,37 +285,72 @@ export function GalleryProduct() {
 				setLoading(true);
 				setError(null);
 
-				const { data, error: supabaseError } = await supabase
-					.from("products")
+				// Fetch categories with their products
+				const { data: categoriesData, error: categoriesError } = await supabase
+					.from("categories")
 					.select(
-						`id,name,description,price,is_available,category_id,
-                         product_images (image_url, alt_text, display_order, is_primary)`
+						`
+						id,
+						name,
+						slug,
+						description,
+						products (
+							id,
+							price,
+							color,
+							is_available,
+							product_images (image_url, is_primary)
+						)
+					`
 					)
-					.eq("is_available", true)
-					.order("created_at", { ascending: false })
-					.limit(12);
+					.order("created_at", { ascending: true });
 
-				if (supabaseError) throw supabaseError;
+				if (categoriesError) throw categoriesError;
 
 				if (isMounted) {
-					const normalized = (data || []).map((p) => {
-						const primary =
-							p.product_images?.find((img) => img.is_primary) ||
-							p.product_images?.[0];
-						return {
-							...p,
-							price: Number(p.price),
-							compare_at_price: p.compare_at_price
-								? Number(p.compare_at_price)
-								: null,
-							image_url: primary?.image_url || null,
-						};
-					});
-					setProducts(normalized);
+					// Process categories data
+					const processedCategories = (categoriesData || [])
+						.map((cat) => {
+							// Filter available products only
+							const availableProducts =
+								cat.products?.filter((p) => p.is_available) || [];
+
+							if (availableProducts.length === 0) return null;
+
+							// Get unique colors
+							const colors = [
+								...new Set(availableProducts.map((p) => p.color)),
+							];
+
+							// Find minimum price
+							const prices = availableProducts.map((p) => Number(p.price));
+							const minPrice = Math.min(...prices);
+
+							// Get primary image from first product
+							const firstProduct = availableProducts[0];
+							const primaryImage =
+								firstProduct.product_images?.find((img) => img.is_primary) ||
+								firstProduct.product_images?.[0];
+
+							return {
+								id: cat.id,
+								name: cat.name,
+								slug: cat.slug,
+								description: cat.description,
+								productCount: availableProducts.length,
+								minPrice,
+								image_url: primaryImage?.image_url || null,
+								availableColors: colors,
+								firstProductId: firstProduct?.id,
+							};
+						})
+						.filter(Boolean); // Remove null entries
+
+					setCategories(processedCategories);
 				}
 			} catch (err) {
 				if (isMounted) {
-					console.error("Error fetching products:", err);
+					console.error("Error fetching categories:", err);
 					setError(t("gallery.errors.loadFailed"));
 				}
 			} finally {
@@ -327,7 +360,7 @@ export function GalleryProduct() {
 			}
 		};
 
-		fetchProducts();
+		fetchCategories();
 
 		return () => {
 			isMounted = false;
@@ -373,11 +406,11 @@ export function GalleryProduct() {
 				{/* Content */}
 				{loading ? (
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-						{Array.from({ length: 8 }, (_, index) => (
-							<ProductSkeleton key={index} />
+						{Array.from({ length: 4 }, (_, index) => (
+							<CategorySkeleton key={index} />
 						))}
 					</div>
-				) : products.length === 0 ? (
+				) : categories.length === 0 ? (
 					<EmptyState />
 				) : (
 					<Carousel
@@ -387,12 +420,12 @@ export function GalleryProduct() {
 					>
 						<div className="relative pb-24">
 							<CarouselContent className="ml-0">
-								{products.map((product) => (
+								{categories.map((category) => (
 									<CarouselItem
-										key={product.id}
-										className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[33%] lg:pr-12"
+										key={category.id}
+										className="basis-[95%] pr-6 pl-0 sm:basis-4/5 md:basis-1/2 md:pr-8 lg:basis-[45%] lg:pr-12"
 									>
-										<ProductItem product={product} />
+										<CategoryItem category={category} />
 									</CarouselItem>
 								))}
 							</CarouselContent>
@@ -415,12 +448,12 @@ export function GalleryProduct() {
 									<CustomArrowButton
 										direction="left"
 										onClick={carouselState.handlePrevious}
-										aria-label="Previous products"
+										aria-label="Previous categories"
 									/>
 									<CustomArrowButton
 										direction="right"
 										onClick={carouselState.handleNext}
-										aria-label="Next products"
+										aria-label="Next categories"
 									/>
 								</div>
 							</div>

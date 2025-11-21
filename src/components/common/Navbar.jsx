@@ -182,13 +182,13 @@ export function Navbar() {
 					className="flex items-center"
 				>
 					<Link to="/" className="flex items-center">
-						<motion.img
-							src="./Tokspace-Logo.png"
-							width="100px"
-							alt="Tokspace Logo"
-							whileHover={{ rotate: [0, -5, 5, 0] }}
-							transition={{ duration: 0.5 }}
-						/>
+                        <motion.img
+                            src="/Tokspace-Logo.png"
+                            width="100px"
+                            alt="Tokspace Logo"
+                            whileHover={{ rotate: [0, -5, 5, 0] }}
+                            transition={{ duration: 0.5 }}
+                        />
 					</Link>
 				</motion.div>
 

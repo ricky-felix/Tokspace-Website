@@ -20,9 +20,9 @@ export default function ProductListingPage() {
 					<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full"></div>
 					<GalleryProduct />
 				</div>
-				<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full">
-					<ProductCTAListingPage />
-				</div>
+			</div>
+			<div className="flex flex-col items-center justify-center py-8 lg:py-12 w-full">
+				<ProductCTAListingPage />
 			</div>
 			<Footer />
 		</>
