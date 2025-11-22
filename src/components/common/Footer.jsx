@@ -44,12 +44,12 @@ export function Footer() {
 								{t("footer.joinUs")}
 							</p>
 							<div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-								<Button
+								{/* <Button
 									title="Discover"
 									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 								>
 									{t("footer.checkRoadmap")}
-								</Button>
+								</Button> */}
 								<Button
 									title="Connect"
 									variant="secondary"
@@ -73,7 +73,7 @@ export function Footer() {
 										{t("footer.meetTokspace")}
 									</Link>
 								</li>
-								<li className="py-2 text-sm font-semibold">
+								{/* <li className="py-2 text-sm font-semibold">
 									<Link
 										to="/#discover"
 										onClick={(e) => handleScrollToSection(e, "discover")}
@@ -81,7 +81,7 @@ export function Footer() {
 									>
 										{t("navbar.discover")}
 									</Link>
-								</li>
+								</li> */}
 								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/#ourmission"
