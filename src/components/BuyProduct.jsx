@@ -34,6 +34,9 @@ import clsx from "clsx";
 import buttonStyles from "../css/Button.module.css";
 import { WhatsAppService } from "../services/whatsappService.js";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n.js";
+import { useTranslationHelper } from "../hooks/useTranslationHelper.js";
 
 const Star = ({ rating }) => {
 	const fullStars = Math.floor(rating);
@@ -58,6 +61,10 @@ const Star = ({ rating }) => {
 			})}
 		</div>
 	);
+};
+
+Star.propTypes = {
+	rating: PropTypes.number.isRequired,
 };
 
 const useGalleryDialog = () => {
@@ -105,6 +112,11 @@ const useLightbox = (selectedSlide) => {
 };
 
 export function BuyProduct({ productId }) {
+	const { t } = useTranslation();
+	const { getTranslation, prefetchTranslations } = useTranslationHelper(
+		supabase,
+		i18n
+	);
 	const gallery = useGalleryDialog();
 	const lightbox = useLightbox(gallery.selectedSlide);
 	const useActive = { ...gallery, ...lightbox };
@@ -128,7 +140,7 @@ export function BuyProduct({ productId }) {
 			try {
 				setLoading(true);
 				setError(null);
-				const selectFields = `id,name,description,price,color,stock_quantity,category_id`;
+				const selectFields = `id,name,description,details,price,color,stock_quantity,category_id`;
 
 				let data = null;
 				let err = null;
@@ -257,6 +269,13 @@ export function BuyProduct({ productId }) {
 		fetchProduct();
 	}, [productId]);
 
+	// Fetch translations for the product and categories
+	useEffect(() => {
+		if (product?.id) {
+			prefetchTranslations(["products", "categories"]);
+		}
+	}, [product?.id, i18n.language, prefetchTranslations]);
+
 	const selectedVariant = variants[selectedVariantIndex] || null;
 	const imagesForVariant = useMemo(() => {
 		const imgs = product?.product_images || [];
@@ -279,9 +298,16 @@ export function BuyProduct({ productId }) {
 
 	const unitPrice = selectedVariant?.price ?? product?.price ?? 0;
 	const handleBuyNow = () => {
+		const productName = getTranslation(
+			product?.id,
+			"name",
+			"products",
+			null,
+			product?.name || ""
+		);
 		const url = WhatsAppService.generateOrderMessage(
 			{
-				productName: product?.name || "",
+				productName: productName,
 				variantName: selectedVariant?.name || product?.color || "",
 				quantity: Number(quantity) || 1,
 				unitPrice,
@@ -325,27 +351,6 @@ export function BuyProduct({ productId }) {
 		<header id="relume" className="px-[5%] ">
 			<div className="container">
 				<div className="mb-8 flex flex-col gap-6 md:mb-12">
-					{/* <Breadcrumb className="order-last flex flex-wrap items-center text-sm md:order-none">
-						<BreadcrumbList>
-							<Fragment>
-								<BreadcrumbItem>
-									<BreadcrumbLink href="#">Shop all</BreadcrumbLink>
-								</BreadcrumbItem>
-								<BreadcrumbSeparator />
-							</Fragment>
-							<Fragment>
-								<BreadcrumbItem>
-									<BreadcrumbLink href="#">Keychains</BreadcrumbLink>
-								</BreadcrumbItem>
-								<BreadcrumbSeparator />
-							</Fragment>
-							<Fragment>
-								<BreadcrumbItem>
-									<BreadcrumbLink href="#">Fidgeting Toy</BreadcrumbLink>
-								</BreadcrumbItem>
-							</Fragment>
-						</BreadcrumbList>
-					</Breadcrumb> */}
 					<div className="relative">
 						<Dialog>
 							<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
@@ -558,9 +563,6 @@ export function BuyProduct({ productId }) {
 							</DialogContent>
 						</Dialog>
 						<Dialog>
-							{/* <SheetTrigger className="absolute right-4 bottom-4 z-10 border border-border-alternative bg-background-primary px-5 py-2">
-								Show all photos
-							</SheetTrigger> */}
 							<SheetContent side="bottom" className="size-full px-4">
 								<SheetClose />
 								<div className="container">
@@ -576,7 +578,6 @@ export function BuyProduct({ productId }) {
 															src={getImageSrc(0)}
 															alt="Image 1"
 															className="aspect-[5/4] size-full object-cover"
-															onClick={useActive.handleSelectSlide(0)}
 														/>
 													</div>
 												</DialogTrigger>
@@ -589,7 +590,6 @@ export function BuyProduct({ productId }) {
 															src={getImageSrc(1)}
 															alt="Image 2"
 															className="aspect-[5/4] size-full object-cover"
-															onClick={useActive.handleSelectSlide(1)}
 														/>
 													</div>
 												</DialogTrigger>
@@ -602,7 +602,6 @@ export function BuyProduct({ productId }) {
 															src={getImageSrc(2)}
 															alt="Image 3"
 															className="aspect-[5/4] size-full object-cover"
-															onClick={useActive.handleSelectSlide(2)}
 														/>
 													</div>
 												</DialogTrigger>
@@ -615,7 +614,6 @@ export function BuyProduct({ productId }) {
 															src={getImageSrc(3)}
 															alt="Image 4"
 															className="aspect-[5/4] size-full object-cover"
-															onClick={useActive.handleSelectSlide(3)}
 														/>
 													</div>
 												</DialogTrigger>
@@ -628,7 +626,6 @@ export function BuyProduct({ productId }) {
 															src={getImageSrc(4)}
 															alt="Image 5"
 															className="aspect-[5/4] size-full object-cover"
-															onClick={useActive.handleSelectSlide(4)}
 														/>
 													</div>
 												</DialogTrigger>
@@ -801,81 +798,84 @@ export function BuyProduct({ productId }) {
 				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
 					<div>
 						<h1 className="hidden text-4xl leading-[1.2] font-bold md:mb-8 md:block md:text-5xl lg:text-6xl">
-							{product?.name || ""}
+							{getTranslation(
+								product?.id,
+								"name",
+								"products",
+								null,
+								product?.name || ""
+							)}
 						</h1>
 						<p>
-							This small keychain is more than just an accessory—it's a piece of
-							your narrative. Carry it everywhere to express yourself or simply
-							keep it as a cherished companion.
+							{getTranslation(
+								product?.id,
+								"description",
+								"products",
+								null,
+								product?.description || "Premium product description"
+							)}
 						</p>
 						<ul className="mt-4 mb-6 list-inside list-disc md:mb-8">
 							<li className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
-								Perfect for focus and self-expression on the go.
+								{t("buyProduct.feature1")}
 							</li>
 							<li className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
-								A pocket-sized friend for your daily adventures.
+								{t("buyProduct.feature2")}
 							</li>
 							<li className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
-								Designed for creativity and personal connection.
+								{t("buyProduct.feature3")}
 							</li>
 						</ul>
 						<Tabs defaultValue="tab-details">
 							<TabsList className="mb-5 flex-wrap items-center gap-6 md:mb-6">
 								<TabsTrigger
 									value="tab-details"
-									className="border-0 border-b-[1.5px] border-border-alternative px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
+									className="border-0 px-0 py-2 data-[state=active]:border-b-[2px] data-[state=active]:border-border-primary data-[state=active]:text-text-primary"
 								>
-									Details
+									{t("buyProduct.detailsTab")}
 								</TabsTrigger>
 								<TabsTrigger
 									value="tab-shipping"
-									className="border-0 border-b-[1.5px] border-border-alternative px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
+									className="border-0 px-0 py-2 data-[state=active]:border-b-[2px] data-[state=active]:border-border-primary data-[state=active]:text-text-primary"
 								>
-									Shipping
+									{t("buyProduct.shippingTab")}
 								</TabsTrigger>
 								<TabsTrigger
 									value="tab-returns"
-									className="border-0 border-b-[1.5px] border-border-alternative px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
+									className="border-0 px-0 py-2 data-[state=active]:border-b-[2px] data-[state=active]:border-border-primary data-[state=active]:text-text-primary"
 								>
-									Returns
+									{t("buyProduct.returnsTab")}
 								</TabsTrigger>
 							</TabsList>
 							<TabsContent
 								value="tab-details"
 								className="data-[state=active]:animate-tabs"
 							>
-								<p>
-									Our keychains are crafted with care, ensuring durability and
-									style. Each piece is a unique expression of your personality.
-									Enjoy a seamless shopping experience with our easy returns
-									policy.
-								</p>
+								<p>{t("buyProduct.detailsText")}</p>
 							</TabsContent>
 							<TabsContent
 								value="tab-shipping"
 								className="data-[state=active]:animate-tabs"
 							>
-								<p>
-									Shipping is fast and reliable, so you can get your keychain
-									quickly. We offer various shipping options to suit your needs.
-									Track your order easily right from our website.
-								</p>
+								<p>{t("buyProduct.shippingText")}</p>
 							</TabsContent>
 							<TabsContent
 								value="tab-returns"
 								className="data-[state=active]:animate-tabs"
 							>
-								<p>
-									If you're not completely satisfied, our return process is
-									hassle-free. Simply reach out to our customer service for
-									assistance. We want you to love your purchase!
-								</p>
+								<p>{t("buyProduct.returnsText")}</p>
 							</TabsContent>
 						</Tabs>
 					</div>
 					<div className="order-first md:order-none">
 						<h1 className="mb-4 text-4xl leading-[1.2] font-bold md:hidden">
-							{product?.name || ""}
+							{getTranslation(
+								product?.id,
+								"name",
+								"products",
+								null,
+								product?.name || ""
+							)}
 						</h1>
 						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
 							{new Intl.NumberFormat("id-ID", {
@@ -886,37 +886,37 @@ export function BuyProduct({ productId }) {
 						</p>
 						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
 							<Star rating={3.5} />
-							<p className="text-sm">(3.5 stars) • 10 reviews</p>
+							<p className="text-sm">{t("buyProduct.reviews", { rating: "3.5", count: 10 })}</p>
 						</div>
 						<form>
 							<div className="grid grid-cols-1 gap-6">
 								<div className="flex flex-col">
-									<Label className="mb-2">Variant</Label>
+									<Label className="mb-2">{t("buyProduct.variant")}</Label>
 									<div className="flex flex-wrap gap-4">
 										{variants.map((v, i) => {
 											const isSelected = i === selectedVariantIndex;
-											const baseClass =
-												"rounded-button inline-flex gap-3 items-center justify-center whitespace-nowrap transition-all duration-200 ease-in-out disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none border border-border-primary px-4 py-2";
-											const selectedClass =
-												" bg-background-alternative text-text-alternative";
-											const defaultClass =
-												" text-text-primary bg-background-primary";
+											const baseClass = `${buttonStyles.bubbleButton} ${
+												isSelected
+													? buttonStyles.primary
+													: buttonStyles.secondary
+											}`;
 											const disabledClass =
-												v.is_available === false
-													? " pointer-events-none opacity-25"
-													: "";
+												v.is_available === false ? " opacity-60" : "";
+											// Translate color names
+											const colorKey = v.name?.toLowerCase();
+											const translatedName =
+												t(`buyProduct.colors.${colorKey}`, {
+													defaultValue: v.name,
+												}) || v.name;
 											return (
 												<button
 													key={v.id || i}
 													type="button"
 													onClick={() => setSelectedVariantIndex(i)}
-													className={
-														baseClass +
-														(isSelected ? selectedClass : defaultClass) +
-														disabledClass
-													}
+													className={baseClass + disabledClass}
+													disabled={v.is_available === false}
 												>
-													{v.name}
+													{translatedName}
 												</button>
 											);
 										})}
@@ -924,32 +924,51 @@ export function BuyProduct({ productId }) {
 								</div>
 								<div className="flex flex-col">
 									<Label htmlFor="quantity" className="mb-2">
-										Quantity
+										{t("buyProduct.quantity")}
 									</Label>
 									<Input
 										type="number"
 										id="quantity"
 										placeholder="1"
-										className="w-16"
+										className="w-20 text-center"
 										min={1}
 										value={quantity}
 										onChange={(e) => {
 											const val = parseInt(e.target.value, 10);
-											setQuantity(Number.isNaN(val) ? 1 : Math.max(1, val));
+											const max =
+												Number(product?.stock_quantity) > 0
+													? Number(product.stock_quantity)
+													: Number.MAX_SAFE_INTEGER;
+											const clamped = Number.isNaN(val)
+												? 1
+												: Math.max(1, Math.min(max, val));
+											setQuantity(clamped);
+										}}
+										onBlur={(e) => {
+											const val = parseInt(e.target.value, 10);
+											const max =
+												Number(product?.stock_quantity) > 0
+													? Number(product.stock_quantity)
+													: Number.MAX_SAFE_INTEGER;
+											const clamped = Number.isNaN(val)
+												? 1
+												: Math.max(1, Math.min(max, val));
+											setQuantity(clamped);
 										}}
 									/>
 								</div>
 							</div>
 							<div className="mt-8 mb-4 flex flex-col gap-y-4">
 								<Button
-									title="Buy now"
+									title={t("buyProduct.buyNow")}
 									variant="secondary"
+									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 									onClick={handleBuyNow}
 								>
-									Buy now
+									{t("buyProduct.buyNow")}
 								</Button>
 							</div>
-							<p className="text-center text-xs">Free shipping over $50</p>
+							<p className="text-center text-xs">{t("buyProduct.freeShipping")}</p>
 						</form>
 					</div>
 				</div>

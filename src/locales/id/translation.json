@@ -167,5 +167,35 @@
 			"configError": "Kesalahan konfigurasi",
 			"tryAgain": "Coba Lagi"
 		}
+	},
+	"buyProduct": {
+		"feature1": "Sempurna untuk fokus dan ekspresi diri saat bepergian.",
+		"feature2": "Teman berukuran saku untuk petualangan harian Anda.",
+		"feature3": "Dirancang untuk kreativitas dan koneksi personal.",
+		"detailsTab": "Detail",
+		"shippingTab": "Pengiriman",
+		"returnsTab": "Pengembalian",
+		"detailsText": "Temukan keahlian di balik produk ini. Setiap bagian dirancang dengan penuh perhatian untuk menginspirasi kreativitas dan inovasi.",
+		"shippingText": "Kami menawarkan pengiriman cepat dan andal ke seluruh Indonesia. Sebagian besar pesanan tiba dalam 3-5 hari kerja.",
+		"returnsText": "Tidak puas? Kami menawarkan pengembalian tanpa ribet dalam 30 hari setelah pembelian. Kepuasan Anda adalah prioritas kami.",
+		"reviews": "({{rating}} bintang) • {{count}} ulasan",
+		"variant": "Varian",
+		"quantity": "Kuantitas",
+		"buyNow": "Beli sekarang",
+		"freeShipping": "Pengiriman gratis di atas $50",
+		"colors": {
+			"white": "putih",
+			"black": "hitam",
+			"grey": "abu-abu",
+			"gray": "abu-abu",
+			"orange": "oranye",
+			"blue": "biru",
+			"red": "merah",
+			"green": "hijau",
+			"yellow": "kuning",
+			"purple": "ungu",
+			"pink": "pink",
+			"brown": "coklat"
+		}
 	}
 }

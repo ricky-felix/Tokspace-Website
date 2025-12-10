@@ -168,5 +168,35 @@
 			"configError": "Configuration error",
 			"tryAgain": "Try Again"
 		}
+	},
+	"buyProduct": {
+		"feature1": "Perfect for focus and self-expression on the go.",
+		"feature2": "A pocket-sized friend for your daily adventures.",
+		"feature3": "Designed for creativity and personal connection.",
+		"detailsTab": "Details",
+		"shippingTab": "Shipping",
+		"returnsTab": "Returns",
+		"detailsText": "Discover the craftsmanship behind this product. Each piece is thoughtfully designed to inspire creativity and innovation.",
+		"shippingText": "We offer fast and reliable shipping across Indonesia. Most orders arrive within 3-5 business days.",
+		"returnsText": "Not satisfied? We offer hassle-free returns within 30 days of purchase. Your satisfaction is our priority.",
+		"reviews": "({{rating}} stars) • {{count}} reviews",
+		"variant": "Variant",
+		"quantity": "Quantity",
+		"buyNow": "Buy now",
+		"freeShipping": "Free shipping over $50",
+		"colors": {
+			"white": "white",
+			"black": "black",
+			"grey": "grey",
+			"gray": "gray",
+			"orange": "orange",
+			"blue": "blue",
+			"red": "red",
+			"green": "green",
+			"yellow": "yellow",
+			"purple": "purple",
+			"pink": "pink",
+			"brown": "brown"
+		}
 	}
 }
