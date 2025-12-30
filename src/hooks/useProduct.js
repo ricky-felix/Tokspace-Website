@@ -8,12 +8,37 @@ export const useProduct = (productId) => {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		if (!productId) return;
+		if (!productId) {
+			console.log("❌ No productId provided to useProduct hook");
+			setLoading(false);
+			return;
+		}
+
+		console.log("🔍 Fetching product with ID:", productId);
 
 		const fetchProduct = async () => {
 			try {
 				setLoading(true);
 
+				// First, let's test if we can connect to products table at all
+				console.log("🧪 Testing basic connection...");
+				const { data: testData, error: testError } = await supabase
+					.from("products")
+					.select("id, name")
+					.limit(5);
+
+				if (testError) {
+					console.error("❌ Basic connection test failed:", testError);
+					throw testError;
+				}
+
+				console.log(
+					"✅ Basic connection successful. Available products:",
+					testData
+				);
+
+				// Now try to fetch the specific product
+				console.log("🎯 Fetching specific product...");
 				const { data: productData, error: productError } = await supabase
 					.from("products")
 					.select(
@@ -29,7 +54,30 @@ export const useProduct = (productId) => {
 					.eq("is_available", true)
 					.single();
 
-				if (productError) throw productError;
+				if (productError) {
+					console.error("❌ Product fetch error:", productError);
+
+					// If not found, try without is_available filter
+					console.log("🔍 Trying without availability filter...");
+					const { data: anyProduct, error: anyError } = await supabase
+						.from("products")
+						.select("*")
+						.eq("id", productId)
+						.single();
+
+					if (anyError) {
+						console.error("❌ Product doesn't exist at all:", anyError);
+					} else {
+						console.log(
+							"⚠️ Product exists but is_available =",
+							anyProduct.is_available
+						);
+					}
+
+					throw productError;
+				}
+
+				console.log("✅ Product fetched successfully:", productData.name);
 
 				// Sort related data by display_order
 				if (productData) {
@@ -49,12 +97,20 @@ export const useProduct = (productId) => {
 						productData.product_tabs?.sort(
 							(a, b) => a.display_order - b.display_order
 						) || [];
+
+					console.log("📊 Product data structure:", {
+						name: productData.name,
+						images: productData.product_images?.length || 0,
+						variants: productData.product_variants?.length || 0,
+						features: productData.product_features?.length || 0,
+						tabs: productData.product_tabs?.length || 0,
+					});
 				}
 
 				setProduct(productData);
 			} catch (err) {
+				console.error("❌ Error in useProduct hook:", err);
 				setError(err.message);
-				console.error("Error fetching product:", err);
 			} finally {
 				setLoading(false);
 			}
@@ -66,7 +122,7 @@ export const useProduct = (productId) => {
 	return { product, loading, error };
 };
 
-// Hook to fetch all available products
+// Hook to fetch all available products (for testing)
 export const useProducts = (category = null, featured = false) => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -76,6 +132,8 @@ export const useProducts = (category = null, featured = false) => {
 		const fetchProducts = async () => {
 			try {
 				setLoading(true);
+
+				console.log("🔍 Fetching all products...");
 
 				let query = supabase
 					.from("products")
@@ -99,7 +157,16 @@ export const useProducts = (category = null, featured = false) => {
 
 				const { data, error } = await query;
 
-				if (error) throw error;
+				if (error) {
+					console.error("❌ Error fetching products:", error);
+					throw error;
+				}
+
+				console.log("✅ Fetched products:", data?.length || 0);
+				console.log(
+					"📝 Product IDs:",
+					data?.map((p) => ({ id: p.id, name: p.name }))
+				);
 
 				// Sort images by display_order and take first image as primary
 				const productsWithSortedImages =
@@ -130,7 +197,7 @@ export const useProducts = (category = null, featured = false) => {
 	return { products, loading, error };
 };
 
-// Hook to search products
+// Keep other hooks the same...
 export const useProductSearch = (searchTerm) => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -192,7 +259,6 @@ export const useProductSearch = (searchTerm) => {
 	return { products, loading, error };
 };
 
-// Hook to get product categories
 export const useProductCategories = () => {
 	const [categories, setCategories] = useState([]);
 	const [loading, setLoading] = useState(true);

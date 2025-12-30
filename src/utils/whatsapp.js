@@ -43,3 +43,26 @@ export const formatCurrency = (amount, locale = "id-ID") => {
 		minimumFractionDigits: 0,
 	}).format(amount);
 };
+
+export const sendWhatsAppMessage = async ({
+	phoneNumber,
+	message,
+	productName,
+}) => {
+	try {
+		const cleanPhone = phoneNumber.replace(/[^\d+]/g, "");
+		const encodedMessage = encodeURIComponent(
+			`${message}\nProduct: ${productName}`
+		);
+
+		if (!cleanPhone.match(/^\+?[\d]{10,15}$/)) {
+			throw new Error("Invalid phone number");
+		}
+
+		window.open(`https://wa.me/${cleanPhone}?text=${encodedMessage}`, "_blank");
+		return true;
+	} catch (error) {
+		console.error("WhatsApp service error:", error);
+		throw error;
+	}
+};

@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
 import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbSeparator,
+	Button,
 	Carousel,
 	CarouselContent,
 	CarouselItem,
@@ -10,303 +17,27 @@ import {
 	DialogTrigger,
 	Input,
 	Label,
-	Sheet,
 	SheetClose,
 	SheetContent,
 	SheetTrigger,
+	Tabs,
+	TabsContent,
+	TabsList,
+	TabsTrigger,
 } from "@relume_io/relume-ui";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../utils/supabase.js";
 import { BiSolidStar, BiSolidStarHalf, BiStar } from "react-icons/bi";
-import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
 import buttonStyles from "../css/Button.module.css";
-import { useProduct } from "../hooks/useProduct.js";
 import { WhatsAppService } from "../services/whatsappService.js";
-import { formatCurrency } from "../utils/whatsapp.js";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n.js";
+import { useTranslationHelper } from "../hooks/useTranslationHelper.js";
 
-export const BuyProduct = ({ productId, ...props }) => {
-	const { t, i18n } = useTranslation();
-	const { product, loading, error } = useProduct(productId);
-
-	const [selectedVariant, setSelectedVariant] = useState(null);
-	const [quantity, setQuantity] = useState(1);
-
-	// Set initial variant when product loads
-	useEffect(() => {
-		if (
-			product &&
-			product.product_variants &&
-			product.product_variants.length > 0
-		) {
-			// Set first available variant as default
-			const firstAvailableVariant = product.product_variants.find(
-				(v) => v.is_available
-			);
-			setSelectedVariant(firstAvailableVariant || product.product_variants[0]);
-		}
-	}, [product]);
-
-	const handleWhatsAppOrder = () => {
-		if (!product) return;
-
-		const orderData = {
-			productName: product.name,
-			variantName: selectedVariant?.name,
-			quantity: quantity,
-			unitPrice: selectedVariant?.price || product.base_price,
-			totalPrice: (selectedVariant?.price || product.base_price) * quantity,
-		};
-
-		const whatsappURL = WhatsAppService.generateOrderMessage(
-			orderData,
-			i18n.language
-		);
-		WhatsAppService.openWhatsApp(whatsappURL);
-	};
-
-	const handleWhatsAppInquiry = () => {
-		if (!product) return;
-
-		const whatsappURL = WhatsAppService.generateInquiryMessage(
-			{ productName: product.name },
-			i18n.language
-		);
-		WhatsAppService.openWhatsApp(whatsappURL);
-	};
-
-	const getCurrentPrice = () => {
-		const price = selectedVariant?.price || product?.base_price || 0;
-		return formatCurrency(price);
-	};
-
-	const getTotalPrice = () => {
-		const price = selectedVariant?.price || product?.base_price || 0;
-		return formatCurrency(price * quantity);
-	};
-
-	if (!productId) {
-		return (
-			<div className="px-[5%] py-12 md:py-16 lg:py-20">
-				<div className="container">
-					<div className="text-center">
-						<h2 className="text-2xl font-bold text-gray-900 mb-4">
-							{t("buyProduct.notFoundTitle") || "Product not found"}
-						</h2>
-						<p className="text-gray-600">
-							{t("buyProduct.notFoundMessage") ||
-								"The product you're looking for doesn't exist."}
-						</p>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	if (loading) {
-		return (
-			<div className="px-[5%] py-12 md:py-16 lg:py-20">
-				<div className="container">
-					<div className="flex items-center justify-center h-64">
-						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	// Error state
-	if (error) {
-		return (
-			<div className="px-[5%] py-12 md:py-16 lg:py-20">
-				<div className="container">
-					<div className="text-center">
-						<h2 className="text-2xl font-bold text-gray-900 mb-4">
-							{t("buyProduct.errorTitle") || "Error loading product"}
-						</h2>
-						<p className="text-gray-600">{error}</p>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	// No product found
-	if (!product) {
-		return (
-			<div className="px-[5%] py-12 md:py-16 lg:py-20">
-				<div className="container">
-					<div className="text-center">
-						<h2 className="text-2xl font-bold text-gray-900 mb-4">
-							{t("buyProduct.notFoundTitle") || "Product not found"}
-						</h2>
-						<p className="text-gray-600">
-							{t("buyProduct.notFoundMessage") ||
-								"The product you're looking for doesn't exist."}
-						</p>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	return (
-		<header id="relume" className="px-[5%] py-12 md:py-16 lg:py-20">
-			<div className="container">
-				<div className="mb-8 flex flex-col gap-6 md:mb-12">
-					<GalleryDialog
-						images={product.product_images || []}
-						showAllButton={{
-							title: t("buyProduct.showAllPhotos") || "Show all photos",
-						}}
-					/>
-				</div>
-
-				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
-					<div>
-						<h1 className="hidden text-4xl font-bold leading-[1.2] md:mb-8 md:block md:text-5xl lg:text-6xl">
-							{product.name}
-						</h1>
-						<p className="mb-6 text-gray-700">{product.description}</p>
-
-						{product.product_features &&
-							product.product_features.length > 0 && (
-								<ul className="mb-6 mt-4 list-inside list-disc md:mb-8">
-									{product.product_features.map((feature) => (
-										<li
-											key={feature.id}
-											className="py-0.5 pl-1.5 first:pt-0 last:pb-0"
-										>
-											{feature.feature_text}
-										</li>
-									))}
-								</ul>
-							)}
-
-						<InformationTabs tabs={product.product_tabs || []} />
-					</div>
-
-					<div className="order-first md:order-none">
-						<h1 className="mb-4 text-4xl font-bold leading-[1.2] md:hidden">
-							{product.name}
-						</h1>
-						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
-							{getCurrentPrice()}
-						</p>
-
-						{/* Rating */}
-						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
-							<Star rating={product.rating || 0} />
-							<p className="text-sm">
-								{`(${product.rating || 0} stars) • ${product.review_count || 0} reviews`}
-							</p>
-						</div>
-
-						{/* Order Form */}
-						<div className="grid grid-cols-1 gap-6">
-							{/* Variants Selection */}
-							{product.product_variants &&
-								product.product_variants.length > 0 && (
-									<div className="flex flex-col">
-										<Label className="mb-2">
-											{t("buyProduct.variantLabel") || "Select Variant"}
-										</Label>
-										<div className="flex flex-wrap gap-4">
-											{product.product_variants.map((variant) => (
-												<button
-													key={variant.id}
-													type="button"
-													className={`${buttonStyles.bubbleButton} ${
-														selectedVariant?.id === variant.id
-															? buttonStyles.primary
-															: buttonStyles.secondary
-													} ${
-														!variant.is_available
-															? "opacity-25 pointer-events-none"
-															: ""
-													}`}
-													onClick={() => setSelectedVariant(variant)}
-													disabled={!variant.is_available}
-												>
-													{variant.name}
-													{variant.price !== product.base_price && (
-														<span className="ml-1 text-xs">
-															({formatCurrency(variant.price)})
-														</span>
-													)}
-												</button>
-											))}
-										</div>
-									</div>
-								)}
-
-							{/* Quantity Selection */}
-							<div className="flex flex-col">
-								<Label htmlFor="quantity" className="mb-2">
-									{t("buyProduct.quantityLabel") || "Quantity"}
-								</Label>
-								<Input
-									type="number"
-									id="quantity"
-									min="1"
-									max="99"
-									placeholder="1"
-									className="w-full"
-									value={quantity}
-									onChange={(e) =>
-										setQuantity(Math.max(1, parseInt(e.target.value) || 1))
-									}
-								/>
-							</div>
-
-							{/* Total Price Display */}
-							{quantity > 1 && (
-								<div className="bg-gray-50 p-4 rounded-lg">
-									<p className="text-lg font-semibold">
-										{t("buyProduct.total") || "Total"}: {getTotalPrice()}
-									</p>
-								</div>
-							)}
-						</div>
-
-						{/* Action Buttons */}
-						<div className="mb-4 mt-8 flex flex-col gap-y-4">
-							<button
-								type="button"
-								onClick={handleWhatsAppOrder}
-								className={`${buttonStyles.bubbleButton} ${buttonStyles.primary} flex items-center justify-center gap-2`}
-							>
-								<span>📱</span>
-								{t("buyProduct.orderWhatsApp") || "Order via WhatsApp"}
-							</button>
-
-							<button
-								type="button"
-								onClick={handleWhatsAppInquiry}
-								className={`${buttonStyles.bubbleButton} ${buttonStyles.secondary} flex items-center justify-center gap-2`}
-							>
-								<span>💬</span>
-								{t("buyProduct.askQuestion") || "Ask Questions"}
-							</button>
-						</div>
-
-						{/* WhatsApp Contact Info */}
-						<div className="text-center text-sm text-gray-600">
-							<p>
-								{t("buyProduct.whatsappInfo") ||
-									"Orders processed via WhatsApp Business"}
-							</p>
-							<p className="font-medium">
-								{WhatsAppService.getFormattedPhoneNumber()}
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-	);
-};
-
-// Star Rating Component
 const Star = ({ rating }) => {
 	const fullStars = Math.floor(rating);
 	const hasHalfStar = rating % 1 !== 0;
@@ -332,144 +63,30 @@ const Star = ({ rating }) => {
 	);
 };
 
-// Image Gallery Dialog Component
-const GalleryDialog = ({ images, showAllButton }) => {
+Star.propTypes = {
+	rating: PropTypes.number.isRequired,
+};
+
+const useGalleryDialog = () => {
 	const [selectedSlide, setSelectedSlide] = useState(0);
-
-	if (!images || images.length === 0) {
-		return (
-			<div className="aspect-[5/4] bg-gray-200 flex items-center justify-center rounded-lg">
-				<p className="text-gray-500">No images available</p>
-			</div>
-		);
-	}
-
-	return (
-		<div className="relative">
-			<Dialog>
-				<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
-					<div>
-						<DialogTrigger asChild>
-							<button
-								className="block size-full rounded-lg overflow-hidden"
-								onClick={() => setSelectedSlide(0)}
-							>
-								<img
-									src={images[0].image_url}
-									alt={images[0].alt_text || "Product image"}
-									className="aspect-[5/4] size-full object-cover hover:scale-105 transition-transform duration-300"
-								/>
-							</button>
-						</DialogTrigger>
-					</div>
-					{images.length > 1 && (
-						<div className="hidden md:grid md:grid-cols-2 md:gap-4 relative">
-							{images.slice(1, 5).map((image, index) => (
-								<DialogTrigger key={index} asChild>
-									<button
-										className="block w-full rounded-lg overflow-hidden"
-										onClick={() => setSelectedSlide(index + 1)}
-									>
-										<img
-											src={image.image_url}
-											alt={image.alt_text || `Product image ${index + 2}`}
-											className="aspect-[5/4] size-full object-cover hover:scale-105 transition-transform duration-300"
-										/>
-									</button>
-								</DialogTrigger>
-							))}
-
-							{/* Show all photos button */}
-							{images.length > 5 && (
-								<div className="absolute bottom-2 right-2 z-10 pointer-events-auto">
-									<GallerySheet
-										images={images}
-										showAllButton={showAllButton}
-										setSelectedSlide={setSelectedSlide}
-										selectedSlide={selectedSlide}
-									/>
-								</div>
-							)}
-						</div>
-					)}
-				</div>
-				<DialogContent
-					onCloseAutoFocus={(e) => e.preventDefault()}
-					closeIconPosition="inside"
-					closeIconClassName="text-text-alternative z-[1001]"
-					className="z-[1001]"
-				>
-					<Lightbox images={images} selectedSlide={selectedSlide} />
-				</DialogContent>
-			</Dialog>
-		</div>
-	);
+	const handleSelectSlide = (number) => () => {
+		setSelectedSlide(number);
+	};
+	const preventDefault = (e) => e.preventDefault();
+	return {
+		selectedSlide,
+		handleSelectSlide,
+		preventDefault,
+	};
 };
 
-// Gallery Sheet Component
-const GallerySheet = ({
-	images,
-	showAllButton,
-	selectedSlide,
-	setSelectedSlide,
-}) => {
-	const { t } = useTranslation();
-	return (
-		<Sheet>
-			<SheetTrigger asChild>
-				<button
-					className={`${buttonStyles.bubbleButton} ${buttonStyles[showAllButton.variant || "secondary"]} !mb-0 bg-black/70 text-white hover:bg-black/80 transition-all duration-200 text-sm px-3 py-2 rounded-md shadow-md`}
-				>
-					{showAllButton.title}
-				</button>
-			</SheetTrigger>
-			<SheetContent side="bottom" className="size-full px-4 z-[1001]">
-				<SheetClose className="z-[1002]" />
-				<div className="container">
-					<div className="mx-auto max-w-lg">
-						<Dialog>
-							<div className="grid grid-cols-2 gap-4">
-								{images.map((image, index) => (
-									<DialogTrigger key={index} asChild>
-										<button
-											onClick={() => setSelectedSlide(index)}
-											className="first:col-span-2 rounded-lg overflow-hidden"
-										>
-											<img
-												src={image.image_url}
-												alt={image.alt_text || `Product image ${index + 1}`}
-												className="aspect-[5/4] size-full object-cover"
-											/>
-										</button>
-									</DialogTrigger>
-								))}
-							</div>
-							<DialogContent
-								onCloseAutoFocus={(e) => e.preventDefault()}
-								closeIconPosition="inside"
-								closeIconClassName="text-text-alternative z-[1003]"
-								className="z-[1002]"
-							>
-								<Lightbox images={images} selectedSlide={selectedSlide} />
-							</DialogContent>
-						</Dialog>
-					</div>
-				</div>
-			</SheetContent>
-		</Sheet>
-	);
-};
-
-// Lightbox Component
-const Lightbox = ({ images, selectedSlide }) => {
+const useLightbox = (selectedSlide) => {
 	const [mainApi, setMainApi] = useState();
 	const [thumbApi, setThumbApi] = useState();
 	const [current, setCurrent] = useState(selectedSlide);
-
 	useEffect(() => {
 		setCurrent(selectedSlide);
 	}, [selectedSlide]);
-
 	useEffect(() => {
 		if (!mainApi || !thumbApi) {
 			return;
@@ -480,145 +97,888 @@ const Lightbox = ({ images, selectedSlide }) => {
 			thumbApi.scrollTo(index);
 		});
 	}, [mainApi, thumbApi]);
-
-	return (
-		<div className="relative flex h-screen flex-col">
-			<div className="flex grow items-center justify-center pb-[12vh]">
-				<div className="mx-auto max-w-[1000px]">
-					<div className="overflow-hidden">
-						<Carousel
-							setApi={setMainApi}
-							opts={{
-								loop: true,
-								align: "start",
-							}}
-							className="static m-0"
-						>
-							<CarouselContent className="m-0">
-								{images.map((slide, index) => (
-									<CarouselItem key={index} className="pl-0">
-										<button
-											onClick={() => mainApi?.scrollTo(index + 1)}
-											className="block w-full"
-										>
-											<img
-												src={slide.image_url}
-												alt={slide.alt_text || `Product image ${index + 1}`}
-												className="max-w-screen mx-auto max-h-[86vh] w-full md:max-h-[84vh] md:max-w-[82.3vw] object-contain"
-											/>
-										</button>
-									</CarouselItem>
-								))}
-							</CarouselContent>
-							<CarouselPrevious className="left-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
-							<CarouselNext className="right-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
-						</Carousel>
-					</div>
-				</div>
-			</div>
-			<div className="absolute bottom-0 left-0 w-full overflow-hidden p-[1vh]">
-				<Carousel
-					setApi={setThumbApi}
-					opts={{
-						align: "start",
-						dragFree: true,
-						loop: true,
-					}}
-					className="m-0"
-				>
-					<CarouselContent className="m-0 block whitespace-nowrap text-center">
-						{images.map((slide, index) => (
-							<CarouselItem
-								key={index}
-								className="inline-block max-w-[12vh] pl-[2vh]"
-							>
-								<button
-									onClick={() => mainApi?.scrollTo(index)}
-									className={clsx(
-										"block rounded-lg overflow-hidden",
-										current === index && "opacity-30"
-									)}
-								>
-									<img
-										src={slide.image_url}
-										alt={slide.alt_text || `Product image ${index + 1}`}
-										className="w-full aspect-square object-cover"
-									/>
-								</button>
-							</CarouselItem>
-						))}
-					</CarouselContent>
-				</Carousel>
-			</div>
-		</div>
-	);
+	const handleClick = (index) => () => {
+		return mainApi?.scrollTo(index);
+	};
+	const getThumbStyles = (index) => {
+		return clsx("block", current === index && "opacity-30");
+	};
+	return {
+		setMainApi,
+		setThumbApi,
+		handleClick,
+		getThumbStyles,
+	};
 };
 
-// Information Tabs Component
-const InformationTabs = ({ tabs }) => {
+export function BuyProduct({ productId }) {
 	const { t } = useTranslation();
-	const [activeTab, setActiveTab] = useState(tabs[0]?.id);
+	const { getTranslation, prefetchTranslations } = useTranslationHelper(
+		supabase,
+		i18n
+	);
+	const gallery = useGalleryDialog();
+	const lightbox = useLightbox(gallery.selectedSlide);
+	const useActive = { ...gallery, ...lightbox };
+	const [product, setProduct] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [variants, setVariants] = useState([]);
+	const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+	const [quantity, setQuantity] = useState(1);
+	const [categoryProducts, setCategoryProducts] = useState([]);
+	const [categoryLoading, setCategoryLoading] = useState(false);
 
-	if (!tabs || tabs.length === 0) {
-		return null;
+	useEffect(() => {
+		if (!productId) return;
+		const isUuid = (v) =>
+			typeof v === "string" &&
+			/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+				v
+			);
+		const fetchProduct = async () => {
+			try {
+				setLoading(true);
+				setError(null);
+				const selectFields = `id,name,description,details,price,color,stock_quantity,category_id`;
+
+				let data = null;
+				let err = null;
+
+				if (isUuid(productId)) {
+					const r1 = await supabase
+						.from("products")
+						.select(selectFields)
+						.eq("id", productId)
+						.eq("is_available", true)
+						.single();
+					data = r1.data;
+					err = r1.error;
+					if (err) {
+						const r2 = await supabase
+							.from("products")
+							.select(selectFields)
+							.eq("slug", productId)
+							.eq("is_available", true)
+							.single();
+						data = r2.data;
+						err = r2.error;
+					}
+				} else {
+					const r1 = await supabase
+						.from("products")
+						.select(selectFields)
+						.eq("slug", productId)
+						.eq("is_available", true)
+						.single();
+					data = r1.data;
+					err = r1.error;
+					if (err) {
+						const r2 = await supabase
+							.from("products")
+							.select(selectFields)
+							.eq("id", productId)
+							.eq("is_available", true)
+							.single();
+						data = r2.data;
+						err = r2.error;
+					}
+				}
+				if (err) throw err;
+				let productImages = [];
+				try {
+					const { data: imgRows, error: imgErr } = await supabase
+						.from("product_images")
+						.select("id,image_url,alt_text,display_order,is_primary")
+						.eq("product_id", data.id)
+						.order("display_order", { ascending: true });
+					if (imgErr) throw imgErr;
+					productImages = imgRows || [];
+				} catch (ie) {
+					console.error(ie);
+				}
+				setProduct({ ...data, product_images: productImages });
+				setVariants([]);
+				setSelectedVariantIndex(0);
+
+				if (data?.category_id) {
+					setCategoryLoading(true);
+					try {
+						const { data: siblings, error: catErr } = await supabase
+							.from("products")
+							.select("id,name,price,color,is_available")
+							.eq("category_id", data.category_id)
+							.eq("is_available", true)
+							.order("created_at", { ascending: true });
+						if (catErr) throw catErr;
+						const sibs = siblings || [];
+						const sibIds = sibs.map((s) => s.id);
+						let imageRows = [];
+						if (sibIds.length) {
+							const { data: rows, error: imgErr } = await supabase
+								.from("product_images")
+								.select(
+									"product_id,id,image_url,alt_text,display_order,is_primary"
+								)
+								.in("product_id", sibIds)
+								.order("display_order", { ascending: true });
+							if (imgErr) throw imgErr;
+							imageRows = rows || [];
+						}
+						const imagesByProduct = new Map();
+						for (const r of imageRows) {
+							const arr = imagesByProduct.get(r.product_id) || [];
+							arr.push(r);
+							imagesByProduct.set(r.product_id, arr);
+						}
+						const processed = sibs.map((p) => {
+							const images = imagesByProduct.get(p.id) || [];
+							const primary = images.find((img) => img.is_primary) || images[0];
+							return {
+								...p,
+								price: Number(p.price),
+								image_url: primary?.image_url || null,
+								images,
+							};
+						});
+						setCategoryProducts(processed);
+						const fallbackVariants = processed
+							.map((cp) => ({
+								id: cp.id,
+								name: cp.color || cp.name,
+								price: cp.price,
+								is_available: cp.is_available,
+								images: cp.images,
+							}))
+							.slice(0, 5);
+						setVariants(fallbackVariants);
+						const idx = fallbackVariants.findIndex((v) => v.id === data.id);
+						setSelectedVariantIndex(idx >= 0 ? idx : 0);
+					} catch (ce) {
+						console.error(ce);
+					} finally {
+						setCategoryLoading(false);
+					}
+				}
+			} catch (e) {
+				setError(e.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchProduct();
+	}, [productId]);
+
+	// Fetch translations for the product and categories
+	useEffect(() => {
+		if (product?.id) {
+			prefetchTranslations(["products", "categories"]);
+		}
+	}, [product?.id, i18n.language, prefetchTranslations]);
+
+	const selectedVariant = variants[selectedVariantIndex] || null;
+	const imagesForVariant = useMemo(() => {
+		const imgs = product?.product_images || [];
+		if (selectedVariant?.images && selectedVariant.images.length) {
+			return selectedVariant.images;
+		}
+		if (selectedVariant?.name) {
+			const filtered = imgs.filter((img) =>
+				(img.alt_text || "")
+					.toLowerCase()
+					.includes(selectedVariant.name.toLowerCase())
+			);
+			if (filtered.length) return filtered;
+		}
+		return imgs;
+	}, [product, selectedVariant]);
+	const getImageSrc = (index) =>
+		imagesForVariant[index]?.image_url ||
+		"https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg";
+
+	const unitPrice = selectedVariant?.price ?? product?.price ?? 0;
+	const handleBuyNow = () => {
+		const productName = getTranslation(
+			product?.id,
+			"name",
+			"products",
+			null,
+			product?.name || ""
+		);
+		const url = WhatsAppService.generateOrderMessage(
+			{
+				productName: productName,
+				variantName: selectedVariant?.name || product?.color || "",
+				quantity: Number(quantity) || 1,
+				unitPrice,
+				totalPrice: (Number(quantity) || 1) * unitPrice,
+			},
+			"en"
+		);
+		WhatsAppService.openWhatsApp(url);
+	};
+	if (loading) {
+		return (
+			<header id="relume" className="px-[5%] ">
+				<div className="container">
+					<div className="mb-8 flex flex-col gap-6 md:mb-12">
+						<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
+							<div className="animate-pulse h-[40vh] bg-gray-200 rounded-lg" />
+							<div className="hidden md:grid md:grid-cols-2 md:gap-4">
+								<div className="animate-pulse h-[19vh] bg-gray-200 rounded-lg" />
+								<div className="animate-pulse h-[19vh] bg-gray-200 rounded-lg" />
+								<div className="animate-pulse h-[19vh] bg-gray-200 rounded-lg" />
+								<div className="animate-pulse h-[19vh] bg-gray-200 rounded-lg" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+		);
+	}
+
+	if (error) {
+		return (
+			<header id="relume" className="px-[5%] ">
+				<div className="container">
+					<div className="text-center text-red-600 py-10">{String(error)}</div>
+				</div>
+			</header>
+		);
 	}
 
 	return (
-		<div className="w-full">
-			<div className="mb-6 flex flex-wrap gap-2">
-				{tabs.map((tab) => (
-					<button
-						key={tab.id}
-						onClick={() => setActiveTab(tab.id)}
-						className={clsx(
-							"px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-in-out",
-							"border-2 relative overflow-hidden",
-							activeTab === tab.id
-								? [
-										"bg-gradient-to-r from-orange-500 to-red-500",
-										"text-white border-orange-500",
-										"shadow-lg shadow-orange-500/30",
-										"transform translate-y-0",
-									]
-								: [
-										"bg-white text-gray-600",
-										"border-gray-200 hover:border-gray-300",
-										"hover:bg-gray-50 hover:text-gray-800",
-										"hover:shadow-md hover:transform hover:-translate-y-0.5",
-									]
-						)}
-					>
-						<span className="relative z-10">{tab.tab_name}</span>
-						{activeTab === tab.id && (
-							<div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-20"></div>
-						)}
-					</button>
-				))}
-			</div>
-
-			<div className="mt-4">
-				{tabs.map((tab) => (
-					<div
-						key={tab.id}
-						className={clsx(
-							"transition-all duration-300 ease-in-out",
-							activeTab === tab.id
-								? "opacity-100 max-h-none"
-								: "opacity-0 max-h-0 overflow-hidden"
-						)}
-					>
-						{activeTab === tab.id && (
-							<div className="animate-fade-in">
-								<p className="text-gray-700 leading-relaxed whitespace-pre-line">
-									{tab.tab_content}
-								</p>
+		<header id="relume" className="px-[5%] ">
+			<div className="container">
+				<div className="mb-8 flex flex-col gap-6 md:mb-12">
+					<div className="relative">
+						<Dialog>
+							<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
+								<div>
+									<DialogTrigger className="block size-full">
+										<div
+											onClick={useActive.handleSelectSlide(0)}
+											className="h-full"
+										>
+											<img
+												src={getImageSrc(0)}
+												alt="Image 1"
+												className="aspect-[5/4] size-full object-cover"
+											/>
+										</div>
+									</DialogTrigger>
+								</div>
+								<div className="hidden md:grid md:grid-cols-2 md:gap-4">
+									<DialogTrigger className="block w-full">
+										<div onClick={useActive.handleSelectSlide(1)}>
+											<img
+												src={getImageSrc(1)}
+												alt="Image 2"
+												className="aspect-[5/4] size-full object-cover"
+											/>
+										</div>
+									</DialogTrigger>
+									<DialogTrigger className="block w-full">
+										<div onClick={useActive.handleSelectSlide(2)}>
+											<img
+												src={getImageSrc(2)}
+												alt="Image 3"
+												className="aspect-[5/4] size-full object-cover"
+											/>
+										</div>
+									</DialogTrigger>
+									<DialogTrigger className="block w-full">
+										<div onClick={useActive.handleSelectSlide(3)}>
+											<img
+												src={getImageSrc(3)}
+												alt="Image 4"
+												className="aspect-[5/4] size-full object-cover"
+											/>
+										</div>
+									</DialogTrigger>
+									<DialogTrigger className="block w-full">
+										<div onClick={useActive.handleSelectSlide(4)}>
+											<img
+												src={getImageSrc(4)}
+												alt="Image 5"
+												className="aspect-[5/4] size-full object-cover"
+											/>
+										</div>
+									</DialogTrigger>
+								</div>
 							</div>
-						)}
+							<DialogContent
+								onCloseAutoFocus={useActive.preventDefault}
+								closeIconPosition="inside"
+								closeIconClassName="text-text-alternative"
+							>
+								<div className="relative flex h-screen flex-col">
+									<div className="flex grow items-center justify-center pb-[12vh]">
+										<div className="mx-auto max-w-[1000px]">
+											<div className="overflow-hidden">
+												<Carousel
+													setApi={useActive.setMainApi}
+													opts={{ loop: true, align: "start" }}
+													className="static m-0"
+												>
+													<CarouselContent className="m-0">
+														<CarouselItem className="pl-0">
+															<button
+																onClick={useActive.handleClick(1)}
+																className="block w-full"
+															>
+																<img
+																	src={getImageSrc(0)}
+																	alt="Image 1"
+																	className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																/>
+															</button>
+														</CarouselItem>
+														<CarouselItem className="pl-0">
+															<button
+																onClick={useActive.handleClick(2)}
+																className="block w-full"
+															>
+																<img
+																	src={getImageSrc(1)}
+																	alt="Image 2"
+																	className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																/>
+															</button>
+														</CarouselItem>
+														<CarouselItem className="pl-0">
+															<button
+																onClick={useActive.handleClick(3)}
+																className="block w-full"
+															>
+																<img
+																	src={getImageSrc(2)}
+																	alt="Image 3"
+																	className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																/>
+															</button>
+														</CarouselItem>
+														<CarouselItem className="pl-0">
+															<button
+																onClick={useActive.handleClick(4)}
+																className="block w-full"
+															>
+																<img
+																	src={getImageSrc(3)}
+																	alt="Image 4"
+																	className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																/>
+															</button>
+														</CarouselItem>
+														<CarouselItem className="pl-0">
+															<button
+																onClick={useActive.handleClick(5)}
+																className="block w-full"
+															>
+																<img
+																	src={getImageSrc(4)}
+																	alt="Image 5"
+																	className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																/>
+															</button>
+														</CarouselItem>
+													</CarouselContent>
+													<CarouselPrevious className="left-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
+													<CarouselNext className="right-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
+												</Carousel>
+											</div>
+										</div>
+									</div>
+									<div className="absolute bottom-0 left-0 w-full overflow-hidden p-[1vh]">
+										<Carousel
+											setApi={useActive.setThumbApi}
+											opts={{ align: "start", dragFree: true, loop: true }}
+											className="m-0"
+										>
+											<CarouselContent className="m-0 block text-center whitespace-nowrap">
+												<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+													<button
+														onClick={useActive.handleClick(0)}
+														className={useActive.getThumbStyles(0)}
+													>
+														<img
+															src={getImageSrc(0)}
+															alt="Image 1"
+															className="w-full"
+														/>
+													</button>
+												</CarouselItem>
+												<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+													<button
+														onClick={useActive.handleClick(1)}
+														className={useActive.getThumbStyles(1)}
+													>
+														<img
+															src={getImageSrc(1)}
+															alt="Image 2"
+															className="w-full"
+														/>
+													</button>
+												</CarouselItem>
+												<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+													<button
+														onClick={useActive.handleClick(2)}
+														className={useActive.getThumbStyles(2)}
+													>
+														<img
+															src={getImageSrc(2)}
+															alt="Image 3"
+															className="w-full"
+														/>
+													</button>
+												</CarouselItem>
+												<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+													<button
+														onClick={useActive.handleClick(3)}
+														className={useActive.getThumbStyles(3)}
+													>
+														<img
+															src={getImageSrc(3)}
+															alt="Image 4"
+															className="w-full"
+														/>
+													</button>
+												</CarouselItem>
+												<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+													<button
+														onClick={useActive.handleClick(4)}
+														className={useActive.getThumbStyles(4)}
+													>
+														<img
+															src={getImageSrc(4)}
+															alt="Image 5"
+															className="w-full"
+														/>
+													</button>
+												</CarouselItem>
+											</CarouselContent>
+										</Carousel>
+									</div>
+								</div>
+							</DialogContent>
+						</Dialog>
+						<Dialog>
+							<SheetContent side="bottom" className="size-full px-4">
+								<SheetClose />
+								<div className="container">
+									<div className="mx-auto max-w-lg">
+										<Dialog>
+											<div className="grid grid-cols-2 gap-4">
+												<DialogTrigger>
+													<div
+														onClick={useActive.handleSelectSlide(0)}
+														className="first:col-span-2"
+													>
+														<img
+															src={getImageSrc(0)}
+															alt="Image 1"
+															className="aspect-[5/4] size-full object-cover"
+														/>
+													</div>
+												</DialogTrigger>
+												<DialogTrigger>
+													<div
+														onClick={useActive.handleSelectSlide(1)}
+														className="first:col-span-2"
+													>
+														<img
+															src={getImageSrc(1)}
+															alt="Image 2"
+															className="aspect-[5/4] size-full object-cover"
+														/>
+													</div>
+												</DialogTrigger>
+												<DialogTrigger>
+													<div
+														onClick={useActive.handleSelectSlide(2)}
+														className="first:col-span-2"
+													>
+														<img
+															src={getImageSrc(2)}
+															alt="Image 3"
+															className="aspect-[5/4] size-full object-cover"
+														/>
+													</div>
+												</DialogTrigger>
+												<DialogTrigger>
+													<div
+														onClick={useActive.handleSelectSlide(3)}
+														className="first:col-span-2"
+													>
+														<img
+															src={getImageSrc(3)}
+															alt="Image 4"
+															className="aspect-[5/4] size-full object-cover"
+														/>
+													</div>
+												</DialogTrigger>
+												<DialogTrigger>
+													<div
+														onClick={useActive.handleSelectSlide(4)}
+														className="first:col-span-2"
+													>
+														<img
+															src={getImageSrc(4)}
+															alt="Image 5"
+															className="aspect-[5/4] size-full object-cover"
+														/>
+													</div>
+												</DialogTrigger>
+											</div>
+											<DialogContent
+												onCloseAutoFocus={useActive.preventDefault}
+												closeIconPosition="inside"
+												closeIconClassName="text-text-alternative"
+											>
+												<div className="relative flex h-screen flex-col">
+													<div className="flex grow items-center justify-center pb-[12vh]">
+														<div className="mx-auto max-w-[1000px]">
+															<div className="overflow-hidden">
+																<Carousel
+																	setApi={useActive.setMainApi}
+																	opts={{ loop: true, align: "start" }}
+																	className="static m-0"
+																>
+																	<CarouselContent className="m-0">
+																		<CarouselItem className="pl-0">
+																			<button
+																				onClick={useActive.handleClick(1)}
+																				className="block w-full"
+																			>
+																				<img
+																					src={getImageSrc(0)}
+																					alt="Image 1"
+																					className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																				/>
+																			</button>
+																		</CarouselItem>
+																		<CarouselItem className="pl-0">
+																			<button
+																				onClick={useActive.handleClick(2)}
+																				className="block w-full"
+																			>
+																				<img
+																					src={getImageSrc(1)}
+																					alt="Image 2"
+																					className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																				/>
+																			</button>
+																		</CarouselItem>
+																		<CarouselItem className="pl-0">
+																			<button
+																				onClick={useActive.handleClick(3)}
+																				className="block w-full"
+																			>
+																				<img
+																					src={getImageSrc(2)}
+																					alt="Image 3"
+																					className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																				/>
+																			</button>
+																		</CarouselItem>
+																		<CarouselItem className="pl-0">
+																			<button
+																				onClick={useActive.handleClick(4)}
+																				className="block w-full"
+																			>
+																				<img
+																					src={getImageSrc(3)}
+																					alt="Image 4"
+																					className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																				/>
+																			</button>
+																		</CarouselItem>
+																		<CarouselItem className="pl-0">
+																			<button
+																				onClick={useActive.handleClick(5)}
+																				className="block w-full"
+																			>
+																				<img
+																					src={getImageSrc(4)}
+																					alt="Image 5"
+																					className="mx-auto max-h-[86vh] w-full max-w-screen md:max-h-[84vh] md:max-w-[82.3vw]"
+																				/>
+																			</button>
+																		</CarouselItem>
+																	</CarouselContent>
+																	<CarouselPrevious className="left-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
+																	<CarouselNext className="right-6 hidden rounded-none border-none bg-transparent text-text-alternative md:flex md:size-12 lg:size-14" />
+																</Carousel>
+															</div>
+														</div>
+													</div>
+													<div className="absolute bottom-0 left-0 w-full overflow-hidden p-[1vh]">
+														<Carousel
+															setApi={useActive.setThumbApi}
+															opts={{
+																align: "start",
+																dragFree: true,
+																loop: true,
+															}}
+															className="m-0"
+														>
+															<CarouselContent className="m-0 block text-center whitespace-nowrap">
+																<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+																	<button
+																		onClick={useActive.handleClick(0)}
+																		className={useActive.getThumbStyles(0)}
+																	>
+																		<img
+																			src={getImageSrc(0)}
+																			alt="Image 1"
+																			className="w-full"
+																		/>
+																	</button>
+																</CarouselItem>
+																<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+																	<button
+																		onClick={useActive.handleClick(1)}
+																		className={useActive.getThumbStyles(1)}
+																	>
+																		<img
+																			src={getImageSrc(1)}
+																			alt="Image 2"
+																			className="w-full"
+																		/>
+																	</button>
+																</CarouselItem>
+																<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+																	<button
+																		onClick={useActive.handleClick(2)}
+																		className={useActive.getThumbStyles(2)}
+																	>
+																		<img
+																			src={getImageSrc(2)}
+																			alt="Image 3"
+																			className="w-full"
+																		/>
+																	</button>
+																</CarouselItem>
+																<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+																	<button
+																		onClick={useActive.handleClick(3)}
+																		className={useActive.getThumbStyles(3)}
+																	>
+																		<img
+																			src={getImageSrc(3)}
+																			alt="Image 4"
+																			className="w-full"
+																		/>
+																	</button>
+																</CarouselItem>
+																<CarouselItem className="inline-block max-w-[12vh] pl-[2vh]">
+																	<button
+																		onClick={useActive.handleClick(4)}
+																		className={useActive.getThumbStyles(4)}
+																	>
+																		<img
+																			src={getImageSrc(4)}
+																			alt="Image 5"
+																			className="w-full"
+																		/>
+																	</button>
+																</CarouselItem>
+															</CarouselContent>
+														</Carousel>
+													</div>
+												</div>
+											</DialogContent>
+										</Dialog>
+									</div>
+								</div>
+							</SheetContent>
+						</Dialog>
 					</div>
-				))}
+				</div>
+				<div className="grid grid-cols-1 gap-y-8 md:grid-cols-[1fr_16rem] md:gap-x-12 md:gap-y-10 lg:gap-12 xl:grid-cols-[1fr_0.5fr] xl:gap-x-20">
+					<div>
+						<h1 className="hidden text-4xl leading-[1.2] font-bold md:mb-8 md:block md:text-5xl lg:text-6xl">
+							{getTranslation(
+								product?.id,
+								"name",
+								"products",
+								null,
+								product?.name || ""
+							)}
+						</h1>
+						<p>
+							{getTranslation(
+								product?.id,
+								"description",
+								"products",
+								null,
+								product?.description || "Premium product description"
+							)}
+						</p>
+						<ul className="mt-4 mb-6 list-inside list-disc md:mb-8">
+							<li className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
+								{t("buyProduct.feature1")}
+							</li>
+							<li className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
+								{t("buyProduct.feature2")}
+							</li>
+							<li className="py-0.5 pl-1.5 first:pt-0 last:pb-0">
+								{t("buyProduct.feature3")}
+							</li>
+						</ul>
+						<Tabs defaultValue="tab-details">
+							<TabsList className="mb-5 flex-wrap items-center gap-6 md:mb-6">
+								<TabsTrigger
+									value="tab-details"
+									className="border-0 px-0 py-2 data-[state=active]:border-b-[2px] data-[state=active]:border-border-primary data-[state=active]:text-text-primary"
+								>
+									{t("buyProduct.detailsTab")}
+								</TabsTrigger>
+								<TabsTrigger
+									value="tab-shipping"
+									className="border-0 px-0 py-2 data-[state=active]:border-b-[2px] data-[state=active]:border-border-primary data-[state=active]:text-text-primary"
+								>
+									{t("buyProduct.shippingTab")}
+								</TabsTrigger>
+								<TabsTrigger
+									value="tab-returns"
+									className="border-0 px-0 py-2 data-[state=active]:border-b-[2px] data-[state=active]:border-border-primary data-[state=active]:text-text-primary"
+								>
+									{t("buyProduct.returnsTab")}
+								</TabsTrigger>
+							</TabsList>
+							<TabsContent
+								value="tab-details"
+								className="data-[state=active]:animate-tabs"
+							>
+								<p>{t("buyProduct.detailsText")}</p>
+							</TabsContent>
+							<TabsContent
+								value="tab-shipping"
+								className="data-[state=active]:animate-tabs"
+							>
+								<p>{t("buyProduct.shippingText")}</p>
+							</TabsContent>
+							<TabsContent
+								value="tab-returns"
+								className="data-[state=active]:animate-tabs"
+							>
+								<p>{t("buyProduct.returnsText")}</p>
+							</TabsContent>
+						</Tabs>
+					</div>
+					<div className="order-first md:order-none">
+						<h1 className="mb-4 text-4xl leading-[1.2] font-bold md:hidden">
+							{getTranslation(
+								product?.id,
+								"name",
+								"products",
+								null,
+								product?.name || ""
+							)}
+						</h1>
+						<p className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl lg:text-4xl">
+							{new Intl.NumberFormat("id-ID", {
+								style: "currency",
+								currency: "IDR",
+								minimumFractionDigits: 0,
+							}).format(Number(unitPrice))}
+						</p>
+						<div className="mb-5 flex flex-wrap items-center gap-3 md:mb-6">
+							<Star rating={3.5} />
+							<p className="text-sm">{t("buyProduct.reviews", { rating: "3.5", count: 10 })}</p>
+						</div>
+						<form>
+							<div className="grid grid-cols-1 gap-6">
+								<div className="flex flex-col">
+									<Label className="mb-2">{t("buyProduct.variant")}</Label>
+									<div className="flex flex-wrap gap-4">
+										{variants.map((v, i) => {
+											const isSelected = i === selectedVariantIndex;
+											const baseClass = `${buttonStyles.bubbleButton} ${
+												isSelected
+													? buttonStyles.primary
+													: buttonStyles.secondary
+											}`;
+											const disabledClass =
+												v.is_available === false ? " opacity-60" : "";
+											// Translate color names
+											const colorKey = v.name?.toLowerCase();
+											const translatedName =
+												t(`buyProduct.colors.${colorKey}`, {
+													defaultValue: v.name,
+												}) || v.name;
+											return (
+												<button
+													key={v.id || i}
+													type="button"
+													onClick={() => setSelectedVariantIndex(i)}
+													className={baseClass + disabledClass}
+													disabled={v.is_available === false}
+												>
+													{translatedName}
+												</button>
+											);
+										})}
+									</div>
+								</div>
+								<div className="flex flex-col">
+									<Label htmlFor="quantity" className="mb-2">
+										{t("buyProduct.quantity")}
+									</Label>
+									<Input
+										type="number"
+										id="quantity"
+										placeholder="1"
+										className="w-20 text-center"
+										min={1}
+										value={quantity}
+										onChange={(e) => {
+											const val = parseInt(e.target.value, 10);
+											const max =
+												Number(product?.stock_quantity) > 0
+													? Number(product.stock_quantity)
+													: Number.MAX_SAFE_INTEGER;
+											const clamped = Number.isNaN(val)
+												? 1
+												: Math.max(1, Math.min(max, val));
+											setQuantity(clamped);
+										}}
+										onBlur={(e) => {
+											const val = parseInt(e.target.value, 10);
+											const max =
+												Number(product?.stock_quantity) > 0
+													? Number(product.stock_quantity)
+													: Number.MAX_SAFE_INTEGER;
+											const clamped = Number.isNaN(val)
+												? 1
+												: Math.max(1, Math.min(max, val));
+											setQuantity(clamped);
+										}}
+									/>
+								</div>
+							</div>
+							<div className="mt-8 mb-4 flex flex-col gap-y-4">
+								<Button
+									title={t("buyProduct.buyNow")}
+									variant="secondary"
+									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
+									onClick={handleBuyNow}
+								>
+									{t("buyProduct.buyNow")}
+								</Button>
+							</div>
+							<p className="text-center text-xs">{t("buyProduct.freeShipping")}</p>
+						</form>
+					</div>
+				</div>
 			</div>
-		</div>
+		</header>
 	);
+}
+
+BuyProduct.propTypes = {
+	productId: PropTypes.string.isRequired,
 };
 
 export default BuyProduct;

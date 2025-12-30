@@ -2,7 +2,7 @@ import TokspaceLogo from "./Tokspace.png";
 
 import React from "react";
 
-export function Welcome() {
+export function ComingSoon() {
 	return (
 		<main className="flex flex-col md:flex-row min-h-screen bg-white">
 			{/* Left Side */}

@@ -17,7 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export function Footer() {
 	const location = useLocation();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const handleScrollToSection = (e, sectionId) => {
 		if (location.pathname === "/") {
@@ -62,11 +62,11 @@ export function Footer() {
 						<div className="grid grid-cols-1 items-start gap-x-6 gap-y-5 sm:grid-cols-2 sm:gap-x-6 md:gap-x-8 md:gap-y-4">
 							<ul>
 								<li className="py-2 text-sm font-bold text-[#1c1f2a]">
-									{t("footer.homepage")}
+									{t("footer.page")}
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
-										to="/#header"
+										to="/"
 										onClick={(e) => handleScrollToSection(e, "header")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
@@ -93,20 +93,10 @@ export function Footer() {
 								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
-										to="/#creativity"
-										onClick={(e) => handleScrollToSection(e, "creativity")}
+										to="/shop"
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
-										{t("navbar.creativity")}
-									</Link>
-								</li>
-								<li className="py-2 text-sm font-semibold">
-									<Link
-										to="/#innovation"
-										onClick={(e) => handleScrollToSection(e, "innovation")}
-										className="text-black hover:text-[#ff6523] transition-colors duration-300"
-									>
-										{t("navbar.innovation")}
+										{t("navbar.shop")}
 									</Link>
 								</li>
 							</ul>
@@ -122,7 +112,7 @@ export function Footer() {
 										{t("navbar.contactUs")}
 									</Link>
 								</li>
-								<li className="py-2 text-sm font-semibold">
+								{/* <li className="py-2 text-sm font-semibold">
 									<a
 										href="https://form.typeform.com/to/fkjdwnRR"
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
@@ -131,7 +121,7 @@ export function Footer() {
 									>
 										{t("footer.bugReport")}
 									</a>
-								</li>
+								</li> */}
 
 								{/* <li className="py-2 text-sm font-semibold">
 									<a href="" target="_blank">

@@ -5,6 +5,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
 	base: "./",
 	plugins: [react(), tailwindcss()],
+	resolve: {
+		alias: {
+			"@": "/src",
+			"@public": "/public",
+		},
+	},
 	css: {
 		modules: {
 			generateScopedName:
@@ -51,5 +57,9 @@ export default defineConfig({
 				},
 			},
 		},
+	},
+	json: {
+		namedExports: true,
+		stringify: true,
 	},
 });
