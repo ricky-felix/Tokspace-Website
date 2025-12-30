@@ -17,16 +17,12 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact-us" element={<ContactUs />} />
-<<<<<<< HEAD
-				{/* <Route path="/shop" element={<ProductPage />} /> */}
-=======
 
 				{/* Products routes */}
                 <Route path="/shop" element={<ProductListingPage />} />
                 <Route path="/shop/:productId" element={<ProductDetailPage />} />
 
 				{/* 404 - Keep this last */}
->>>>>>> 4d159e3a521ea309827fe8ba39da5fc033660448
 				<Route path="*" element={<NotFound404 />} />
 			</Routes>
 		</div>
