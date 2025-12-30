@@ -160,7 +160,7 @@ export function Navbar() {
 
 			<motion.section
 				id="relume"
-				className="fixed top-0 left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white/95 backdrop-blur-sm lg:min-h-18 lg:px-[5%]"
+				className="fixed top-[48px] left-0 right-0 z-[999] flex w-full items-center border-b border-border-primary bg-white/95 backdrop-blur-sm lg:min-h-18 lg:px-[5%]"
 				style={{
 					backgroundColor,
 					backdropFilter: backdropBlur,

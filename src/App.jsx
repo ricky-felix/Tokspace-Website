@@ -8,10 +8,12 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductListingPage from "./pages/ProductListingPage";
 
 import NotFound404 from "./pages/NotFound404Page";
+import GlobalBanner from "./components/common/GlobalBanner";
 
 function App() {
 	return (
 		<div>
+			<GlobalBanner />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact-us" element={<ContactUs />} />
