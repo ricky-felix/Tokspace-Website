@@ -1,8 +1,10 @@
 // Fixed App.jsx - Add dynamic product routes
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Homepage";
 import ContactUs from "./pages/ContactUsPage";
+import CustomPrintRequestPage from "./pages/CustomPrintRequestPage";
 
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductListingPage from "./pages/ProductListingPage";
@@ -17,6 +19,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/contact-us" element={<ContactUs />} />
+				<Route path="/custom-print" element={<CustomPrintRequestPage />} />
 
 				{/* Products routes */}
                 <Route path="/shop" element={<ProductListingPage />} />

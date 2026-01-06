@@ -99,6 +99,14 @@ export function Footer() {
 										{t("navbar.shop")}
 									</Link>
 								</li>
+								<li className="py-2 text-sm font-semibold">
+									<Link
+										to="/custom-print"
+										className="text-black hover:text-[#ff6523] transition-colors duration-300"
+									>
+										{t("navbar.customPrint")}
+									</Link>
+								</li>
 							</ul>
 							<ul>
 								<li className="py-2 text-sm font-bold text-[#1c1f2a]">

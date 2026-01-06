@@ -61,7 +61,7 @@ export const ProductCTADetailPageDefaults = {
 		},
 	],
 	image: {
-		src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg",
+		src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
 		alt: "Relume placeholder image",
 	},
 };

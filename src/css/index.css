@@ -46,6 +46,12 @@ a {
 	*/
 }
 
+/* Exception: Orange background sections should have dark text */
+.bg-gradient-to-br.from-\[\#ff6523\] p,
+.bg-gradient-to-br.from-\[\#ff6523\] h3 {
+	color: #222222 !important;
+}
+
 /* Crops 2px from top, for some reason there is a black line at the top */
 img[alt="Tokspace Logo"] {
 	clip-path: inset(2px 0 0 0) !important;

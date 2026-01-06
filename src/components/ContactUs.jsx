@@ -5,10 +5,12 @@ import {
 	BiPhone,
 	BiCheckCircle,
 	BiErrorCircle,
+	BiCube,
 } from "react-icons/bi";
 import { AiOutlineLoading } from "react-icons/ai";
 import emailjs from "@emailjs/browser";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import buttonStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
@@ -69,6 +71,31 @@ export function ContactUs() {
 						{t("contactUs.title")}
 					</h2>
 					<p className="text-base md:text-lg lg:text-xl">{t("contactUs.subtitle")}</p>
+				</div>
+
+				{/* Custom Print CTA Section */}
+				<div className="mb-12 md:mb-16">
+					<div className="bg-gradient-to-br from-[#ff6523] to-[#ff8c52] rounded-2xl p-8 md:p-10 shadow-xl">
+						<div className="flex flex-col md:flex-row items-center justify-between gap-6">
+							<div className="flex items-center gap-4 flex-1">
+								<BiCube className="size-16 md:size-20 flex-shrink-0" style={{ color: '#222222' }} />
+								<div>
+									<h3 className="text-2xl md:text-3xl font-bold mb-2">
+										{t("contactUs.customPrintTitle")}
+									</h3>
+									<p className="text-base md:text-lg">
+										{t("contactUs.customPrintDescription")}
+									</p>
+								</div>
+							</div>
+							<Link
+								to="/custom-print"
+								className={`${buttonStyles.bubbleButton} bg-white text-[#ff6523] hover:bg-gray-50 px-8 py-3 text-lg font-semibold whitespace-nowrap flex-shrink-0`}
+							>
+								{t("contactUs.customPrintButton")}
+							</Link>
+						</div>
+					</div>
 				</div>
 				<div className="grid auto-cols-fr grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-[1fr_1fr] md:gap-x-20 md:gap-y-16">
 					<form onSubmit={handleSubmit} className={formStyles.formContainer}>

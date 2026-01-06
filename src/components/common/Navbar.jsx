@@ -224,6 +224,20 @@ export function Navbar() {
 								{t("navbar.shop")}
 							</Link>
 						</motion.div>
+						<motion.div
+							variants={linkVariants}
+							initial="initial"
+							whileHover="hover"
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.25, duration: 0.3 }}
+						>
+							<Link
+								to="/custom-print"
+								className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+							>
+								{t("navbar.customPrint")}
+							</Link>
+						</motion.div>
 					</div>
 
 					{/* Desktop Right Section */}
@@ -369,6 +383,34 @@ export function Navbar() {
 								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 							>
 								{t("navbar.home")}
+							</Link>
+						</motion.div>
+						<motion.div
+							variants={{
+								open: { opacity: 1, y: 0 },
+								close: { opacity: 0, y: -20 },
+							}}
+						>
+							<Link
+								to="/shop"
+								onClick={() => useActive.toggleMobileMenu()}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
+							>
+								{t("navbar.shop")}
+							</Link>
+						</motion.div>
+						<motion.div
+							variants={{
+								open: { opacity: 1, y: 0 },
+								close: { opacity: 0, y: -20 },
+							}}
+						>
+							<Link
+								to="/custom-print"
+								onClick={() => useActive.toggleMobileMenu()}
+								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
+							>
+								{t("navbar.customPrint")}
 							</Link>
 						</motion.div>
 						<motion.div
