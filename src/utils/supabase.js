@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Check if running in Node.js environment
+// Supabase client configuration - Updated 2026-01-06
 const isNode = typeof process !== "undefined" && process.env;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
