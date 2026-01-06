@@ -49,14 +49,14 @@ export function Footer() {
 									className={`${buttonStyles.bubbleButton} ${buttonStyles.primary}`}
 								>
 									{t("footer.checkRoadmap")}
-								</Button> */}
+								</Button>
 								<Button
 									title="Connect"
 									variant="secondary"
 									className={`${buttonStyles.bubbleButton} ${buttonStyles.secondary}`}
 								>
 									{t("footer.joinCommunity")}
-								</Button>
+								</Button> */}
 							</div>
 						</div>
 						<div className="grid grid-cols-1 items-start gap-x-6 gap-y-5 sm:grid-cols-2 sm:gap-x-6 md:gap-x-8 md:gap-y-4">
@@ -67,7 +67,6 @@ export function Footer() {
 								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/"
-										onClick={(e) => handleScrollToSection(e, "header")}
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
 										{t("footer.meetTokspace")}
@@ -82,15 +81,6 @@ export function Footer() {
 										{t("navbar.discover")}
 									</Link>
 								</li> */}
-								<li className="py-2 text-sm font-semibold">
-									<Link
-										to="/#ourmission"
-										onClick={(e) => handleScrollToSection(e, "ourmission")}
-										className="text-black hover:text-[#ff6523] transition-colors duration-300"
-									>
-										{t("navbar.ourMission")}
-									</Link>
-								</li>
 								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/shop"

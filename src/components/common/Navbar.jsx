@@ -347,7 +347,6 @@ export function Navbar() {
 				<motion.div
 					variants={{
 						open: {
-							height: "auto",
 							opacity: 1,
 							transition: {
 								duration: 0.4,
@@ -356,7 +355,6 @@ export function Navbar() {
 							},
 						},
 						close: {
-							height: 0,
 							opacity: 0,
 							transition: {
 								duration: 0.4,
@@ -368,7 +366,10 @@ export function Navbar() {
 					animate={useActive.animateMobileMenu}
 					initial="close"
 					exit="close"
-					className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-sm border-b border-border-primary overflow-hidden lg:hidden"
+					className="fixed top-full left-0 w-full h-[calc(100vh-114px)] bg-white backdrop-blur-sm overflow-y-auto lg:hidden z-[998]"
+					style={{
+						display: useActive.animateMobileMenu === "open" ? "block" : "none",
+					}}
 				>
 					<nav className="px-4 py-6 space-y-2">
 						<motion.div
@@ -411,62 +412,6 @@ export function Navbar() {
 								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
 							>
 								{t("navbar.customPrint")}
-							</Link>
-						</motion.div>
-						<motion.div
-							variants={{
-								open: { opacity: 1, y: 0 },
-								close: { opacity: 0, y: -20 },
-							}}
-						>
-							<Link
-								to="/#discover"
-								onClick={(e) => handleNavLinkClick(e, "discover")}
-								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-							>
-								{t("navbar.discover")}
-							</Link>
-						</motion.div>
-						<motion.div
-							variants={{
-								open: { opacity: 1, y: 0 },
-								close: { opacity: 0, y: -20 },
-							}}
-						>
-							<Link
-								to="/#ourmission"
-								onClick={(e) => handleNavLinkClick(e, "ourmission")}
-								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-							>
-								{t("navbar.ourMission")}
-							</Link>
-						</motion.div>
-						<motion.div
-							variants={{
-								open: { opacity: 1, y: 0 },
-								close: { opacity: 0, y: -20 },
-							}}
-						>
-							<Link
-								to="/#creativity"
-								onClick={(e) => handleNavLinkClick(e, "creativity")}
-								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-							>
-								{t("navbar.creativity")}
-							</Link>
-						</motion.div>
-						<motion.div
-							variants={{
-								open: { opacity: 1, y: 0 },
-								close: { opacity: 0, y: -20 },
-							}}
-						>
-							<Link
-								to="/#innovation"
-								onClick={(e) => handleNavLinkClick(e, "innovation")}
-								className="block py-3 text-md font-semibold lg:px-4 lg:py-3 hover:text-[#ff6523] transition-colors"
-							>
-								{t("navbar.innovation")}
 							</Link>
 						</motion.div>
 
