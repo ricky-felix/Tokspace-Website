@@ -67,13 +67,13 @@ export function Navbar() {
 	const backgroundColor = useTransform(
 		scrollY,
 		[0, 100],
-		["rgba(255, 255, 255, 0.95)", "rgba(255, 255, 255, 0.98)"]
+		["rgba(255, 255, 255, 0.95)", "rgba(255, 255, 255, 0.98)"],
 	);
 
 	const backdropBlur = useTransform(
 		scrollY,
 		[0, 100],
-		["blur(0px)", "blur(10px)"]
+		["blur(0px)", "blur(10px)"],
 	);
 
 	// Track scroll position
@@ -210,7 +210,7 @@ export function Navbar() {
 								{t("navbar.home")}
 							</Link>
 						</motion.div>
-						<motion.div
+						{/* <motion.div
 							variants={linkVariants}
 							initial="initial"
 							whileHover="hover"
@@ -223,7 +223,7 @@ export function Navbar() {
 							>
 								{t("navbar.shop")}
 							</Link>
-						</motion.div>
+						</motion.div> */}
 						<motion.div
 							variants={linkVariants}
 							initial="initial"

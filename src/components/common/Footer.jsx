@@ -81,14 +81,14 @@ export function Footer() {
 										{t("navbar.discover")}
 									</Link>
 								</li> */}
-								<li className="py-2 text-sm font-semibold">
+								{/* <li className="py-2 text-sm font-semibold">
 									<Link
 										to="/shop"
 										className="text-black hover:text-[#ff6523] transition-colors duration-300"
 									>
 										{t("navbar.shop")}
 									</Link>
-								</li>
+								</li> */}
 								<li className="py-2 text-sm font-semibold">
 									<Link
 										to="/custom-print"
