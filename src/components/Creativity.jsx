@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { MdOutlineJoinFull } from "react-icons/md";
 import { MdDesignServices } from "react-icons/md";
 
+import LazyVideo from "./common/LazyVideo";
+
 export function Creativity() {
 	const { t } = useTranslation();
 	return (
@@ -37,20 +39,10 @@ export function Creativity() {
 								</div>
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
-								<video
+								<LazyVideo
+									src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Transforming_Ideas_into_Reality.webm"
 									className="w-full aspect-video"
-									autoPlay
-									muted
-									loop
-									playsInline
-									preload="eager"
-									frameBorder="0"
-								>
-									<source
-										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Transforming_Ideas_into_Reality.webm"
-										type="video/webm"
-									/>
-								</video>
+								/>
 							</div>
 						</div>
 						<div className="flex flex-col bg-[#DEE3E9] rounded-xl">
@@ -87,20 +79,10 @@ export function Creativity() {
 					<div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8">
 						<div className="flex flex-col sm:col-span-2 sm:grid sm:auto-cols-fr sm:grid-cols-2 bg-[#DEE3E9] rounded-xl">
 							<div className="flex size-full flex-col items-center justify-center self-start">
-								<video
+								<LazyVideo
+									src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Community.webm"
 									className="w-full aspect-video"
-									autoPlay
-									muted
-									loop
-									playsInline
-									preload="eager"
-									frameBorder="0"
-								>
-									<source
-										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Community.webm"
-										type="video/webm"
-									/>
-								</video>
+								/>
 							</div>
 							<div className="block flex-col justify-center p-6 sm:flex">
 								<p className="mb-2 font-semibold">
@@ -129,20 +111,10 @@ export function Creativity() {
 								</div>
 							</div>
 							<div className="flex w-full flex-col items-center justify-center self-start">
-								<video
+								<LazyVideo
+									src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Launch_Ideas_Into_Space.webm"
 									className="w-full aspect-video"
-									autoPlay
-									muted
-									loop
-									playsInline
-									preload="eager"
-									frameBorder="0"
-								>
-									<source
-										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-3-Launch_Ideas_Into_Space.webm"
-										type="video/webm"
-									/>
-								</video>
+								/>
 							</div>
 						</div>
 					</div>

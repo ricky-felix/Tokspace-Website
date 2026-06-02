@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import LazyVideo from "./common/LazyVideo";
+
 const useRelume = (features = []) => {
 	// Accept features as parameter
 	const [activeIndex, setActiveIndex] = useState(0);
@@ -91,22 +93,10 @@ export function OurMission() {
 									{t("ourMission.explorationDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<video
+									<LazyVideo
+										src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Iteration_over_Perfection.webm"
 										className="w-full aspect-video"
-										width="300"
-										height="300"
-										autoPlay
-										muted
-										loop
-										playsInline
-										preload="eager"
-										frameBorder="0"
-									>
-										<source
-											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Iteration_over_Perfection.webm"
-											type="video/webm"
-										/>
-									</video>
+									/>
 								</div>
 							</div>
 						</useSctoll.CardContent>
@@ -150,20 +140,10 @@ export function OurMission() {
 									{t("ourMission.communityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<video
-										className="w-full aspect-video"
-										autoPlay
-										muted
-										loop
-										playsInline
-										preload="eager"
-										frameBorder="0"
-									>
-										<source
+									<LazyVideo
 											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Community.webm"
-											type="video/webm"
+											className="w-full aspect-video"
 										/>
-									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>
@@ -207,20 +187,10 @@ export function OurMission() {
 									{t("ourMission.curiosityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<video
-										className="w-full aspect-video"
-										autoPlay
-										muted
-										loop
-										playsInline
-										preload="eager"
-										frameBorder="0"
-									>
-										<source
+									<LazyVideo
 											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Sharing.webm"
-											type="video/webm"
+											className="w-full aspect-video"
 										/>
-									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>
@@ -267,20 +237,10 @@ export function OurMission() {
 									{t("ourMission.sustainabilityDescription")}
 								</p>
 								<div className="rt-8 mt-8 h-80 md:mt-10 md:h-[25rem] lg:mt-12">
-									<video
-										className="w-full aspect-video"
-										autoPlay
-										muted
-										loop
-										playsInline
-										preload="eager"
-										frameBorder="0"
-									>
-										<source
+									<LazyVideo
 											src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-2-Sustainability.webm"
-											type="video/webm"
+											className="w-full aspect-video"
 										/>
-									</video>
 								</div>
 							</div>
 						</useSctoll.CardContent>

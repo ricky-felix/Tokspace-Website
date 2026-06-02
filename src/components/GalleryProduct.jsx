@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import buttonStyles from "../css/Button.module.css";
+import LazyImage from "./common/LazyImage";
 
 // Price formatting utility
 const formatPrice = (price) => {
@@ -155,17 +156,11 @@ const CategoryItem = ({ category }) => {
 			className="group block font-semibold md:text-md"
 		>
 			<div className="mb-3 aspect-[5/6] md:mb-4 relative overflow-hidden rounded-2xl bg-white transition-all duration-300">
-				<img
-					src={
-						category.image_url ||
-						"https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-					}
+				<LazyImage
+					src={category.image_url}
 					alt={category.name}
-					className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
-					onError={(e) => {
-						e.target.src =
-							"https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg";
-					}}
+					className="size-full"
+					imgClassName="group-hover:scale-105 transition-transform duration-300"
 				/>
 
 				<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

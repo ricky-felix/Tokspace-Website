@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import buttonStyles from "../css/Button.module.css";
+import LazyVideo from "./common/LazyVideo";
 
 export function Header() {
 	const { t } = useTranslation();
@@ -97,24 +98,11 @@ export function Header() {
 						</p>
 					</div>
 				</div>
-				<div className={getVideoContainerClasses()}>
-					<video
-						ref={videoRef}
-						autoPlay
-						muted
-						loop
-						playsInline
-						preload="eager"
-						className="absolute inset-0 w-full h-full"
-						frameBorder="0"
-					>
-						<source
-							src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-1.webm"
-							type="video/webm"
-						/>
-						Your browser does not support the video tag.
-					</video>
-				</div>
+				<LazyVideo
+					ref={videoRef}
+					src="https://files.tokspace.cloud/website-videos/Tokspace-Website-Clip-1.webm"
+					className={getVideoContainerClasses()}
+				/>
 			</div>
 		</section>
 	);
