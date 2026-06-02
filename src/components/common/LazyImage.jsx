@@ -25,7 +25,12 @@ export default function LazyImage({
 	return (
 		<div className={`relative overflow-hidden bg-gray-200 ${className}`}>
 			{!loaded && (
-				<div className="absolute inset-0 animate-pulse bg-gray-200" />
+				<div className="absolute inset-0 z-10 flex animate-pulse items-center justify-center rounded-lg bg-gray-100">
+					<div className="flex flex-col items-center">
+						<div className="mb-2 h-8 w-8 animate-spin rounded-full border-4 border-[#ff6523] border-t-transparent"></div>
+						<p className="text-sm text-gray-600">Loading image...</p>
+					</div>
+				</div>
 			)}
 
 			<img

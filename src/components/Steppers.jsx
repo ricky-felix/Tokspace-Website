@@ -327,7 +327,7 @@ export function Steppers() {
 				<div className="relative" ref={containerRef}>
 					<div className={getVideoContainerClasses()}>
 						{isVideoLoading && (
-							<div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-lg z-10">
+							<div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-lg z-10 animate-pulse">
 								<div className="flex flex-col items-center">
 									<div className="w-8 h-8 border-4 border-[#ff6523] border-t-transparent rounded-full animate-spin mb-2"></div>
 									<p className="text-sm text-gray-600">Loading video...</p>
